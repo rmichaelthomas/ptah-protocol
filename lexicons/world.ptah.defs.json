@@ -1,0 +1,35 @@
+{
+  "lexicon": 1,
+  "id": "world.ptah.defs",
+  "description": "Shared definitions for The Ptah Protocol — reusable types referenced across record schemas.",
+  "defs": {
+    "sourceType": {
+      "type": "token",
+      "description": "Content originates as original intellectual property."
+    },
+    "sourceTypeOriginalIP": {
+      "type": "token",
+      "description": "Content originates as original intellectual property."
+    },
+    "sourceTypePublicDomain": {
+      "type": "token",
+      "description": "Content is derived from public domain source material."
+    },
+    "sourceTypeCollaborativeCommons": {
+      "type": "token",
+      "description": "Content is created under a collaborative commons framework."
+    },
+    "canonicalStatusOfficial": {
+      "type": "token",
+      "description": "Record is recognized as official canon within its world."
+    },
+    "canonicalStatusCommunity": {
+      "type": "token",
+      "description": "Record is community-contributed canon — valid but not originator-designated."
+    },
+    "canonicalStatusApocryphal": {
+      "type": "token",
+      "description": "Record exists but is not recognized as part of any canonical timeline."
+    }
+  }
+}

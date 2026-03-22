@@ -1,0 +1,107 @@
+{
+  "lexicon": 1,
+  "id": "world.ptah.location",
+  "description": "A location record in The Ptah Protocol. A place inside a world — what gives events and actions an address. Without it, things happen in the world but they happen nowhere specific. With it, history accumulates in places and places develop gravity over time.",
+  "defs": {
+    "main": {
+      "type": "record",
+      "description": "A pin dropped on a map that does not exist yet. The pin creates the place. Hwt-ka-Ptah — the House of the Ka of Ptah — gave Egypt its name. A place becomes so significant that it names everything around it.",
+      "key": "tid",
+      "record": {
+        "type": "object",
+        "required": ["name", "creatorDID", "worldReference", "createdAt"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "What this place is called.",
+            "maxLength": 640,
+            "maxGraphemes": 64
+          },
+          "worldReference": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "The AT URI of the world this location exists in."
+          },
+          "creatorDID": {
+            "type": "string",
+            "format": "did",
+            "description": "Who named and defined this place."
+          },
+          "description": {
+            "type": "string",
+            "description": "What kind of place this is, in plain language.",
+            "maxLength": 10240,
+            "maxGraphemes": 1024
+          },
+          "locationType": {
+            "type": "string",
+            "description": "The geographic or spatial classification. Open-ended so any kind of world geography works.",
+            "knownValues": ["city", "region", "building", "territory", "landmark", "vessel", "abstractSpace"],
+            "maxLength": 640,
+            "maxGraphemes": 64
+          },
+          "parentLocation": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "If this location exists inside a larger location — a tavern inside a city, a room inside a building. Lets geography nest infinitely. Places come into existence as people need them."
+          },
+          "depthIndex": {
+            "type": "integer",
+            "description": "How deep in the geographic hierarchy this location sits. World-level is 0, continent is 1, country is 2, city is 3, and so on. Any rendering layer can read this single number and decide how much geographic context it needs without traversing the full parent chain.",
+            "minimum": 0
+          },
+          "properties": {
+            "type": "ref",
+            "ref": "#locationProperties",
+            "description": "Flexible fields — climate, population, controlling faction, notable history. Whatever the world requires."
+          },
+          "authorshipRecord": {
+            "type": "string",
+            "format": "did",
+            "description": "Permanent link to the creator. Provenance travels."
+          },
+          "canonicalStatus": {
+            "type": "string",
+            "description": "The canonical standing of this location within its world.",
+            "knownValues": [
+              "world.ptah.defs#canonicalStatusOfficial",
+              "world.ptah.defs#canonicalStatusCommunity",
+              "world.ptah.defs#canonicalStatusApocryphal"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Timestamp of location creation."
+          }
+        }
+      }
+    },
+    "locationProperties": {
+      "type": "object",
+      "description": "Flexible properties for any kind of world geography. All fields optional — worlds define what matters.",
+      "properties": {
+        "climate": {
+          "type": "string",
+          "maxLength": 2560,
+          "maxGraphemes": 256
+        },
+        "population": {
+          "type": "string",
+          "maxLength": 2560,
+          "maxGraphemes": 256
+        },
+        "controllingFaction": {
+          "type": "string",
+          "maxLength": 2560,
+          "maxGraphemes": 256
+        },
+        "notableHistory": {
+          "type": "string",
+          "maxLength": 10240,
+          "maxGraphemes": 1024
+        }
+      }
+    }
+  }
+}
