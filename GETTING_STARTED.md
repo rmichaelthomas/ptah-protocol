@@ -234,7 +234,7 @@ These work for any collection — `world.ptah.character`, `world.ptah.action`, e
 ## Resources
 
 - **Specification:** [SPECIFICATION.md](SPECIFICATION.md) — full field-level reference
-- **Example Worlds:** [EXAMPLES.md](EXAMPLES.md) — Hamlet and Gatsby record chains
+- **Example Worlds:** [EXAMPLES.md](EXAMPLES.md) — Hamlet, Gatsby, Spades tournament, and tabletop RPG campaign
 - **ATProto Lexicon Spec:** [atproto.com/specs/lexicon](https://atproto.com/specs/lexicon)
 - **Lexicon Schemas:** [`lexicons/`](lexicons/) directory in this repository
 - **Contact:** protocol@ptah.world

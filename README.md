@@ -18,7 +18,7 @@ The namespace is `world.ptah.*`. Experimental schemas are published to the netwo
 
 - **[Getting Started](GETTING_STARTED.md)** — build your first world in five minutes
 - **[Specification](SPECIFICATION.md)** — field-level reference for every record type
-- **[Examples](EXAMPLES.md)** — two complete world record chains (Hamlet + Gatsby)
+- **[Examples](EXAMPLES.md)** — four complete world record chains (Hamlet, Gatsby, Spades, tabletop RPG)
 - **[Roadmap](ROADMAP.md)** — where the protocol is and where it's going
 
 ---
