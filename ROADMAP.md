@@ -16,7 +16,6 @@ The Ptah Protocol is in active development. Here's where things stand and where 
 
 **In progress:**
 - Promote schemas from `world.ptah.temp.*` to production `world.ptah.*` namespace
-- Developer documentation (specification, getting started guide)
 - Community engagement via ATmosphereConf 2026 and ATProto developer ecosystem
 
 ---
