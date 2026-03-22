@@ -9,7 +9,7 @@ The namespace is `world.ptah.*`. Experimental schemas are published to the netwo
 **Status:** Active Development — Schema Complete
 
 **Website:** [ptah.world](https://ptah.world)
-**Account:** [@ptah.world](https://bsky.app/profile/ptah.world)
+**Account:** [@ptah.world](https://blacksky.community/profile/ptah.world)
 **Contact:** protocol@ptah.world
 
 ---
