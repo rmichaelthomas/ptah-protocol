@@ -14,6 +14,15 @@ The namespace is `world.ptah.*`. Experimental schemas are published to the netwo
 
 ---
 
+## Documentation
+
+- **[Getting Started](GETTING_STARTED.md)** — build your first world in five minutes
+- **[Specification](SPECIFICATION.md)** — field-level reference for every record type
+- **[Examples](EXAMPLES.md)** — two complete world record chains (Hamlet + Gatsby)
+- **[Roadmap](ROADMAP.md)** — where the protocol is and where it's going
+
+---
+
 ## Record Types
 
 The protocol defines eight foundational record types plus a shared definitions file and a declaration companion record.
@@ -73,7 +82,7 @@ A place inside a world. Gives events and actions an address. Locations nest infi
 
 ## Network Publication
 
-Experimental schemas are published as `com.atproto.lexicon.schema` records in the [@ptah.world](https://bsky.app/profile/ptah.world) repository under the `world.ptah.temp.*` namespace.
+Experimental schemas are published as `com.atproto.lexicon.schema` records in the [@ptah.world](https://blacksky.community/profile/ptah.world) repository under the `world.ptah.temp.*` namespace.
 
 Lexicon resolution is wired via DNS TXT records:
 - `_lexicon.ptah.world` → production namespace (`world.ptah.*`)
@@ -101,6 +110,10 @@ The `controlType` field on characters (exclusive, open, delegated) and the `inst
 ```
 ptah-protocol/
 ├── README.md
+├── SPECIFICATION.md
+├── GETTING_STARTED.md
+├── EXAMPLES.md
+├── ROADMAP.md
 ├── LICENSE
 └── lexicons/
     ├── world.ptah.action.json
