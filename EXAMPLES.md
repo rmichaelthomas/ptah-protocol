@@ -135,7 +135,7 @@ An open character — anyone can act as Claudius within the world's rules.
   "name": "Claudius, King of Denmark",
   "creatorDID": "did:plc:worldseeder01",
   "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
-  "description": "The usurper. Brother of the dead king. Now wears the crown and the queen.",
+  "description": "The usurper. Brother of the dead king. Took the crown and married the queen.",
   "controlType": "open",
   "originType": "world.ptah.defs#sourceTypePublicDomain",
   "authorshipRecord": "did:plc:worldseeder01",
@@ -727,7 +727,7 @@ Total: 11 records. No Role record — Spades players are themselves, not instanc
 ```json
 {
   "$type": "world.ptah.character",
-  "name": "Spook",
+  "name": "Blitz",
   "creatorDID": "did:plc:player03",
   "worldReference": "at://did:plc:spadeshost01/world.ptah.world/blacksky-spades",
   "description": "Team South. Overbids every round. Somehow makes it work.",
@@ -741,7 +741,7 @@ Total: 11 records. No Role record — Spades players are themselves, not instanc
 }
 ```
 
-**AT URI:** `at://did:plc:player03/world.ptah.character/spook`
+**AT URI:** `at://did:plc:player03/world.ptah.character/blitz`
 
 ---
 
@@ -817,10 +817,10 @@ Total: 11 records. No Role record — Spades players are themselves, not instanc
 {
   "$type": "world.ptah.action",
   "actorDID": "did:plc:player03",
-  "characterReference": "at://did:plc:player03/world.ptah.character/spook",
+  "characterReference": "at://did:plc:player03/world.ptah.character/blitz",
   "worldReference": "at://did:plc:spadeshost01/world.ptah.world/blacksky-spades",
   "actionType": "conflict",
-  "content": "Spook cuts with the Queen of Spades on a Heart lead. Takes the book. Team South now has 7 — one over their bid. Sandbag watch is on.",
+  "content": "Blitz cuts with the Queen of Spades on a Heart lead. Takes the book. Team South now has 7 — one over their bid. Sandbag watch is on.",
   "locationReference": "at://did:plc:spadeshost01/world.ptah.location/the-table",
   "visibility": "canon",
   "createdAt": "2026-04-05T20:15:00Z"
@@ -862,12 +862,12 @@ Total: 11 records. No Role record — Spades players are themselves, not instanc
   "participants": [
     "at://did:plc:player01/world.ptah.character/ace",
     "at://did:plc:player02/world.ptah.character/deuce",
-    "at://did:plc:player03/world.ptah.character/spook",
+    "at://did:plc:player03/world.ptah.character/blitz",
     "at://did:plc:player04/world.ptah.character/shadow"
   ],
   "stakes": "Season title. Bragging rights. Your name in the permanent record.",
   "status": "completed",
-  "result": "Team South wins 502–380. Spook went nil in the final round and made it. Shadow counted every card to cover. Team North went set trying to block the nil.",
+  "result": "Team South wins 502–380. Blitz went nil in the final round and made it. Shadow counted every card to cover. Team North went set trying to block the nil.",
   "witnesses": [
     "at://did:plc:spectator01/world.ptah.action/witness-championship"
   ],
@@ -892,7 +892,7 @@ Total: 11 records. No Role record — Spades players are themselves, not instanc
   "title": "Spring 2026 Season — The Nil That Won It",
   "worldReference": "at://did:plc:spadeshost01/world.ptah.world/blacksky-spades",
   "creatorDID": "did:plc:spadeshost01",
-  "content": "The Spring 2026 Championship came down to one call. Team South was up 40 points going into the final round. Spook bid nil — the first nil bid of the entire match. Shadow counted the remaining spades and covered every lead. Team North tried to force a spade onto Spook three times. Three times Shadow cut in front. Final score: 502–380. The nil held. The season belongs to Team South.",
+  "content": "The Spring 2026 Championship came down to one call. Team South was up 40 points going into the final round. Blitz bid nil — the first nil bid of the entire match. Shadow counted the remaining spades and covered every lead. Team North tried to force a spade onto Blitz three times. Three times Shadow cut in front. Final score: 502–380. The nil held. The season belongs to Team South.",
   "sourceReferences": [
     "at://did:plc:player01/world.ptah.action/bid-round1",
     "at://did:plc:player03/world.ptah.action/play-round1",
@@ -901,7 +901,7 @@ Total: 11 records. No Role record — Spades players are themselves, not instanc
   "characters": [
     "at://did:plc:player01/world.ptah.character/ace",
     "at://did:plc:player02/world.ptah.character/deuce",
-    "at://did:plc:player03/world.ptah.character/spook",
+    "at://did:plc:player03/world.ptah.character/blitz",
     "at://did:plc:player04/world.ptah.character/shadow"
   ],
   "timelinePosition": "Spring 2026 Season — Championship",
