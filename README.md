@@ -73,7 +73,7 @@ A place inside a world. Gives events and actions an address. Locations nest infi
 ## Schema Design Decisions
 
 - **`knownValues` over `enum` everywhere.** Fields use open-ended known value sets rather than closed enumerations, allowing extensibility without breaking changes.
-- **Consistent required fields.** Every record requires who created it, what world it belongs to, when it was created, and what it's called. Everything else is optional.
+- **Consistent required fields.** Most records require who created it, what world it belongs to, when it was created, and what it's called. Deliberate exceptions: Action uses `actorDID` instead of `creatorDID`, Contribution uses `contributorDID`, Declaration requires only `createdAt`, and Action has no `name` field. Everything else is optional.
 - **Typed flexible properties.** Freeform metadata (rendering hints, character properties, location properties) uses named object definitions with explicit optional fields rather than untyped key-value pairs.
 - **String length limits.** Names: 640 bytes / 64 graphemes. Descriptions: 10,240 bytes / 1,024 graphemes. Lore content: 102,400 bytes / 10,000 graphemes. Byte-to-grapheme ratio approximately 10:1.
 - **AT URI references throughout.** All cross-record references use the `at-uri` format, making every relationship in the record chain resolvable on the network.
