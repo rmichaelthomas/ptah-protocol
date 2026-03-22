@@ -125,6 +125,6 @@ MIT OR Apache-2.0, at your discretion. Following the dual-license convention use
 
 ## About
 
-The Ptah Protocol is created by [R. Michael Thomas](https://bsky.app/profile/rmichaelthomas.com).
+The Ptah Protocol is created by [R. Michael Thomas](https://blacksky.community/profile/rmichaelthomas.com).
 
 Named for Ptah, the Egyptian god of craftsmen and architects — the one who conceived the world in his heart and spoke it into existence. The protocol's three-letter hieroglyphic name maps to its architecture: 𓊪 (P) is the foundation layer, 𓏏 (T) is the record layer, 𓉔 (H) is the attribution chain.
