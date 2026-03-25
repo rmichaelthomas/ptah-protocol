@@ -1,6 +1,6 @@
 # Example World Record Chains
 
-Two complete example worlds demonstrating how the Ptah Protocol's eight record types connect, reference each other via AT URIs, and express different kinds of creative worlds. Two additional competitive examples demonstrate the protocol handling structured tournament play and collaborative tabletop RPG campaigns.
+Two complete example worlds demonstrating how the Ptah Protocol's fourteen record types connect, reference each other via AT URIs, and express different kinds of creative worlds. Two additional competitive examples demonstrate the protocol handling structured tournament play and collaborative tabletop RPG campaigns.
 
 For field-level details, see the [Specification](SPECIFICATION.md). For a hands-on walkthrough, see [Getting Started](GETTING_STARTED.md).
 
@@ -27,20 +27,20 @@ Placeholder DIDs are human-readable for clarity. On a live network, DIDs are opa
 
 ## Why This World
 
-Hamlet is the hardest test for the public domain pattern. It is universally known. The Role/Instance split matters immediately — multiple people can play the same character. Canon is contested by four centuries of interpretation. The `controlType`, `roleReference`, and `canonicalCharacterReference` fields are all load-bearing from the first record.
+Hamlet is the hardest test for the public domain pattern. It is universally known. The Template/Instance split matters immediately — multiple people can play the same character. Canon is contested by four centuries of interpretation. The `controlType`, `templateReference`, and `canonicalCharacterReference` fields are all load-bearing from the first record.
 
 If the schema holds Hamlet, it holds any public domain world.
 
 ## What This Chain Contains
 
 - 1 World record
-- 1 Role record (Hamlet)
+- 1 Template record (Hamlet)
 - 3 Character records (Canonical Hamlet, a contributor's Hamlet instance, Claudius)
 - 1 Location record (The Battlements of Elsinore)
 - 3 Action records (The Ghost Speaks, The Burning Court Hamlet Acts, A Witness Action)
 - 1 Event record (The Throne Room Confrontation)
-- 1 Lore record (The Day the Court Heard the Truth)
-- 1 Contribution record (governing the contributor's additions)
+- 1 Log record (The Day the Court Heard the Truth)
+- 1 Origin record (governing the contributor's additions)
 
 Total: 12 records across all 8 record types.
 
@@ -71,37 +71,35 @@ Total: 12 records across all 8 record types.
 
 ---
 
-### Record 2 — Role: Hamlet, Prince of Denmark
+### Record 2 — Template: Hamlet, Prince of Denmark
 
-The template. The shared identity. Not a specific performance — the Role itself.
+The template. The shared identity. Not a specific performance — the Template itself.
 
 ```json
 {
-  "$type": "world.ptah.role",
+  "$type": "world.ptah.template",
   "name": "Hamlet, Prince of Denmark",
   "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
   "creatorDID": "did:plc:worldseeder01",
   "description": "The Prince. Son of the murdered King. The most performed role in the English language.",
-  "sourceType": "world.ptah.defs#sourceTypePublicDomain",
-  "sourceReference": "William Shakespeare, Hamlet, Prince of Denmark character.",
+  "originType": "publicDomain",
   "canonicalCharacterReference": "at://did:plc:worldseeder01/world.ptah.character/hamlet-canonical",
   "canonicalReferencePolicy": "updatable",
-  "instancePolicy": "openInstance",
-  "authorshipRecord": "did:plc:worldseeder01",
+  "instancePolicy": "open",
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
   "createdAt": "2026-04-01T00:01:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:worldseeder01/world.ptah.role/hamlet-role`
+**AT URI:** `at://did:plc:worldseeder01/world.ptah.template/hamlet-role`
 
-The Role exists. `instancePolicy: openInstance` means anyone can create a Character instance of Hamlet. This is a public domain world — Hamlet belongs to everyone.
+The Template exists. `instancePolicy: open` means anyone can create a Character instance of Hamlet. This is a public domain world — Hamlet belongs to everyone.
 
 ---
 
 ### Record 3 — Character: Canonical Hamlet
 
-The specific character the world originator designated as the authoritative expression of the Hamlet role.
+The specific character the world originator designated as the authoritative expression of the Hamlet template.
 
 ```json
 {
@@ -109,11 +107,10 @@ The specific character the world originator designated as the authoritative expr
   "name": "Hamlet (Canonical)",
   "creatorDID": "did:plc:worldseeder01",
   "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
-  "roleReference": "at://did:plc:worldseeder01/world.ptah.role/hamlet-role",
+  "templateReference": "at://did:plc:worldseeder01/world.ptah.template/hamlet-role",
   "description": "The canonical Hamlet. The originator's definitive expression of the prince.",
   "controlType": "exclusive",
-  "originType": "world.ptah.defs#sourceTypePublicDomain",
-  "authorshipRecord": "did:plc:worldseeder01",
+  "originType": "publicDomain",
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
   "createdAt": "2026-04-01T00:02:00Z"
 }
@@ -121,7 +118,7 @@ The specific character the world originator designated as the authoritative expr
 
 **AT URI:** `at://did:plc:worldseeder01/world.ptah.character/hamlet-canonical`
 
-This is the character that `canonicalCharacterReference` on the Role record points to.
+This is the character that `canonicalCharacterReference` on the Template record points to.
 
 ---
 
@@ -137,8 +134,7 @@ An open character — anyone can act as Claudius within the world's rules.
   "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
   "description": "The usurper. Brother of the dead king. Took the crown and married the queen.",
   "controlType": "open",
-  "originType": "world.ptah.defs#sourceTypePublicDomain",
-  "authorshipRecord": "did:plc:worldseeder01",
+  "originType": "publicDomain",
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
   "createdAt": "2026-04-01T00:03:00Z"
 }
@@ -146,7 +142,7 @@ An open character — anyone can act as Claudius within the world's rules.
 
 **AT URI:** `at://did:plc:worldseeder01/world.ptah.character/claudius`
 
-No `roleReference` — Claudius doesn't need the Role/Instance split because there's only one Claudius. The role pattern is used when multiple people need to embody the same identity.
+No `templateReference` — Claudius doesn't need the Template/Instance split because there's only one Claudius. The template pattern is used when multiple people need to embody the same identity.
 
 ---
 
@@ -183,7 +179,7 @@ No `roleReference` — Claudius doesn't need the Role/Instance split because the
   "actorDID": "did:plc:worldseeder01",
   "characterReference": "at://did:plc:worldseeder01/world.ptah.character/hamlet-canonical",
   "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
-  "actionType": "speech",
+  "actionType": "dialogue",
   "content": "The ghost of King Hamlet appears on the battlements and speaks to his son. He names his murderer. He demands revenge. The prince listens. The prince does not act.",
   "locationReference": "at://did:plc:worldseeder01/world.ptah.location/battlements",
   "visibility": "canon",
@@ -195,30 +191,33 @@ No `roleReference` — Claudius doesn't need the Role/Instance split because the
 
 ---
 
-### Record 7 — Contribution: A Contributor Enters the World
+### Record 7 — Origin: A Contributor Enters the World
 
 A second person wants to add to the World of Hamlet.
 
 ```json
 {
-  "$type": "world.ptah.contribution",
+  "$type": "world.ptah.origin",
   "contributorDID": "did:plc:contributor01",
   "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
-  "contributionType": "character",
-  "recordReference": "at://did:plc:contributor01/world.ptah.character/hamlet-instance-01",
-  "originatorApproval": "preApproved",
+  "contributionType": "contributor",
+  "targetReference": "at://did:plc:contributor01/world.ptah.character/hamlet-instance-01",
+  "originatorApproval": "notRequired",
   "canonicalStatus": "world.ptah.defs#canonicalStatusCommunity",
   "attributionChain": [
-    "at://did:plc:worldseeder01/world.ptah.world/hamlet-world"
+    {
+      "contributorDID": "did:plc:worldseeder01",
+      "role": "originator"
+    }
   ],
-  "publicDomainCompliance": true,
+  "publicDomainCompliance": "compliant",
   "createdAt": "2026-04-02T00:00:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:contributor01/world.ptah.contribution/hamlet-contrib-01`
+**AT URI:** `at://did:plc:contributor01/world.ptah.origin/hamlet-contrib-01`
 
-`originatorApproval: preApproved` because the world is public domain with `instancePolicy: openInstance`. The contributor doesn't need individual permission — the world's design already grants it.
+`originatorApproval: notRequired` because the world is public domain with `instancePolicy: open`. The contributor doesn't need individual permission — the world's design already grants it.
 
 ---
 
@@ -230,11 +229,10 @@ A second person wants to add to the World of Hamlet.
   "name": "Hamlet (The Burning Court)",
   "creatorDID": "did:plc:contributor01",
   "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
-  "roleReference": "at://did:plc:worldseeder01/world.ptah.role/hamlet-role",
+  "templateReference": "at://did:plc:worldseeder01/world.ptah.template/hamlet-role",
   "description": "A Hamlet who chose fire over hesitation. This is the prince who acts immediately — and burns the court down around him.",
   "controlType": "exclusive",
-  "originType": "contributed",
-  "authorshipRecord": "did:plc:contributor01",
+  "originType": "publicDomain",
   "canonicalStatus": "world.ptah.defs#canonicalStatusCommunity",
   "createdAt": "2026-04-02T00:01:00Z"
 }
@@ -242,7 +240,7 @@ A second person wants to add to the World of Hamlet.
 
 **AT URI:** `at://did:plc:contributor01/world.ptah.character/hamlet-instance-01`
 
-This character references the same Role as the canonical Hamlet but is a different instance — a different performance. `canonicalStatus: communityCanon` distinguishes it from the originator's version.
+This character references the same Template as the canonical Hamlet but is a different instance — a different performance. `canonicalStatus: communityCanon` distinguishes it from the originator's version.
 
 ---
 
@@ -254,7 +252,7 @@ This character references the same Role as the canonical Hamlet but is a differe
   "actorDID": "did:plc:contributor01",
   "characterReference": "at://did:plc:contributor01/world.ptah.character/hamlet-instance-01",
   "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
-  "actionType": "conflict",
+  "actionType": "competitive",
   "content": "This Hamlet does not wait. He draws his sword in the throne room and names Claudius murderer before the entire court. The court fractures. The kingdom splinters. The ghost watches from the battlements and says nothing.",
   "locationReference": "at://did:plc:worldseeder01/world.ptah.location/battlements",
   "visibility": "community",
@@ -294,7 +292,7 @@ A third person witnesses the event. This action record becomes evidence in the E
   "name": "The Throne Room Confrontation",
   "creatorDID": "did:plc:worldseeder01",
   "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
-  "eventType": "battle",
+  "eventType": "conflict",
   "participants": [
     "at://did:plc:worldseeder01/world.ptah.character/hamlet-canonical",
     "at://did:plc:worldseeder01/world.ptah.character/claudius"
@@ -306,9 +304,9 @@ A third person witnesses the event. This action record becomes evidence in the E
     "at://did:plc:witness01/world.ptah.action/witness-throne-room"
   ],
   "locationReference": "at://did:plc:worldseeder01/world.ptah.location/battlements",
-  "loreStatus": "world.ptah.defs#canonicalStatusOfficial",
-  "createdAt": "2026-04-02T00:04:00Z",
-  "completedAt": "2026-04-02T00:05:00Z"
+  "startTime": "2026-04-02T00:04:00Z",
+  "endTime": "2026-04-02T00:05:00Z",
+  "createdAt": "2026-04-02T00:04:00Z"
 }
 ```
 
@@ -316,14 +314,16 @@ A third person witnesses the event. This action record becomes evidence in the E
 
 ---
 
-### Record 12 — Lore: The Day the Court Heard the Truth
+### Record 12 — Log: The Day the Court Heard the Truth
 
 ```json
 {
-  "$type": "world.ptah.lore",
+  "$type": "world.ptah.log",
   "title": "The Day the Court Heard the Truth",
   "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
   "creatorDID": "did:plc:worldseeder01",
+  "logType": "chronicle",
+  "summary": "The court confrontation and its two competing accounts — the deliberating prince and the burning prince.",
   "content": "On the day the prince finally spoke, the court learned what the battlements had known since the ghost first walked. The king was a murderer. The crown was stolen. And the prince — whether he hesitated for weeks or acted in an instant — changed Denmark forever. Two versions of this moment exist in the record. In one, the prince deliberated. In the other, he burned. Both are true. Both are attributed. The world holds both.",
   "sourceReferences": [
     "at://did:plc:worldseeder01/world.ptah.action/ghost-speaks",
@@ -334,17 +334,14 @@ A third person witnesses the event. This action record becomes evidence in the E
     "at://did:plc:worldseeder01/world.ptah.character/hamlet-canonical",
     "at://did:plc:worldseeder01/world.ptah.character/claudius"
   ],
-  "timelinePosition": "Act III — The Confrontation",
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
-  "authorshipRecord": "did:plc:worldseeder01",
-  "contributionType": "originator",
   "createdAt": "2026-04-02T00:06:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:worldseeder01/world.ptah.lore/court-heard-truth`
+**AT URI:** `at://did:plc:worldseeder01/world.ptah.log/court-heard-truth`
 
-The `sourceReferences` array traces this lore back to the action records and event record that generated it. The history is verifiable — follow the AT URIs to the source.
+The `sourceReferences` array traces this log back to the action records and event record that generated it. The history is verifiable — follow the AT URIs to the source.
 
 ---
 
@@ -352,20 +349,20 @@ The `sourceReferences` array traces this lore back to the action records and eve
 
 ## Why This World
 
-Gatsby tests what Hamlet doesn't. Where Hamlet is a world of political violence and succession, Gatsby is a world of social performance — wealth as identity, parties as power, narration as an unreliable act. The characters' public selves diverge from their private selves. The events are social gatherings, not battles. The lore is gossip elevated to history.
+Gatsby tests what Hamlet doesn't. Where Hamlet is a world of political violence and succession, Gatsby is a world of social performance — wealth as identity, parties as power, narration as an unreliable act. The characters' public selves diverge from their private selves. The events are social gatherings, not battles. The log is gossip elevated to history.
 
 This world entered the U.S. public domain in 2021 and has already spawned a wave of creative reworkings. It's one of the most recognized stories in the English language.
 
 ## What This Chain Contains
 
 - 1 World record
-- 1 Role record (Gatsby)
+- 1 Template record (Gatsby)
 - 2 Character records (Canonical Gatsby, a contributor's Gatsby reinterpretation)
 - 1 Location record (The Mansion at West Egg)
 - 2 Action records (The Party Begins, A Witness Observes)
 - 1 Event record (The Last Party)
-- 1 Lore record (What the Green Light Meant)
-- 1 Contribution record
+- 1 Log record (What the Green Light Meant)
+- 1 Origin record
 
 Total: 10 records across all 8 record types.
 
@@ -396,27 +393,25 @@ Total: 10 records across all 8 record types.
 
 ---
 
-### Record 2 — Role: Jay Gatsby
+### Record 2 — Template: Jay Gatsby
 
 ```json
 {
-  "$type": "world.ptah.role",
+  "$type": "world.ptah.template",
   "name": "Jay Gatsby",
   "worldReference": "at://did:plc:worldseeder02/world.ptah.world/gatsby-world",
   "creatorDID": "did:plc:worldseeder02",
-  "description": "The self-made man. Born James Gatz. Invented himself out of nothing and longing. Throws parties for a woman across the bay. The performance is the person — or the person is the performance. The role invites that question.",
-  "sourceType": "world.ptah.defs#sourceTypePublicDomain",
-  "sourceReference": "F. Scott Fitzgerald, The Great Gatsby, Jay Gatsby character.",
+  "description": "The self-made man. Born James Gatz. Invented himself out of nothing and longing. Throws parties for a woman across the bay. The performance is the person — or the person is the performance. The template invites that question.",
+  "originType": "publicDomain",
   "canonicalCharacterReference": "at://did:plc:worldseeder02/world.ptah.character/gatsby-canonical",
   "canonicalReferencePolicy": "updatable",
-  "instancePolicy": "openInstance",
-  "authorshipRecord": "did:plc:worldseeder02",
+  "instancePolicy": "open",
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
   "createdAt": "2026-04-01T00:01:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:worldseeder02/world.ptah.role/gatsby-role`
+**AT URI:** `at://did:plc:worldseeder02/world.ptah.template/gatsby-role`
 
 ---
 
@@ -428,11 +423,10 @@ Total: 10 records across all 8 record types.
   "name": "Jay Gatsby (Canonical)",
   "creatorDID": "did:plc:worldseeder02",
   "worldReference": "at://did:plc:worldseeder02/world.ptah.world/gatsby-world",
-  "roleReference": "at://did:plc:worldseeder02/world.ptah.role/gatsby-role",
+  "templateReference": "at://did:plc:worldseeder02/world.ptah.template/gatsby-role",
   "description": "The originator's Gatsby. Faithful to Fitzgerald's portrait — the romantic who built a cathedral of lights to reach one person.",
   "controlType": "exclusive",
-  "originType": "world.ptah.defs#sourceTypePublicDomain",
-  "authorshipRecord": "did:plc:worldseeder02",
+  "originType": "publicDomain",
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
   "createdAt": "2026-04-01T00:02:00Z"
 }
@@ -475,7 +469,7 @@ Total: 10 records across all 8 record types.
   "actorDID": "did:plc:worldseeder02",
   "characterReference": "at://did:plc:worldseeder02/world.ptah.character/gatsby-canonical",
   "worldReference": "at://did:plc:worldseeder02/world.ptah.world/gatsby-world",
-  "actionType": "creation",
+  "actionType": "narrative",
   "content": "The lights go on across the lawn. The orchestra arrives. The caterers lay tables for hundreds. Gatsby stands at the window and watches the green light across the bay. The party is not for the guests. It has never been for the guests.",
   "locationReference": "at://did:plc:worldseeder02/world.ptah.location/west-egg-mansion",
   "visibility": "canon",
@@ -487,26 +481,29 @@ Total: 10 records across all 8 record types.
 
 ---
 
-### Record 6 — Contribution: A Contributor Reimagines Gatsby
+### Record 6 — Origin: A Contributor Reimagines Gatsby
 
 ```json
 {
-  "$type": "world.ptah.contribution",
+  "$type": "world.ptah.origin",
   "contributorDID": "did:plc:contributor02",
   "worldReference": "at://did:plc:worldseeder02/world.ptah.world/gatsby-world",
-  "contributionType": "character",
-  "recordReference": "at://did:plc:contributor02/world.ptah.character/gatsby-instance-01",
-  "originatorApproval": "preApproved",
+  "contributionType": "contributor",
+  "targetReference": "at://did:plc:contributor02/world.ptah.character/gatsby-instance-01",
+  "originatorApproval": "notRequired",
   "canonicalStatus": "world.ptah.defs#canonicalStatusCommunity",
   "attributionChain": [
-    "at://did:plc:worldseeder02/world.ptah.world/gatsby-world"
+    {
+      "contributorDID": "did:plc:worldseeder02",
+      "role": "originator"
+    }
   ],
-  "publicDomainCompliance": true,
+  "publicDomainCompliance": "compliant",
   "createdAt": "2026-04-02T00:00:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:contributor02/world.ptah.contribution/gatsby-contrib-01`
+**AT URI:** `at://did:plc:contributor02/world.ptah.origin/gatsby-contrib-01`
 
 ---
 
@@ -518,11 +515,10 @@ Total: 10 records across all 8 record types.
   "name": "Jay Gatsby (The Hollow Empire)",
   "creatorDID": "did:plc:contributor02",
   "worldReference": "at://did:plc:worldseeder02/world.ptah.world/gatsby-world",
-  "roleReference": "at://did:plc:worldseeder02/world.ptah.role/gatsby-role",
+  "templateReference": "at://did:plc:worldseeder02/world.ptah.template/gatsby-role",
   "description": "A Gatsby who knows the performance is empty and keeps performing anyway. Not a romantic — a nihilist wearing a romantic's suit. The parties get louder because the silence underneath gets worse.",
   "controlType": "exclusive",
-  "originType": "contributed",
-  "authorshipRecord": "did:plc:contributor02",
+  "originType": "publicDomain",
   "canonicalStatus": "world.ptah.defs#canonicalStatusCommunity",
   "createdAt": "2026-04-02T00:01:00Z"
 }
@@ -530,7 +526,7 @@ Total: 10 records across all 8 record types.
 
 **AT URI:** `at://did:plc:contributor02/world.ptah.character/gatsby-instance-01`
 
-Same Role, different instance. Fitzgerald's Gatsby is a romantic. This contributor's Gatsby is a nihilist. Both reference the same Role record. Both are valid. Both are attributed to different creators.
+Same Template, different instance. Fitzgerald's Gatsby is a romantic. This contributor's Gatsby is a nihilist. Both reference the same Template record. Both are valid. Both are attributed to different creators.
 
 ---
 
@@ -572,9 +568,9 @@ Same Role, different instance. Fitzgerald's Gatsby is a romantic. This contribut
     "at://did:plc:witness02/world.ptah.action/witness-last-party"
   ],
   "locationReference": "at://did:plc:worldseeder02/world.ptah.location/west-egg-mansion",
-  "loreStatus": "world.ptah.defs#canonicalStatusOfficial",
-  "createdAt": "2026-04-02T00:03:00Z",
-  "completedAt": "2026-04-02T00:04:00Z"
+  "startTime": "2026-04-02T00:03:00Z",
+  "endTime": "2026-04-02T00:04:00Z",
+  "createdAt": "2026-04-02T00:03:00Z"
 }
 ```
 
@@ -582,14 +578,16 @@ Same Role, different instance. Fitzgerald's Gatsby is a romantic. This contribut
 
 ---
 
-### Record 10 — Lore: What the Green Light Meant
+### Record 10 — Log: What the Green Light Meant
 
 ```json
 {
-  "$type": "world.ptah.lore",
+  "$type": "world.ptah.log",
   "title": "What the Green Light Meant",
   "worldReference": "at://did:plc:worldseeder02/world.ptah.world/gatsby-world",
   "creatorDID": "did:plc:worldseeder02",
+  "logType": "essay",
+  "summary": "Two interpretations of the green light — the romantic reading and the nihilist reading — both sourced to the same event.",
   "content": "After the last party ended and the mansion went dark, the question remained: what was the green light? To the canonical Gatsby, it was Daisy — the real person, the recoverable past. To the Hollow Empire Gatsby, it was the performance itself — the light you stare at because looking away means admitting there's nothing behind you. Both readings trace back to the same event. Both are sourced. Both are permanent. The world holds both, and the green light stays on.",
   "sourceReferences": [
     "at://did:plc:worldseeder02/world.ptah.action/party-begins",
@@ -599,31 +597,28 @@ Same Role, different instance. Fitzgerald's Gatsby is a romantic. This contribut
     "at://did:plc:worldseeder02/world.ptah.character/gatsby-canonical",
     "at://did:plc:contributor02/world.ptah.character/gatsby-instance-01"
   ],
-  "timelinePosition": "Summer's End — After the Last Party",
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
-  "authorshipRecord": "did:plc:worldseeder02",
-  "contributionType": "originator",
   "createdAt": "2026-04-02T00:05:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:worldseeder02/world.ptah.lore/green-light`
+**AT URI:** `at://did:plc:worldseeder02/world.ptah.log/green-light`
 
 ---
 
 ## What These Two Literary Worlds Demonstrate
 
-**Hamlet** tests the protocol's hardest public domain problem: a universally known work with contested interpretations, where multiple people need to embody the same character simultaneously. The Role/Instance split, `controlType`, and `canonicalCharacterReference` are all exercised.
+**Hamlet** tests the protocol's hardest public domain problem: a universally known work with contested interpretations, where multiple people need to embody the same character simultaneously. The Template/Instance split, `controlType`, and `canonicalCharacterReference` are all exercised.
 
-**Gatsby** tests a different kind of world: social performance rather than political violence, gatherings rather than battles, lore built from unreliable narration rather than witnessed combat. The same eight record types express both worlds without modification.
+**Gatsby** tests a different kind of world: social performance rather than political violence, gatherings rather than conflicts, log entries built from unreliable narration rather than witnessed combat. The same fourteen record types express both worlds without modification.
 
 Both worlds show:
 - A world originator seeding the foundation
 - A contributor adding their own interpretation
-- Multiple Character instances of the same Role, attributed to different creators
-- Actions generating history that becomes verifiable Lore
+- Multiple Character instances of the same Template, attributed to different creators
+- Actions generating history that becomes verifiable Log entries
 - Events with witnesses — real action records, not just a count
-- The `attributionChain` tracing provenance through every contribution
+- The `attributionChain` tracing provenance through every origin record
 
 ---
 
@@ -633,7 +628,7 @@ Both worlds show:
 
 Hamlet and Gatsby demonstrate literary world-building. Spades demonstrates the other half of what the protocol was built for — structured competitive events with brackets, rounds, winners, and results that become permanent history.
 
-This world tests: the `format` field on Events, the full `status` lifecycle (`upcoming` → `active` → `completed`), multiple Events chaining into a tournament arc, witnesses as real attestation records during competitive play, and Lore that reads like a season record rather than a narrative.
+This world tests: the full `status` lifecycle (`scheduled` → `active` → `completed`), multiple Events chaining into a tournament arc, witnesses as real attestation records during competitive play, and Log entries that read like a season record rather than a narrative.
 
 Spades is culturally aligned with Blacksky, where the protocol lives. It's a game people already play online. The tournament structure is immediately recognizable.
 
@@ -644,9 +639,9 @@ Spades is culturally aligned with Blacksky, where the protocol lives. It's a gam
 - 1 Location record (The Table)
 - 3 Action records (a bid, a play, a witness)
 - 1 Event record (Championship Match)
-- 1 Lore record (Season record)
+- 1 Log record (Season record)
 
-Total: 11 records. No Role record — Spades players are themselves, not instances of a shared identity.
+Total: 11 records. No Template record — Spades players are themselves, not instances of a shared identity.
 
 ---
 
@@ -658,7 +653,7 @@ Total: 11 records. No Role record — Spades players are themselves, not instanc
   "name": "Blacksky Spades",
   "creatorDID": "did:plc:spadeshost01",
   "description": "Competitive Spades on the open network. Partners, bids, books, and Boston. Every hand is recorded. Every result is permanent. Talk your trash — it's on the record too.",
-  "sourceType": "world.ptah.defs#sourceTypeOriginalIP",
+  "sourceType": "originalIP",
   "governanceMode": "governed",
   "renderingHints": {
     "tone": "competitive, social, sharp",
@@ -686,11 +681,10 @@ Total: 11 records. No Role record — Spades players are themselves, not instanc
   "worldReference": "at://did:plc:spadeshost01/world.ptah.world/blacksky-spades",
   "description": "Team North. Bids conservative. Plays aggressive. Never goes nil unless it's match point.",
   "controlType": "exclusive",
-  "originType": "world.ptah.defs#sourceTypeOriginalIP",
+  "originType": "originalIP",
   "properties": {
     "affiliation": "Team North"
   },
-  "authorshipRecord": "did:plc:player01",
   "createdAt": "2026-04-01T00:01:00Z"
 }
 ```
@@ -709,11 +703,10 @@ Total: 11 records. No Role record — Spades players are themselves, not instanc
   "worldReference": "at://did:plc:spadeshost01/world.ptah.world/blacksky-spades",
   "description": "Team North. The nil specialist. Reads the table like a book.",
   "controlType": "exclusive",
-  "originType": "world.ptah.defs#sourceTypeOriginalIP",
+  "originType": "originalIP",
   "properties": {
     "affiliation": "Team North"
   },
-  "authorshipRecord": "did:plc:player02",
   "createdAt": "2026-04-01T00:02:00Z"
 }
 ```
@@ -732,11 +725,10 @@ Total: 11 records. No Role record — Spades players are themselves, not instanc
   "worldReference": "at://did:plc:spadeshost01/world.ptah.world/blacksky-spades",
   "description": "Team South. Overbids every round. Somehow makes it work.",
   "controlType": "exclusive",
-  "originType": "world.ptah.defs#sourceTypeOriginalIP",
+  "originType": "originalIP",
   "properties": {
     "affiliation": "Team South"
   },
-  "authorshipRecord": "did:plc:player03",
   "createdAt": "2026-04-01T00:03:00Z"
 }
 ```
@@ -755,11 +747,10 @@ Total: 11 records. No Role record — Spades players are themselves, not instanc
   "worldReference": "at://did:plc:spadeshost01/world.ptah.world/blacksky-spades",
   "description": "Team South. Counts every card. Doesn't talk until the hand is over. Then talks too much.",
   "controlType": "exclusive",
-  "originType": "world.ptah.defs#sourceTypeOriginalIP",
+  "originType": "originalIP",
   "properties": {
     "affiliation": "Team South"
   },
-  "authorshipRecord": "did:plc:player04",
   "createdAt": "2026-04-01T00:04:00Z"
 }
 ```
@@ -799,7 +790,7 @@ Total: 11 records. No Role record — Spades players are themselves, not instanc
   "actorDID": "did:plc:player01",
   "characterReference": "at://did:plc:player01/world.ptah.character/ace",
   "worldReference": "at://did:plc:spadeshost01/world.ptah.world/blacksky-spades",
-  "actionType": "speech",
+  "actionType": "dialogue",
   "content": "Ace bids 4. Looks at Deuce across the table. Deuce nods. Team North is at 6 combined.",
   "locationReference": "at://did:plc:spadeshost01/world.ptah.location/the-table",
   "visibility": "canon",
@@ -819,7 +810,7 @@ Total: 11 records. No Role record — Spades players are themselves, not instanc
   "actorDID": "did:plc:player03",
   "characterReference": "at://did:plc:player03/world.ptah.character/blitz",
   "worldReference": "at://did:plc:spadeshost01/world.ptah.world/blacksky-spades",
-  "actionType": "conflict",
+  "actionType": "competitive",
   "content": "Blitz cuts with the Queen of Spades on a Heart lead. Takes the book. Team South now has 7 — one over their bid. Sandbag watch is on.",
   "locationReference": "at://did:plc:spadeshost01/world.ptah.location/the-table",
   "visibility": "canon",
@@ -857,8 +848,7 @@ Total: 11 records. No Role record — Spades players are themselves, not instanc
   "name": "Blacksky Spades Championship — Spring 2026",
   "creatorDID": "did:plc:spadeshost01",
   "worldReference": "at://did:plc:spadeshost01/world.ptah.world/blacksky-spades",
-  "eventType": "tournament",
-  "format": "singleElimination",
+  "eventType": "competition",
   "participants": [
     "at://did:plc:player01/world.ptah.character/ace",
     "at://did:plc:player02/world.ptah.character/deuce",
@@ -872,26 +862,28 @@ Total: 11 records. No Role record — Spades players are themselves, not instanc
     "at://did:plc:spectator01/world.ptah.action/witness-championship"
   ],
   "locationReference": "at://did:plc:spadeshost01/world.ptah.location/the-table",
-  "loreStatus": "world.ptah.defs#canonicalStatusOfficial",
-  "createdAt": "2026-04-05T19:00:00Z",
-  "completedAt": "2026-04-05T22:00:00Z"
+  "startTime": "2026-04-05T19:00:00Z",
+  "endTime": "2026-04-05T22:00:00Z",
+  "createdAt": "2026-04-05T19:00:00Z"
 }
 ```
 
 **AT URI:** `at://did:plc:spadeshost01/world.ptah.event/championship-spring-2026`
 
-`format: singleElimination` — this field hasn't been exercised in either literary world. Here it defines the tournament structure.
+`eventType: competition` — the same record type that holds literary confrontations also holds tournament matches. The `stakes` and `result` fields do the heavy lifting.
 
 ---
 
-### Record 11 — Lore: The Spring 2026 Season Record
+### Record 11 — Log: The Spring 2026 Season Record
 
 ```json
 {
-  "$type": "world.ptah.lore",
+  "$type": "world.ptah.log",
   "title": "Spring 2026 Season — The Nil That Won It",
   "worldReference": "at://did:plc:spadeshost01/world.ptah.world/blacksky-spades",
   "creatorDID": "did:plc:spadeshost01",
+  "logType": "article",
+  "summary": "Spring 2026 Championship final — Team South wins on a nil bid in the last round.",
   "content": "The Spring 2026 Championship came down to one call. Team South was up 40 points going into the final round. Blitz bid nil — the first nil bid of the entire match. Shadow counted the remaining spades and covered every lead. Team North tried to force a spade onto Blitz three times. Three times Shadow cut in front. Final score: 502–380. The nil held. The season belongs to Team South.",
   "sourceReferences": [
     "at://did:plc:player01/world.ptah.action/bid-round1",
@@ -904,17 +896,14 @@ Total: 11 records. No Role record — Spades players are themselves, not instanc
     "at://did:plc:player03/world.ptah.character/blitz",
     "at://did:plc:player04/world.ptah.character/shadow"
   ],
-  "timelinePosition": "Spring 2026 Season — Championship",
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
-  "authorshipRecord": "did:plc:spadeshost01",
-  "contributionType": "originator",
   "createdAt": "2026-04-05T23:00:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:spadeshost01/world.ptah.lore/spring-2026-season`
+**AT URI:** `at://did:plc:spadeshost01/world.ptah.log/spring-2026-season`
 
-The `sourceReferences` trace the season record back to the specific actions and events that produced it. The lore isn't a narrative someone made up — it's a record of what happened, verifiable against the action records.
+The `sourceReferences` trace the season record back to the specific actions and events that produced it. The log isn't a narrative someone made up — it's a record of what happened, verifiable against the action records.
 
 ---
 
@@ -924,7 +913,7 @@ The `sourceReferences` trace the season record back to the specific actions and 
 
 Spades shows structured competition with concrete outcomes. A tabletop RPG campaign shows the opposite end of the competitive spectrum — open-ended collaborative storytelling where a Game Master runs sessions, players control persistent characters, outcomes are driven by dice and decisions, and history accumulates over weeks or months of play.
 
-This world tests: characters with progression (abilities, affiliations that change over time), a GM as a distinct participant type, sessions as Events rather than tournaments, Actions driven by gameplay mechanics rather than pure narrative, and Lore that serves as a campaign journal — the living memory of a group's shared adventure.
+This world tests: characters with progression (abilities, affiliations that change over time), a GM as a distinct participant type, sessions as Events rather than competitions, Actions driven by gameplay mechanics rather than pure narrative, and Log entries that serve as a campaign journal — the living memory of a group's shared adventure.
 
 The core mechanics reference the D&D 5th Edition SRD, which was released under Creative Commons (CC BY 4.0) in 2023, making the game system itself open for use.
 
@@ -935,8 +924,8 @@ The core mechanics reference the D&D 5th Edition SRD, which was released under C
 - 1 Location record (The Shattered Reach)
 - 2 Action records (a player action, a GM ruling)
 - 1 Event record (Session 1)
-- 1 Lore record (Campaign journal entry)
-- 1 Contribution record (a new player joining the campaign)
+- 1 Log record (Campaign journal entry)
+- 1 Origin record (a new player joining the campaign)
 
 Total: 10 records.
 
@@ -950,7 +939,7 @@ Total: 10 records.
   "name": "The Shattered Reach",
   "creatorDID": "did:plc:gm01",
   "description": "A homebrew campaign world. The northern coast was shattered by a magical cataclysm a century ago. The islands that remain are connected by unstable bridges of frozen arcane energy. Three factions fight for control of the bridges. The party landed on the wrong island at the wrong time.",
-  "sourceType": "world.ptah.defs#sourceTypeCollaborativeCommons",
+  "sourceType": "collaborativeCommons",
   "governanceMode": "governed",
   "renderingHints": {
     "tone": "epic, dangerous, weird",
@@ -978,14 +967,13 @@ Total: 10 records.
   "worldReference": "at://did:plc:gm01/world.ptah.world/shattered-reach",
   "description": "Half-elf ranger. Survived the crossing from the mainland. Doesn't talk about what happened on the boat. Tracks everything. Trusts nothing.",
   "controlType": "exclusive",
-  "originType": "world.ptah.defs#sourceTypeOriginalIP",
+  "originType": "originalIP",
   "properties": {
     "species": "Half-elf",
     "role": "Ranger",
     "abilities": "Favored terrain: coastal. Fighting style: archery. Carries a longbow named Tide.",
     "affiliation": "Unaffiliated — arrived as an outsider"
   },
-  "authorshipRecord": "did:plc:player05",
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
   "createdAt": "2026-04-01T00:01:00Z"
 }
@@ -1007,14 +995,13 @@ The `properties` object gets real use here — species, class, abilities, and af
   "worldReference": "at://did:plc:gm01/world.ptah.world/shattered-reach",
   "description": "Tiefling warlock. Made a pact she won't explain. The magic works. The cost is unclear. She smiles too much for someone carrying that kind of debt.",
   "controlType": "exclusive",
-  "originType": "world.ptah.defs#sourceTypeOriginalIP",
+  "originType": "originalIP",
   "properties": {
     "species": "Tiefling",
     "role": "Warlock",
     "abilities": "Eldritch blast. Pact of the Tome. Patron: unknown (GM secret).",
     "affiliation": "Unaffiliated — won't say where she came from"
   },
-  "authorshipRecord": "did:plc:player06",
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
   "createdAt": "2026-04-01T00:02:00Z"
 }
@@ -1034,14 +1021,13 @@ The `properties` object gets real use here — species, class, abilities, and af
   "worldReference": "at://did:plc:gm01/world.ptah.world/shattered-reach",
   "description": "Nobody knows her real name. She controls the last stable bridge between the outer islands and the mainland fragment. Charges a toll — not in gold. In favors. The favors always come due at the worst possible time.",
   "controlType": "exclusive",
-  "originType": "world.ptah.defs#sourceTypeOriginalIP",
+  "originType": "originalIP",
   "properties": {
     "species": "Human (probably)",
     "role": "NPC — quest giver, gatekeeper",
     "abilities": "Unknown. The bridge obeys her. That's enough.",
     "affiliation": "The Bridge — no faction, no allegiance"
   },
-  "authorshipRecord": "did:plc:gm01",
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
   "createdAt": "2026-04-01T00:03:00Z"
 }
@@ -1090,7 +1076,7 @@ Created by the GM's DID, not a player. The `controlType: exclusive` means only t
   "actorDID": "did:plc:player05",
   "characterReference": "at://did:plc:player05/world.ptah.character/kael",
   "worldReference": "at://did:plc:gm01/world.ptah.world/shattered-reach",
-  "actionType": "creation",
+  "actionType": "narrative",
   "content": "Kael rolls Perception at the bridge approach. Natural 18 + 5 modifier = 23. He spots runes carved into the underside of the bridge supports — they're not part of the original construction. Someone added them recently. They pulse faintly in the same rhythm as the bridge's hum.",
   "locationReference": "at://did:plc:gm01/world.ptah.location/shattered-reach-region",
   "visibility": "canon",
@@ -1112,7 +1098,7 @@ The action content includes the mechanical roll and the narrative result. Both a
   "actorDID": "did:plc:gm01",
   "characterReference": "at://did:plc:gm01/world.ptah.character/bridge-keeper",
   "worldReference": "at://did:plc:gm01/world.ptah.world/shattered-reach",
-  "actionType": "speech",
+  "actionType": "dialogue",
   "content": "The Bridge Keeper steps out of the fog. 'You saw the runes.' It's not a question. She looks at Kael, then at Senna. 'The bridge is dying. Someone is killing it on purpose. I'll let you cross for free — if you find out who.' She holds out two iron tokens. 'One crossing each. Don't lose them.'",
   "locationReference": "at://did:plc:gm01/world.ptah.location/shattered-reach-region",
   "visibility": "canon",
@@ -1126,29 +1112,33 @@ The GM acts through the NPC. The `actorDID` is the GM. The `characterReference` 
 
 ---
 
-### Record 8 — Contribution: A New Player Joins
+### Record 8 — Origin: A New Player Joins
 
 A third player joins the campaign in session 2.
 
 ```json
 {
-  "$type": "world.ptah.contribution",
+  "$type": "world.ptah.origin",
   "contributorDID": "did:plc:player07",
   "worldReference": "at://did:plc:gm01/world.ptah.world/shattered-reach",
-  "contributionType": "character",
-  "recordReference": "at://did:plc:player07/world.ptah.character/new-pc",
+  "contributionType": "contributor",
+  "targetReference": "at://did:plc:player07/world.ptah.character/new-pc",
   "originatorApproval": "approved",
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
   "attributionChain": [
-    "at://did:plc:gm01/world.ptah.world/shattered-reach"
+    {
+      "contributorDID": "did:plc:gm01",
+      "role": "originator"
+    }
   ],
+  "publicDomainCompliance": "notApplicable",
   "createdAt": "2026-04-15T00:00:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:player07/world.ptah.contribution/join-campaign`
+**AT URI:** `at://did:plc:player07/world.ptah.origin/join-campaign`
 
-`originatorApproval: approved` — unlike the public domain worlds where contribution is pre-approved, a tabletop campaign requires the GM to approve new players. The GM governs the world.
+`originatorApproval: approved` — unlike the public domain worlds where approval is not required, a tabletop campaign requires the GM to approve new players. The GM governs the world.
 
 ---
 
@@ -1171,9 +1161,9 @@ A third player joins the campaign in session 2.
   "result": "The party accepted the Bridge Keeper's offer. Kael took both iron tokens. Senna tried to Insight check the Bridge Keeper and rolled a 4. The Keeper smiled. Session ended at the bridge crossing.",
   "witnesses": [],
   "locationReference": "at://did:plc:gm01/world.ptah.location/shattered-reach-region",
-  "loreStatus": "world.ptah.defs#canonicalStatusOfficial",
-  "createdAt": "2026-04-08T19:00:00Z",
-  "completedAt": "2026-04-08T22:00:00Z"
+  "startTime": "2026-04-08T19:00:00Z",
+  "endTime": "2026-04-08T22:00:00Z",
+  "createdAt": "2026-04-08T19:00:00Z"
 }
 ```
 
@@ -1183,14 +1173,16 @@ A third player joins the campaign in session 2.
 
 ---
 
-### Record 10 — Lore: Campaign Journal — Session 1
+### Record 10 — Log: Campaign Journal — Session 1
 
 ```json
 {
-  "$type": "world.ptah.lore",
+  "$type": "world.ptah.log",
   "title": "Session 1 — The Bridge Keeper's Bargain",
   "worldReference": "at://did:plc:gm01/world.ptah.world/shattered-reach",
   "creatorDID": "did:plc:gm01",
+  "logType": "entry",
+  "summary": "The party reaches the last stable bridge, discovers sabotage, and accepts the Bridge Keeper's bargain.",
   "content": "The party arrived at the last stable bridge in the Shattered Reach. Kael spotted sabotage runes on the supports — someone is deliberately destabilizing the bridges. The Bridge Keeper offered free passage in exchange for finding the saboteur. The party accepted. Kael holds both crossing tokens. Senna failed to read the Keeper's intentions. The Keeper knows more than she's saying. The bridge hummed under their feet as they crossed. It flickered once.",
   "sourceReferences": [
     "at://did:plc:player05/world.ptah.action/perception-check-bridge",
@@ -1202,17 +1194,14 @@ A third player joins the campaign in session 2.
     "at://did:plc:player06/world.ptah.character/senna",
     "at://did:plc:gm01/world.ptah.character/bridge-keeper"
   ],
-  "timelinePosition": "Campaign Week 1 — Arrival at the Reach",
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
-  "authorshipRecord": "did:plc:gm01",
-  "contributionType": "originator",
   "createdAt": "2026-04-08T23:00:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:gm01/world.ptah.lore/session-1-journal`
+**AT URI:** `at://did:plc:gm01/world.ptah.log/session-1-journal`
 
-The campaign journal is Lore — traceable back to the specific actions and events of the session. Next week's session builds on this. The history accumulates. The campaign becomes a world with a permanent, verifiable record of everything that happened in it.
+The campaign journal is a Log entry — traceable back to the specific actions and events of the session. Next week's session builds on this. The history accumulates. The campaign becomes a world with a permanent, verifiable record of everything that happened in it.
 
 ---
 
@@ -1220,11 +1209,11 @@ The campaign journal is Lore — traceable back to the specific actions and even
 
 | World | Type | Tests |
 |---|---|---|
-| **Hamlet** | Literary, public domain | Role/Instance split, contested canon, multiple embodiments of shared characters |
+| **Hamlet** | Literary, public domain | Template/Instance split, contested canon, multiple embodiments of shared characters |
 | **Gatsby** | Literary, public domain | Social performance, unreliable narration, gatherings as events |
-| **Blacksky Spades** | Structured competition | Tournament format, scoring, brackets, competitive witnesses, season records |
-| **The Shattered Reach** | Collaborative RPG campaign | GM/player dynamics, character progression, sessions as events, campaign journals as lore |
+| **Blacksky Spades** | Structured competition | Competition events, scoring, competitive witnesses, season records |
+| **The Shattered Reach** | Collaborative RPG campaign | GM/player dynamics, character progression, sessions as events, campaign journals as log entries |
 
-The same eight record types express all four worlds without modification. Literary world-building. Social narrative. Competitive card games. Tabletop RPG campaigns. The protocol doesn't care what kind of world you're building. It cares that authorship travels, history is verifiable, and every contribution traces back to the person who made it.
+The same fourteen record types express all four worlds without modification. Literary world-building. Social narrative. Competitive card games. Tabletop RPG campaigns. The protocol doesn't care what kind of world you're building. It cares that authorship travels, history is verifiable, and every contribution traces back to the person who made it.
 
 The schema holds all four worlds. It will hold yours.

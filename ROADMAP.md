@@ -7,15 +7,15 @@ The Ptah Protocol is in active development. Here's where things stand and where 
 ## Now — Schema Complete
 
 **Done:**
-- Eight foundational record types defined and formalized as Lexicon JSON
-- Shared definitions file and declaration companion record
+- Fourteen record types defined and formalized as Lexicon JSON
+- Shared definitions file (world.ptah.defs)
 - Two complete example world chains (Hamlet + Freedmen Universe) pressure-tested against seven failure modes
-- Experimental schemas published to the ATProto network under `world.ptah.temp.*`
+- Production schemas published to the ATProto network under `world.ptah.*`
+- Schemas promoted from `world.ptah.temp.*` to production `world.ptah.*` namespace
 - Domain, DNS, Blacksky account, and website live
 - GitHub repository public with full documentation
 
 **In progress:**
-- Promote schemas from `world.ptah.temp.*` to production `world.ptah.*` namespace
 - Community engagement via ATmosphereConf 2026 and ATProto developer ecosystem
 
 ---
@@ -45,7 +45,7 @@ Identified during pressure testing as real needs that don't belong in v1:
 - **Canon Branching Vocabulary** — structured language for how a world's canon can fork, merge, or diverge
 - **World Governance Document** — the actual constitution that `governanceMode: constitutional` points to
 - **Geographic Analytics** — world-level spatial data derived from Location records
-- **Cross-World References** — how characters, lore, or events can span multiple worlds
+- **Cross-World References** — how characters, logs, or events can span multiple worlds
 
 ---
 
@@ -53,7 +53,7 @@ Identified during pressure testing as real needs that don't belong in v1:
 
 The roadmap follows a few commitments:
 
-**Ship the schema first.** The record types are the foundation. Everything else — AppViews, clients, tooling — builds on stable schemas. Getting the schemas right and published is the priority.
+**Schemas shipped. Now build the view.** The record types are defined and published to the ATProto network under the production `world.ptah.*` namespace. The priority has shifted to building the AppView and rendering layer that makes this data queryable and navigable.
 
 **Open by default.** The protocol is MIT/Apache-2.0 dual-licensed. Anyone can build on it. The roadmap is public. Feedback shapes direction.
 

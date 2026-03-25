@@ -2,9 +2,9 @@
 
 **Open world infrastructure for the AT Protocol.**
 
-The Ptah Protocol is a set of [Lexicon](https://atproto.com/specs/lexicon) schemas that bring collaborative world-building, narrative provenance, and creative attribution to the [AT Protocol](https://atproto.com) network. It defines eight record types that let anyone create a world, inhabit it with characters, act inside it, accumulate history, and trace every contribution back to the person who made it.
+The Ptah Protocol is a set of [Lexicon](https://atproto.com/specs/lexicon) schemas that bring collaborative world-building, narrative provenance, and creative attribution to the [AT Protocol](https://atproto.com) network. It defines fourteen record types that let anyone create a world, inhabit it with characters, act inside it, accumulate history, track lineage and permissions, and trace every contribution back to the person who made it.
 
-The namespace is `world.ptah.*`. Experimental schemas are published to the network under `world.ptah.temp.*`.
+The namespace is `world.ptah.*`. Production schemas are published and live on the ATProto network.
 
 **Status:** Active Development — Schema Complete
 
@@ -26,36 +26,50 @@ The namespace is `world.ptah.*`. Experimental schemas are published to the netwo
 
 ## Record Types
 
-The protocol defines eight foundational record types plus a shared definitions file and a declaration companion record.
+The protocol defines fourteen record types plus a shared definitions file.
 
 ### World · `world.ptah.world`
-The foundational record. Everything else references it. A world must exist before characters, events, or lore can exist inside it. Declares the world's name, creator, intellectual property origin, governance mode, and rendering hints.
+The foundational record. Everything else references it. A world must exist before characters, events, or logs can exist inside it. Declares the world's name, creator, intellectual property origin, governance mode, and rendering hints.
 
 ### Character · `world.ptah.character`
-A person, creature, or entity that exists inside a specific world. The character is not the user — the character is the world's inhabitant. Can be an original creation or an instance of a shared Role.
+A person, creature, or entity that exists inside a specific world. The character is not the user — the character is the world's inhabitant. Can be an original creation or an instance of a shared Template.
 
-### Role · `world.ptah.role`
-The template that sits between the World and the Character. A shared identity that multiple Character instances can embody. Hamlet is a Role — each performance of Hamlet is a Character instance. Governs instance policy and canonical reference.
+### Template · `world.ptah.template`
+A shared identity template that multiple characters can embody. The type, not the instance. Hamlet is a Template — each performance of Hamlet is a Character instance. Governs instance policy and canonical reference.
 
 ### Action · `world.ptah.action`
-The heartbeat of the protocol. Every time someone acts inside a world, they create one of these. Captures who acted, as which character, in which world, at which location, and what happened.
+The heartbeat of the protocol. Every time someone acts inside a world, they create one of these. Captures who acted, as which character, in which world, at which location, and what happened. Supports threading via parent action references.
 
 ### Event · `world.ptah.event`
-Where competition becomes history. A tournament, battle, gathering, or any occasion where characters compete or convene. Tracks participants, stakes, status, result, and witnesses. Witnesses are verifiable action records, not just a count.
+Where competition becomes history. A competition, gathering, milestone, ceremony, or conflict where characters compete or convene. Tracks participants, stakes, status, result, and witnesses. Witnesses are verifiable action records, not just a count.
 
-### Lore · `world.ptah.lore`
-The world's history book. What separates the protocol from a game or a social feed. Lore traces back through source references to the actions and events that generated it. The history is attributable, permanent, and verifiable.
+### Log · `world.ptah.log`
+The world's history book. What separates the protocol from a game or a social feed. Logs trace back through source references to the actions and events that generated them. The history is attributable, permanent, and verifiable. Supports a human-authored declaration flag.
 
-### Contribution · `world.ptah.contribution`
-The permission and attribution layer. Governs how someone who didn't create a world adds something to it. Carries an attribution chain — an array tracing every hand a contribution passed through. Provenance travels with the work.
+### Origin · `world.ptah.origin`
+The attribution and permission layer. Tracks who contributed what, under what terms, and with what role. Carries a structured attribution chain where each entry records the contributor's DID, role, and optional split percentage. Provenance travels with the work.
 
 ### Location · `world.ptah.location`
 A place inside a world. Gives events and actions an address. Locations nest infinitely via parent references and carry a depth index for efficient rendering without traversing the full hierarchy.
 
+### Collection · `world.ptah.collection`
+Bundles multiple works together. An album, anthology, season, or any curated set of related works. Items are ordered sequentially, chronologically, or unordered.
+
+### Trace · `world.ptah.trace`
+Tracks lineage between works. The paper trail from one work to another — cover, remix, adaptation, translation, sample, interpolation, response, sequel, spinoff, excerpt, remake, or fork. Includes clearance status.
+
+### Usage · `world.ptah.usage`
+Terms and permissions for a work. What's allowed, where, for how long, and under what conditions. Covers commercial use, derivatives, performance rights, attribution requirements, territories, and license type.
+
+### Version · `world.ptah.version`
+Edit history within a work. Tracks the evolution from draft to published to revised to final — every version, every change. Versions link to their predecessors and carry status (active, superseded, retracted, archived).
+
+### Flax · `world.ptah.flax`
+Signaling record indicating an account participates in the Ptah Protocol. One per account, fixed key `self`. Named for the twisted flax glyph (𓉔), the H in Ptah — the attribution chain thread. Used by AppViews for participant discovery.
+
 ### Supporting schemas
 
 - **Defs** · `world.ptah.defs` — Shared token definitions (source types, canonical status tiers) referenced across all record types.
-- **Declaration** · `world.ptah.declaration` — A signaling record indicating that an account participates in the Ptah Protocol. One per account, fixed key. Used by AppViews for participant discovery.
 
 ---
 
@@ -67,7 +81,7 @@ A place inside a world. Gives events and actions an address. Locations nest infi
 
 **Witnessing is presence, not endorsement.** A thousand witnesses do not make an event good. They make it witnessed. The distinction is preserved at every layer.
 
-**Lore is rhetoric, not truth.** The protocol makes narrative attributable and permanent. It does not make narrative true. Any piece of lore can be traced back to its sources, but the interpretation belongs to the author.
+**The log is rhetoric, not truth.** The protocol makes narrative attributable and permanent. It does not make narrative true. Any log entry can be traced back to its sources, but the interpretation belongs to the author.
 
 ---
 
@@ -76,18 +90,17 @@ A place inside a world. Gives events and actions an address. Locations nest infi
 - **`knownValues` over `enum` everywhere.** Fields use open-ended known value sets rather than closed enumerations, allowing extensibility without breaking changes.
 - **Consistent required fields.** Every record requires who created it, what world it belongs to, when it was created, and what it's called. Everything else is optional.
 - **Typed flexible properties.** Freeform metadata (rendering hints, character properties, location properties) uses named object definitions with explicit optional fields rather than untyped key-value pairs.
-- **String length limits.** Names: 640 bytes / 64 graphemes. Descriptions: 10,240 bytes / 1,024 graphemes. Lore content: 102,400 bytes / 10,000 graphemes. Byte-to-grapheme ratio approximately 10:1.
+- **String length limits.** Names: 640 bytes / 64 graphemes. Descriptions: 10,240 bytes / 1,024 graphemes. Log content: 102,400 bytes / 10,000 graphemes. Byte-to-grapheme ratio approximately 10:1.
 - **AT URI references throughout.** All cross-record references use the `at-uri` format, making every relationship in the record chain resolvable on the network.
 
 ---
 
 ## Network Publication
 
-Experimental schemas are published as `com.atproto.lexicon.schema` records in the [@ptah.world](https://blacksky.community/profile/ptah.world) repository under the `world.ptah.temp.*` namespace.
+Production schemas are published as `com.atproto.lexicon.schema` records in the [@ptah.world](https://blacksky.community/profile/ptah.world) repository under the `world.ptah.*` namespace. All fourteen schemas are live and resolvable on the ATProto network.
 
-Lexicon resolution is wired via DNS TXT records:
-- `_lexicon.ptah.world` → production namespace (`world.ptah.*`)
-- `_lexicon.temp.ptah.world` → experimental namespace (`world.ptah.temp.*`)
+Lexicon resolution is wired via DNS TXT record:
+- `_lexicon.ptah.world` → `did=did:plc:l45z35sxxjuobp5q65a5vu22`
 
 DID: `did:plc:l45z35sxxjuobp5q65a5vu22`
 PDS: [Blacksky](https://blacksky.app)
@@ -99,10 +112,10 @@ PDS: [Blacksky](https://blacksky.app)
 The protocol supports three source types for worlds and their contents:
 
 - **Original IP** — created by the world originator, with full authorship control.
-- **Public Domain** — derived from public domain source material, with the Role/Character instance split enabling multiple performances of shared identities.
+- **Public Domain** — derived from public domain source material, with the Template/Character instance split enabling multiple performances of shared identities.
 - **Collaborative Commons** — created under a collaborative framework with shared governance.
 
-The `controlType` field on characters (exclusive, open, delegated) and the `instancePolicy` field on roles (openInstance, approvedInstance, singleInstance) govern how creative control flows through the system.
+The `controlType` field on characters (exclusive, open, contested) and the `instancePolicy` field on templates (open, restricted, closed) govern how creative control flows through the system.
 
 ---
 
@@ -120,13 +133,17 @@ ptah-protocol/
 └── lexicons/
     ├── world.ptah.action.json
     ├── world.ptah.character.json
-    ├── world.ptah.contribution.json
-    ├── world.ptah.declaration.json
+    ├── world.ptah.collection.json
     ├── world.ptah.defs.json
     ├── world.ptah.event.json
+    ├── world.ptah.flax.json
     ├── world.ptah.location.json
-    ├── world.ptah.lore.json
-    ├── world.ptah.role.json
+    ├── world.ptah.log.json
+    ├── world.ptah.origin.json
+    ├── world.ptah.template.json
+    ├── world.ptah.trace.json
+    ├── world.ptah.usage.json
+    ├── world.ptah.version.json
     └── world.ptah.world.json
 ```
 

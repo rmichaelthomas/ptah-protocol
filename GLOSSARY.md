@@ -8,27 +8,35 @@ Terms used across the Ptah Protocol documentation, covering protocol infrastruct
 
 **AppView** — A service that indexes and serves ATProto records for a specific application or use case. The Ptah Protocol will need its own AppView to index `world.ptah.*` records from the network and make them queryable. Think of it as the search engine and database layer that sits between the raw records and whatever client displays them.
 
-**AT URI** — The address of a specific record on the ATProto network. Format: `at://{DID}/{NSID}/{rkey}`. Every cross-reference in the protocol — a character pointing to its world, lore pointing to its source events — uses an AT URI. It's how the record graph stays connected and traversable.
+**AT URI** — The address of a specific record on the ATProto network. Format: `at://{DID}/{NSID}/{rkey}`. Every cross-reference in the protocol — a character pointing to its world, log pointing to its source events — uses an AT URI. It's how the record graph stays connected and traversable.
 
-**Attribution Chain** — An array on the Contribution record that traces every hand a contribution passed through. If person A created a world, person B added a character, and person C built on that character, the chain records all three. Provenance travels with the work.
+**Attribution Chain** — An array of structured `attributionEntry` objects on the Origin record. Each entry records a contributor's DID, role, timestamp, and optional split percentage. If person A created a world, person B added a character, and person C built on that character, the chain records all three. Provenance travels with the work.
 
 **Canonical Status** — Where a record stands in its world's accepted history. Three tiers: Official (originator-designated), Community (community-accepted but not originator-designated), and Apocryphal (exists but outside accepted canon). Clients can filter or display differently based on tier.
 
+**Collection** — A record that bundles multiple works together. An album, anthology, season, or any curated set of related works. Items can be ordered sequentially, chronologically, or left unordered.
+
 **DID (Decentralized Identifier)** — A permanent, portable identity on ATProto. It doesn't change even if the user changes their handle or moves to a different server. Every record that tracks authorship uses a DID. Think of it as a permanent ID number for the open web.
 
-**Declaration** — A lightweight signaling record that tells the network an account participates in the Ptah Protocol. One per account, fixed key. AppViews use it to discover participants.
+**Flax** — A signaling record indicating an account participates in the Ptah Protocol. Named for the twisted flax glyph (𓉔), the H in Ptah — the attribution chain thread. One per account, fixed key. AppViews use it to discover participants.
 
 **Governance Mode** — How a world handles contributions and canon. Three modes: Sandbox (anything goes), Governed (originator sets rules), Constitutional (community governance with published rules). Declared on the World record before anyone contributes.
 
 **knownValues** — ATProto's open-ended value sets. Unlike enums (closed lists), knownValues can be extended without breaking the schema. Every categorical field in the protocol uses knownValues so new types can be added over time.
 
-**Lexicon** — ATProto's schema language. It defines the shape of records — what fields exist, what types they are, which are required. The Ptah Protocol's eight record types are expressed as Lexicon schemas. Think of a Lexicon as a blank form. Each record is a filled-out version of that form.
+**Lexicon** — ATProto's schema language. It defines the shape of records — what fields exist, what types they are, which are required. The Ptah Protocol's fourteen record types are expressed as Lexicon schemas. Think of a Lexicon as a blank form. Each record is a filled-out version of that form.
 
 **NSID (Namespaced Identifier)** — The unique address of a Lexicon schema across the entire ATProto network. Read right to left: `world.ptah.character` means the Character record type, from the Ptah protocol, at the domain ptah.world.
 
 **PDS (Personal Data Server)** — Where your ATProto data lives. Your records, your identity, your repository. Blacksky runs a PDS. Bluesky runs a PDS. You can run your own. The protocol doesn't care which PDS hosts the data — records are portable.
 
 **Record** — A single piece of structured data in an ATProto repository. A Bluesky post is a record. A Ptah World is a record. A Ptah Character is a record. Records are signed, timestamped, and attributed to the DID that created them.
+
+**Trace** — A record tracking lineage between works. The paper trail from one work to another — cover, remix, adaptation, translation, sample, interpolation, response, sequel, spinoff, excerpt, remake, or fork. Includes clearance status for rights management.
+
+**Usage** — A record governing terms and permissions for a work. Covers what's allowed (commercial use, derivatives, performance), where (territories), for how long (expiration), and under what license type (all rights reserved, Creative Commons, public domain, custom).
+
+**Version** — A record tracking edit history within a work. Each version links to its predecessor and carries a label (draft, published, revised, corrected, final) and status (active, superseded, retracted, archived). The protocol's mechanism for tracking how works evolve.
 
 ---
 
@@ -38,21 +46,21 @@ Terms used across the Ptah Protocol documentation, covering protocol infrastruct
 
 **Character** — A person, creature, or entity inside a world. Not the user — the world's inhabitant. A user controls a character through their DID, but the character is a separate object with its own record.
 
-**Character Instance** — A specific performance or interpretation of a shared Role. If Hamlet is the Role, then "Hamlet as played by contributor X" is a Character Instance. Multiple instances of the same Role can coexist, each attributed to a different creator.
+**Character Instance** — A specific performance or interpretation of a shared Template. If Hamlet is the Template, then "Hamlet as played by contributor X" is a Character Instance. Multiple instances of the same Template can coexist, each attributed to a different creator.
 
-**Contribution** — A record governing how someone who didn't create a world adds to it. Carries the attribution chain, approval status, and canonical standing. The protocol's mechanism for collaborative world-building with provenance.
+**Origin** — A record tracking who contributed what, under what terms, and with what role. Carries a structured attribution chain where each entry records the contributor's DID, role, and optional split percentage. The protocol's mechanism for collaborative world-building with provenance.
 
-**Control Type** — How a character is governed. Exclusive (one DID controls it), Open (anyone can act as it), or Delegated (specific DIDs are granted permission). Solves the problem of shared characters in public domain or collaborative worlds.
+**Control Type** — How a character is governed. Exclusive (one DID controls it), Open (anyone can act as it), or Contested (multiple claimants). Solves the problem of shared characters in public domain or collaborative worlds.
 
-**Lore** — A world's accumulated history. What separates the protocol from a game or a social feed. Lore records trace back through source references to the actions and events that generated them. The history is attributable, permanent, and verifiable.
+**Log** — A world's accumulated history. What separates the protocol from a game or a social feed. Log records trace back through source references to the actions and events that generated them. Supports typed entries (history, chronicle, essay, chapter, article, entry) and a human-authored declaration flag.
 
 **Rendering Hints** — Metadata on a World record that tells visual rendering layers what kind of world it is — tone, era, genre, aesthetic. The world has to feel like something before anything has happened in it yet.
 
-**Role** — A shared identity template that sits between the World and the Character. Hamlet is a Role. Each performance of Hamlet is a Character Instance. Roles govern how many instances can exist and who can create them.
+**Template** — A shared identity template that multiple characters can embody. The type, not the instance. Hamlet is a Template. Each performance of Hamlet is a Character Instance. Templates govern how many instances can exist (open, restricted, closed) and who can create them.
 
 **Source Type** — The intellectual property origin of a world or character. Three types: Original IP (created by the originator), Public Domain (derived from public domain source material), Collaborative Commons (created under a shared framework).
 
-**World** — The foundational record. Everything else references it. A world must exist before characters, events, or lore can exist inside it. Defines the world's name, creator, IP origin, governance mode, and rendering hints.
+**World** — The foundational record. Everything else references it. A world must exist before characters, events, or log can exist inside it. Defines the world's name, creator, IP origin, governance mode, and rendering hints.
 
 ---
 

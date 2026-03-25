@@ -25,14 +25,14 @@ Before creating world records, signal that your account participates in the Ptah
 
 ```json
 {
-  "$type": "world.ptah.declaration",
+  "$type": "world.ptah.flax",
   "displayName": "Your Builder Name",
-  "description": "World-builder. Here to create.",
+  "bio": "World-builder. Here to create.",
   "createdAt": "2026-03-22T00:00:00Z"
 }
 ```
 
-This record uses the fixed key `self` — one per account.
+This record uses the fixed key `self` — one per account. Named for the twisted flax glyph (𓉔), the H in Ptah.
 
 To write it to your repository:
 
@@ -42,12 +42,12 @@ curl -X POST "https://YOUR_PDS/xrpc/com.atproto.repo.putRecord" \
   -H "Content-Type: application/json" \
   -d '{
     "repo": "YOUR_DID",
-    "collection": "world.ptah.declaration",
+    "collection": "world.ptah.flax",
     "rkey": "self",
     "record": {
-      "$type": "world.ptah.declaration",
+      "$type": "world.ptah.flax",
       "displayName": "Your Builder Name",
-      "description": "World-builder. Here to create.",
+      "bio": "World-builder. Here to create.",
       "createdAt": "2026-03-22T00:00:00Z"
     }
   }'
@@ -126,16 +126,16 @@ A character lives inside a world. It references the World via AT URI.
   "name": "Jay Gatsby",
   "creatorDID": "did:plc:your-did-here",
   "worldReference": "at://did:plc:your-did-here/world.ptah.world/3lr2example",
-  "roleReference": "at://did:plc:your-did-here/world.ptah.role/ROLE_RKEY",
+  "templateReference": "at://did:plc:your-did-here/world.ptah.template/TEMPLATE_RKEY",
   "description": "The self-made man. Born James Gatz. Invented himself out of nothing and longing. Throws parties for a woman across the bay.",
   "controlType": "exclusive",
-  "originType": "world.ptah.defs#sourceTypePublicDomain",
+  "originType": "publicDomain",
   "authorshipRecord": "did:plc:your-did-here",
   "createdAt": "2026-03-22T00:02:00Z"
 }
 ```
 
-Write it the same way, using `world.ptah.character` as the collection. Replace `ROLE_RKEY` with the record key if you created a Role first (optional for this quickstart). Save the returned AT URI.
+Write it the same way, using `world.ptah.character` as the collection. Replace `TEMPLATE_RKEY` with the record key if you created a Template first (optional for this quickstart). Save the returned AT URI.
 
 ---
 
@@ -197,7 +197,7 @@ World: The World of Gatsby
 
 Every record references the World. The Action references both the Character and the Location. The entire chain is traversable — start at any record and follow the AT URIs to reconstruct the full context.
 
-This is the fundamental pattern. Everything else in the protocol — Roles, Events, Lore, Contributions — builds on this same structure of typed records referencing each other through AT URIs.
+This is the fundamental pattern. Everything else in the protocol — Templates, Events, Logs, Origins, Collections, Traces — builds on this same structure of typed records referencing each other through AT URIs.
 
 ---
 
@@ -205,11 +205,11 @@ This is the fundamental pattern. Everything else in the protocol — Roles, Even
 
 **Add an Event.** Create a `world.ptah.event` record where characters compete or convene. Reference participants and a location.
 
-**Write Lore.** After actions and events accumulate, create a `world.ptah.lore` record that traces back to the actions and events that generated it. This is where play becomes history.
+**Write a Log.** After actions and events accumulate, create a `world.ptah.log` record that traces back to the actions and events that generated it. This is where play becomes history.
 
-**Invite a Contributor.** When someone else wants to add to your world, they create a `world.ptah.contribution` record with an `attributionChain` that traces back to you. Provenance travels with every addition.
+**Track Attribution.** When someone else wants to add to your world, they create a `world.ptah.origin` record with a structured `attributionChain` that traces back to you. Provenance travels with every addition.
 
-**Use Roles for shared characters.** In public domain worlds (or worlds with open characters), create a `world.ptah.role` as a template, then let multiple people create Character instances of that Role. This is how a world scales without losing coherence.
+**Use Templates for shared characters.** In public domain worlds (or worlds with open characters), create a `world.ptah.template` as a shared identity, then let multiple people create Character instances of that Template. This is how a world scales without losing coherence.
 
 ---
 
