@@ -1,0 +1,77 @@
+{
+  "lexicon": 1,
+  "id": "world.ptah.usage",
+  "defs": {
+    "main": {
+      "type": "record",
+      "description": "Terms and permissions for a work. What's allowed, where, for how long, and under what conditions.",
+      "key": "tid",
+      "record": {
+        "type": "object",
+        "required": ["creatorDID", "worldReference", "createdAt", "workReference"],
+        "properties": {
+          "creatorDID": {
+            "type": "string",
+            "format": "did",
+            "description": "The permanent identity of the usage record's creator"
+          },
+          "worldReference": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "Reference to the world this usage record belongs to"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Timestamp when this usage record was created"
+          },
+          "workReference": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "Reference to the work these terms apply to"
+          },
+          "allowCommercial": {
+            "type": "boolean",
+            "description": "Whether commercial use is permitted"
+          },
+          "allowDerivatives": {
+            "type": "boolean",
+            "description": "Whether derivative works are permitted"
+          },
+          "allowPerformance": {
+            "type": "boolean",
+            "description": "Whether public performance is permitted"
+          },
+          "requireAttribution": {
+            "type": "boolean",
+            "description": "Whether attribution is required"
+          },
+          "territories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 128
+            },
+            "description": "Geographic territories where these terms apply (empty = worldwide)"
+          },
+          "validUntil": {
+            "type": "string",
+            "format": "datetime",
+            "description": "When these terms expire (empty = perpetual)"
+          },
+          "terms": {
+            "type": "string",
+            "maxLength": 10240,
+            "maxGraphemes": 1024,
+            "description": "Human-readable terms description"
+          },
+          "licenseType": {
+            "type": "string",
+            "knownValues": ["allRightsReserved", "creativeCommons", "publicDomain", "custom"],
+            "description": "The type of license"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "lexicon": 1,
+  "id": "world.ptah.template",
+  "defs": {
+    "main": {
+      "type": "record",
+      "description": "A shared identity template that multiple characters can embody. The type, not the instance. Defines what something fundamentally is before any specific character performs it.",
+      "key": "tid",
+      "record": {
+        "type": "object",
+        "required": ["name", "creatorDID", "worldReference", "createdAt"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 640,
+            "maxGraphemes": 64,
+            "description": "The name of the template"
+          },
+          "creatorDID": {
+            "type": "string",
+            "format": "did",
+            "description": "The permanent identity of the template's creator"
+          },
+          "worldReference": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "Reference to the world this template belongs to"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Timestamp when this template was created"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 10240,
+            "maxGraphemes": 1024,
+            "description": "What this template represents"
+          },
+          "canonicalCharacterReference": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "Reference to the canonical character instance of this template (if any)"
+          },
+          "instancePolicy": {
+            "type": "string",
+            "knownValues": ["open", "restricted", "closed"],
+            "description": "Who can create new character instances of this template — open (anyone), restricted (with approval), closed (no new instances)"
+          },
+          "canonicalReferencePolicy": {
+            "type": "string",
+            "knownValues": ["fixed", "updatable", "community"],
+            "description": "How the canonical character reference behaves over time — fixed (never changes), updatable (originator can update), community (community consensus)"
+          },
+          "canonicalStatus": {
+            "type": "string",
+            "knownValues": [
+              "world.ptah.defs#canonicalStatusOfficial",
+              "world.ptah.defs#canonicalStatusCommunity",
+              "world.ptah.defs#canonicalStatusApocryphal"
+            ],
+            "description": "The canonical standing of this template"
+          },
+          "originType": {
+            "type": "string",
+            "knownValues": ["originalIP", "publicDomain", "collaborativeCommons"],
+            "description": "The intellectual property status of this template"
+          }
+        }
+      }
+    }
+  }
+}

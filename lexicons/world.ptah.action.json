@@ -1,11 +1,10 @@
 {
   "lexicon": 1,
   "id": "world.ptah.action",
-  "description": "An action record in The Ptah Protocol. The heartbeat of the protocol — every time someone acts inside a world, they create one of these. It is what makes the world alive rather than static.",
   "defs": {
     "main": {
       "type": "record",
-      "description": "An entry in a ship's log. Something happened. Someone did it. The Opening of the Mouth ceremony — Ptah opens the mouth and the statue breathes, speaks, acts. The action record is the breath.",
+      "description": "The heartbeat of a world. Something happened. Attributed to a character, timestamped, permanent.",
       "key": "tid",
       "record": {
         "type": "object",
@@ -14,55 +13,57 @@
           "actorDID": {
             "type": "string",
             "format": "did",
-            "description": "Who performed the action — the person behind the character."
-          },
-          "characterReference": {
-            "type": "string",
-            "format": "at-uri",
-            "description": "The AT URI of the character performing the action. Not the person — the character."
+            "description": "The permanent identity of the person who took this action"
           },
           "worldReference": {
             "type": "string",
             "format": "at-uri",
-            "description": "The AT URI of the world this action happened in."
-          },
-          "actionType": {
-            "type": "string",
-            "description": "What kind of action. Open-ended.",
-            "knownValues": ["movement", "speech", "conflict", "creation", "witness"],
-            "maxLength": 640,
-            "maxGraphemes": 64
-          },
-          "content": {
-            "type": "string",
-            "description": "What actually happened. The text of the action.",
-            "maxLength": 30720,
-            "maxGraphemes": 3000
-          },
-          "locationReference": {
-            "type": "string",
-            "format": "at-uri",
-            "description": "The AT URI of the location record where this action took place."
-          },
-          "targetReference": {
-            "type": "string",
-            "format": "at-uri",
-            "description": "If this action was directed at another character or object, the AT URI of the target."
-          },
-          "visibility": {
-            "type": "string",
-            "description": "The narrative visibility tier of this action.",
-            "knownValues": ["canon", "community", "experimental"]
-          },
-          "narrativeWeight": {
-            "type": "integer",
-            "description": "Optional importance scoring hook. Null by default. Populated by the AppView or by originator designation when needed. Does not change v1 behavior — all actions are structurally flat by default.",
-            "minimum": 0
+            "description": "Reference to the world this action occurred in"
           },
           "createdAt": {
             "type": "string",
             "format": "datetime",
-            "description": "Timestamp of the action."
+            "description": "Timestamp when this action was taken"
+          },
+          "characterReference": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "Reference to the character who took this action"
+          },
+          "locationReference": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "Reference to the location where this action occurred"
+          },
+          "content": {
+            "type": "string",
+            "maxLength": 30720,
+            "maxGraphemes": 3000,
+            "description": "The content of the action — what happened"
+          },
+          "actionType": {
+            "type": "string",
+            "knownValues": ["narrative", "dialogue", "witness", "competitive", "administrative"],
+            "description": "The type of action"
+          },
+          "visibility": {
+            "type": "string",
+            "knownValues": ["canon", "community", "experimental"],
+            "description": "The visibility tier of this action"
+          },
+          "narrativeWeight": {
+            "type": "integer",
+            "description": "Optional importance scoring hook (null default, non-breaking)"
+          },
+          "parentAction": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "Reference to the action this is responding to (for threading)"
+          },
+          "eventReference": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "Reference to the event this action is part of"
           }
         }
       }

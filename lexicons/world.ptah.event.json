@@ -1,11 +1,10 @@
 {
   "lexicon": 1,
   "id": "world.ptah.event",
-  "description": "An event record in The Ptah Protocol. Where competition becomes history. A tournament, battle, gathering, or any occasion where people compete or convene inside a world.",
   "defs": {
     "main": {
       "type": "record",
-      "description": "A boxing match program combined with a history book entry. Before the fight it is a schedule. After the fight it is a permanent record. Ptah-Seker-Osiris — creation, shadow, rebirth. The event holds all three phases simultaneously.",
+      "description": "Where competition becomes history. A structured occurrence with participants, stakes, results, and witnesses.",
       "key": "tid",
       "record": {
         "type": "object",
@@ -13,90 +12,92 @@
         "properties": {
           "name": {
             "type": "string",
-            "description": "What this event is called.",
             "maxLength": 640,
-            "maxGraphemes": 64
+            "maxGraphemes": 64,
+            "description": "The name of the event"
           },
           "creatorDID": {
             "type": "string",
             "format": "did",
-            "description": "Who organized this event."
+            "description": "The permanent identity of the event's creator"
           },
           "worldReference": {
             "type": "string",
             "format": "at-uri",
-            "description": "The AT URI of the world this event occurred in."
-          },
-          "eventType": {
-            "type": "string",
-            "description": "What kind of event. Open-ended.",
-            "knownValues": ["tournament", "battle", "gathering", "contest", "ritual"],
-            "maxLength": 640,
-            "maxGraphemes": 64
-          },
-          "format": {
-            "type": "string",
-            "description": "The competitive or structural format of the event.",
-            "knownValues": ["bracket", "roundRobin", "openChallenge", "singleElimination"],
-            "maxLength": 640,
-            "maxGraphemes": 64
-          },
-          "participants": {
-            "type": "array",
-            "description": "AT URIs of the character records participating. Not people — characters.",
-            "items": {
-              "type": "string",
-              "format": "at-uri"
-            }
-          },
-          "stakes": {
-            "type": "string",
-            "description": "What is at risk or being contested.",
-            "maxLength": 10240,
-            "maxGraphemes": 1024
-          },
-          "status": {
-            "type": "string",
-            "description": "The current phase of the event.",
-            "knownValues": ["upcoming", "active", "completed"]
-          },
-          "result": {
-            "type": "string",
-            "description": "The outcome. Populated when status moves to completed.",
-            "maxLength": 10240,
-            "maxGraphemes": 1024
-          },
-          "witnesses": {
-            "type": "array",
-            "description": "AT URIs of individual witness action records. Each witness action is a real record created by a real DID at a real timestamp. Witnessing is a verifiable technical contribution, not just a tally.",
-            "items": {
-              "type": "string",
-              "format": "at-uri"
-            }
-          },
-          "locationReference": {
-            "type": "string",
-            "format": "at-uri",
-            "description": "The AT URI of the location where this event happened."
-          },
-          "loreStatus": {
-            "type": "string",
-            "description": "The narrative standing of this event in the world's timeline.",
-            "knownValues": [
-              "world.ptah.defs#canonicalStatusOfficial",
-              "world.ptah.defs#canonicalStatusCommunity",
-              "pending"
-            ]
+            "description": "Reference to the world this event occurs in"
           },
           "createdAt": {
             "type": "string",
             "format": "datetime",
-            "description": "Timestamp of event creation."
+            "description": "Timestamp when this event was created"
           },
-          "completedAt": {
+          "description": {
+            "type": "string",
+            "maxLength": 10240,
+            "maxGraphemes": 1024,
+            "description": "What this event is about"
+          },
+          "locationReference": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "Reference to the location where this event takes place"
+          },
+          "eventType": {
+            "type": "string",
+            "knownValues": ["competition", "gathering", "milestone", "ceremony", "conflict"],
+            "description": "The type of event"
+          },
+          "status": {
+            "type": "string",
+            "knownValues": ["scheduled", "active", "completed", "cancelled"],
+            "description": "The current status of the event"
+          },
+          "startTime": {
             "type": "string",
             "format": "datetime",
-            "description": "Timestamp of when the event concluded."
+            "description": "When the event begins"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "datetime",
+            "description": "When the event ends"
+          },
+          "stakes": {
+            "type": "string",
+            "maxLength": 10240,
+            "maxGraphemes": 1024,
+            "description": "What is at stake in this event"
+          },
+          "result": {
+            "type": "string",
+            "maxLength": 10240,
+            "maxGraphemes": 1024,
+            "description": "The outcome of the event"
+          },
+          "participants": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "at-uri"
+            },
+            "description": "References to character records participating in this event"
+          },
+          "witnesses": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "at-uri"
+            },
+            "description": "References to witness action records — verifiable attendance"
+          },
+          "canonicalStatus": {
+            "type": "string",
+            "knownValues": [
+              "world.ptah.defs#canonicalStatusOfficial",
+              "world.ptah.defs#canonicalStatusCommunity",
+              "world.ptah.defs#canonicalStatusApocryphal"
+            ],
+            "description": "The canonical standing of this event"
           }
         }
       }

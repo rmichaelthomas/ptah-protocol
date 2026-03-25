@@ -1,11 +1,10 @@
 {
   "lexicon": 1,
   "id": "world.ptah.world",
-  "description": "A world record in The Ptah Protocol. The foundational record — everything else references it. A world must exist before characters, events, or lore can exist inside it.",
   "defs": {
     "main": {
       "type": "record",
-      "description": "The deed. Establishes that a world exists, who created it, and what its basic properties are. Ptah conceives the world in his heart — this record is that conception made permanent.",
+      "description": "The foundational record. Everything else references it. A world must exist before characters, events, or logs can exist inside it.",
       "key": "tid",
       "record": {
         "type": "object",
@@ -13,90 +12,96 @@
         "properties": {
           "name": {
             "type": "string",
-            "description": "What the world is called.",
             "maxLength": 640,
-            "maxGraphemes": 64
-          },
-          "description": {
-            "type": "string",
-            "description": "What kind of world this is, in plain language.",
-            "maxLength": 10240,
-            "maxGraphemes": 1024
+            "maxGraphemes": 64,
+            "description": "The name of the world"
           },
           "creatorDID": {
             "type": "string",
             "format": "did",
-            "description": "The permanent identity of whoever seeded this world. This never changes."
+            "description": "The permanent identity of the world's originator"
           },
           "createdAt": {
             "type": "string",
             "format": "datetime",
-            "description": "Timestamp of world creation."
+            "description": "Timestamp when this world was created"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 10240,
+            "maxGraphemes": 1024,
+            "description": "What kind of world this is"
           },
           "sourceType": {
             "type": "string",
-            "description": "The intellectual property origin of this world.",
             "knownValues": [
               "world.ptah.defs#sourceTypeOriginalIP",
               "world.ptah.defs#sourceTypePublicDomain",
               "world.ptah.defs#sourceTypeCollaborativeCommons"
-            ]
+            ],
+            "description": "The intellectual property status of this world"
           },
           "sourceReference": {
             "type": "string",
-            "description": "If sourceType is publicDomain, the specific source material this world is derived from.",
-            "maxLength": 10240,
-            "maxGraphemes": 1024
+            "maxLength": 2560,
+            "maxGraphemes": 256,
+            "description": "If sourceType is publicDomain, the specific source material"
+          },
+          "governanceMode": {
+            "type": "string",
+            "knownValues": ["sandbox", "governed", "constitutional"],
+            "description": "The constitutional posture of the world — sandbox (anything goes), governed (originator rules), or constitutional (community governance)"
           },
           "canonicalStatus": {
             "type": "string",
-            "description": "Whether this world is open for contribution, controlled by the originator, or governed by community consensus.",
             "knownValues": [
               "world.ptah.defs#canonicalStatusOfficial",
               "world.ptah.defs#canonicalStatusCommunity",
               "world.ptah.defs#canonicalStatusApocryphal"
-            ]
+            ],
+            "description": "The canonical standing of this world"
           },
-          "governanceMode": {
-            "type": "string",
-            "description": "The constitutional posture of the world. Signals how contributions and canon are governed before anyone contributes.",
-            "knownValues": ["sandbox", "governed", "constitutional"]
+          "coverImage": {
+            "type": "blob",
+            "accept": ["image/png", "image/jpeg", "image/webp"],
+            "maxSize": 1000000,
+            "description": "Cover image for the world"
           },
           "renderingHints": {
             "type": "ref",
             "ref": "#renderingHints",
-            "description": "Loose metadata telling visual rendering layers what kind of world this is — tone, era, genre, aesthetic."
+            "description": "Metadata that tells rendering clients what kind of world this is"
           }
         }
       }
     },
     "renderingHints": {
       "type": "object",
-      "description": "Visual and tonal metadata for rendering layers. The world has to feel like something before anything has happened in it yet.",
+      "description": "Flexible metadata for rendering clients",
       "properties": {
         "tone": {
           "type": "string",
-          "description": "The emotional register of the world.",
-          "maxLength": 2560,
-          "maxGraphemes": 256
+          "maxLength": 640,
+          "maxGraphemes": 64,
+          "description": "The emotional register of the world (e.g., dark, whimsical, gritty)"
         },
         "era": {
           "type": "string",
-          "description": "The temporal setting or period.",
-          "maxLength": 2560,
-          "maxGraphemes": 256
+          "maxLength": 640,
+          "maxGraphemes": 64,
+          "description": "The time period or setting (e.g., Victorian, far future, mythic)"
         },
         "genre": {
           "type": "string",
-          "description": "The narrative genre.",
-          "maxLength": 2560,
-          "maxGraphemes": 256
+          "maxLength": 640,
+          "maxGraphemes": 64,
+          "description": "The genre classification (e.g., fantasy, noir, romance, publication)"
         },
         "aesthetic": {
           "type": "string",
-          "description": "Visual texture, materials, atmosphere.",
-          "maxLength": 2560,
-          "maxGraphemes": 256
+          "maxLength": 640,
+          "maxGraphemes": 64,
+          "description": "Visual or stylistic direction (e.g., minimalist, baroque, wasteland sparse)"
         }
       }
     }

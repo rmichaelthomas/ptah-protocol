@@ -1,0 +1,64 @@
+{
+  "lexicon": 1,
+  "id": "world.ptah.version",
+  "defs": {
+    "main": {
+      "type": "record",
+      "description": "Edit history within a work. Tracks the evolution from draft to published to revised — every version, every change.",
+      "key": "tid",
+      "record": {
+        "type": "object",
+        "required": ["creatorDID", "worldReference", "createdAt", "workReference"],
+        "properties": {
+          "creatorDID": {
+            "type": "string",
+            "format": "did",
+            "description": "The permanent identity of the version's creator"
+          },
+          "worldReference": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "Reference to the world this version belongs to"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Timestamp when this version was created"
+          },
+          "workReference": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "Reference to the work this is a version of"
+          },
+          "previousVersion": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "Reference to the version this replaced (empty = first version)"
+          },
+          "versionLabel": {
+            "type": "string",
+            "maxLength": 640,
+            "maxGraphemes": 64,
+            "knownValues": ["draft", "published", "revised", "corrected", "final"],
+            "description": "Label describing this version stage"
+          },
+          "changeDescription": {
+            "type": "string",
+            "maxLength": 10240,
+            "maxGraphemes": 1024,
+            "description": "What changed in this version"
+          },
+          "isCurrent": {
+            "type": "boolean",
+            "description": "Whether this is the current/active version"
+          },
+          "status": {
+            "type": "string",
+            "knownValues": ["active", "superseded", "retracted", "archived"],
+            "description": "The status of this version"
+          }
+        }
+      }
+    }
+  }
+}

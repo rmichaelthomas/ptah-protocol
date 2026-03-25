@@ -1,0 +1,71 @@
+{
+  "lexicon": 1,
+  "id": "world.ptah.trace",
+  "defs": {
+    "main": {
+      "type": "record",
+      "description": "Tracks lineage between works. The paper trail from one work to another — cover, remix, adaptation, translation, sample, and more.",
+      "key": "tid",
+      "record": {
+        "type": "object",
+        "required": ["creatorDID", "worldReference", "createdAt", "sourceWork", "derivedWork", "relationship"],
+        "properties": {
+          "creatorDID": {
+            "type": "string",
+            "format": "did",
+            "description": "The permanent identity of the trace record's creator"
+          },
+          "worldReference": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "Reference to the world this trace belongs to"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Timestamp when this trace was created"
+          },
+          "sourceWork": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "Reference to the original work"
+          },
+          "derivedWork": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "Reference to the work that came from the source"
+          },
+          "relationship": {
+            "type": "string",
+            "knownValues": [
+              "cover",
+              "remix",
+              "adaptation",
+              "translation",
+              "sample",
+              "interpolation",
+              "response",
+              "sequel",
+              "spinoff",
+              "excerpt",
+              "remake",
+              "fork"
+            ],
+            "description": "The type of relationship between the works"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 10240,
+            "maxGraphemes": 1024,
+            "description": "Context about the relationship"
+          },
+          "clearanceStatus": {
+            "type": "string",
+            "knownValues": ["cleared", "pending", "disputed", "notRequired"],
+            "description": "Whether rights clearance has been obtained"
+          }
+        }
+      }
+    }
+  }
+}

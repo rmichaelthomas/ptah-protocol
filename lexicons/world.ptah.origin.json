@@ -1,0 +1,97 @@
+{
+  "lexicon": 1,
+  "id": "world.ptah.origin",
+  "defs": {
+    "main": {
+      "type": "record",
+      "description": "The attribution and permission layer. Tracks who contributed what and under what terms.",
+      "key": "tid",
+      "record": {
+        "type": "object",
+        "required": ["contributorDID", "worldReference", "createdAt"],
+        "properties": {
+          "contributorDID": {
+            "type": "string",
+            "format": "did",
+            "description": "The permanent identity of the contributor"
+          },
+          "worldReference": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "Reference to the world this contribution is part of"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Timestamp when this contribution was made"
+          },
+          "targetReference": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "Reference to the specific record being contributed to"
+          },
+          "contributionType": {
+            "type": "string",
+            "knownValues": ["originator", "coauthor", "contributor", "editor", "translator", "illustrator"],
+            "description": "The type of contribution"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 10240,
+            "maxGraphemes": 1024,
+            "description": "Description of what was contributed"
+          },
+          "attributionChain": {
+            "type": "array",
+            "items": {
+              "type": "ref",
+              "ref": "#attributionEntry"
+            },
+            "description": "The chain of attribution for this contribution"
+          },
+          "originatorApproval": {
+            "type": "string",
+            "knownValues": ["approved", "pending", "rejected", "notRequired"],
+            "description": "Whether the world originator has approved this contribution"
+          },
+          "publicDomainCompliance": {
+            "type": "string",
+            "knownValues": ["compliant", "pending", "disputed", "notApplicable"],
+            "description": "For public domain worlds, whether this contribution complies with source attribution requirements"
+          },
+          "splitPercentage": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10000,
+            "description": "Contribution share in basis points (100 = 1%)"
+          }
+        }
+      }
+    },
+    "attributionEntry": {
+      "type": "object",
+      "description": "An entry in the attribution chain",
+      "required": ["contributorDID", "role"],
+      "properties": {
+        "contributorDID": {
+          "type": "string",
+          "format": "did"
+        },
+        "role": {
+          "type": "string",
+          "maxLength": 640,
+          "maxGraphemes": 64
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "datetime"
+        },
+        "splitPercentage": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        }
+      }
+    }
+  }
+}
