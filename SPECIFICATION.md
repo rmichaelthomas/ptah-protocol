@@ -116,7 +116,7 @@ A person, creature, or entity that exists inside a specific world. The character
 
 ## Template · `world.ptah.template`
 
-A shared identity template that multiple characters can embody. The type, not the instance. Hamlet is a Template — each performance of Hamlet is a Character instance.
+A shared identity template that multiple characters can embody. The type, not the instance. Iron Man is a Template — Tony Stark is a Character instance.
 
 | Field | Type | Required | Description |
 |---|---|---|---|

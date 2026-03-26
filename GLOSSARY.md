@@ -46,7 +46,7 @@ Terms used across the Ptah Protocol documentation, covering protocol infrastruct
 
 **Character** — A person, creature, or entity inside a world. Not the user — the world's inhabitant. A user controls a character through their DID, but the character is a separate object with its own record.
 
-**Character Instance** — A specific performance or interpretation of a shared Template. If Hamlet is the Template, then "Hamlet as played by contributor X" is a Character Instance. Multiple instances of the same Template can coexist, each attributed to a different creator.
+**Character Instance** — A specific performance or embodiment of a shared Template. If Iron Man is the Template, then Tony Stark is a Character Instance of that Template. Multiple instances of the same Template can coexist, each attributed to a different creator.
 
 **Origin** — A record tracking who contributed what, under what terms, and with what role. Carries a structured attribution chain where each entry records the contributor's DID, role, and optional split percentage. The protocol's mechanism for collaborative world-building with provenance.
 
@@ -56,7 +56,7 @@ Terms used across the Ptah Protocol documentation, covering protocol infrastruct
 
 **Rendering Hints** — Metadata on a World record that tells visual rendering layers what kind of world it is — tone, era, genre, aesthetic. The world has to feel like something before anything has happened in it yet.
 
-**Template** — A shared identity template that multiple characters can embody. The type, not the instance. Hamlet is a Template. Each performance of Hamlet is a Character Instance. Templates govern how many instances can exist (open, restricted, closed) and who can create them.
+**Template** — A shared identity template that multiple characters can embody. The type, not the instance. Iron Man is a Template — Tony Stark is a Character Instance. Templates govern how many instances can exist (open, restricted, closed) and who can create them.
 
 **Source Type** — The intellectual property origin of a world or character. Three types: Original IP (created by the originator), Public Domain (derived from public domain source material), Collaborative Commons (created under a shared framework).
 

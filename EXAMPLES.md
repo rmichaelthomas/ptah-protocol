@@ -1,6 +1,6 @@
 # Example World Record Chains
 
-Two complete example worlds demonstrating how the Ptah Protocol's fourteen record types connect, reference each other via AT URIs, and express different kinds of creative worlds. Two additional competitive examples demonstrate the protocol handling structured tournament play and collaborative tabletop RPG campaigns.
+Four example worlds demonstrating how the Ptah Protocol's fourteen record types connect, reference each other via AT URIs, and express different kinds of creative worlds. RENAISSANCE and the MCU showcase the full protocol including all new production types. Spades and The Shattered Reach demonstrate competitive tournament play and collaborative tabletop RPG campaigns.
 
 For field-level details, see the [Specification](SPECIFICATION.md). For a hands-on walkthrough, see [Getting Started](GETTING_STARTED.md).
 
@@ -15,610 +15,994 @@ at://{DID}/{NSID}/{rkey}
 ```
 
 Where:
-- `{DID}` is a placeholder Decentralized Identifier (e.g., `did:plc:worldseeder01`)
+- `{DID}` is a placeholder Decentralized Identifier (e.g., `did:plc:renaissance01`)
 - `{NSID}` is the Namespaced Identifier for the record type (e.g., `world.ptah.world`)
-- `{rkey}` is a unique record key (e.g., `hamlet-world`)
+- `{rkey}` is a unique record key (e.g., `renaissance`)
 
 Placeholder DIDs are human-readable for clarity. On a live network, DIDs are opaque alphanumeric strings. The structure is identical.
 
 ---
 
-# World 1: The World of Hamlet
+# World 1: RENAISSANCE — Music as World-Building
 
 ## Why This World
 
-Hamlet is the hardest test for the public domain pattern. It is universally known. The Template/Instance split matters immediately — multiple people can play the same character. Canon is contested by four centuries of interpretation. The `controlType`, `templateReference`, and `canonicalCharacterReference` fields are all load-bearing from the first record.
+RENAISSANCE is the attribution showcase. A modern album with over a hundred contributors — producers, writers, sampled artists, featured performers. The protocol's Origin, Trace, and Usage records exist for exactly this kind of complexity. Every sample is traceable. Every contribution is attributed. Every permission is documented.
 
-If the schema holds Hamlet, it holds any public domain world.
+This world demonstrates every record type in the protocol, including the six new production types: Collection, Trace, Usage, Version, Flax, and Defs (referenced throughout).
 
 ## What This Chain Contains
 
 - 1 World record
-- 1 Template record (Hamlet)
-- 3 Character records (Canonical Hamlet, a contributor's Hamlet instance, Claudius)
-- 1 Location record (The Battlements of Elsinore)
-- 3 Action records (The Ghost Speaks, The Burning Court Hamlet Acts, A Witness Action)
-- 1 Event record (The Throne Room Confrontation)
-- 1 Log record (The Day the Court Heard the Truth)
-- 1 Origin record (governing the contributor's additions)
+- 1 Template record (The Featured Artist)
+- 3 Character records (Beyoncé, Big Freedia, Donna Summer)
+- 2 Location records (The Studio, The Stage)
+- 2 Action records (BREAK MY SOUL Drops, Big Freedia's Call)
+- 2 Event records (Album Release, Grammy Performance)
+- 1 Log record (How House Music Shaped RENAISSANCE)
+- 1 Origin record (Attribution Chain)
+- 1 Collection record (RENAISSANCE the album)
+- 2 Trace records (Show Me Love sample, I Feel Love sample)
+- 1 Usage record (Album Licensing Terms)
+- 1 Version record (Album Release Version)
 
-Total: 12 records across all 8 record types.
+Total: 18 records across all 14 record types.
 
 ---
 
-### Record 1 — World: The World of Hamlet
+### Record 1 — World: RENAISSANCE
 
 ```json
 {
   "$type": "world.ptah.world",
-  "name": "The World of Hamlet",
-  "creatorDID": "did:plc:worldseeder01",
-  "description": "A world seeded from Shakespeare's Hamlet. Denmark in crisis. A dead king. A usurper on the throne. A prince caught between action and paralysis.",
-  "sourceType": "publicDomain",
-  "sourceReference": "William Shakespeare, The Tragedy of Hamlet, Prince of Denmark, c. 1600–1601. Public domain.",
+  "name": "RENAISSANCE",
+  "creatorDID": "did:plc:renaissance01",
+  "description": "The album as a world. RENAISSANCE is a house music cathedral built by Beyoncé and over a hundred collaborators — producers, writers, sampled artists, featured vocalists. It traces a lineage from Chicago house to Detroit techno to New York ballroom to Houston bounce. Every track is an act of attribution. Every sample is a citation. The dancefloor is the canon.",
+  "sourceType": "originalIP",
   "governanceMode": "governed",
   "renderingHints": {
-    "tone": "dark, political, psychological",
-    "era": "late medieval / early Renaissance",
-    "genre": "tragedy",
-    "aesthetic": "stone, torchlight, fog, cold sea"
+    "tone": "joyful, defiant, ancestral",
+    "era": "2022, drawing from 1970s–1990s dance music",
+    "genre": "house, dance, Afrofuturist pop",
+    "aesthetic": "silver chrome, disco mirrors, sweat, strobe light, the four-on-the-floor kick"
   },
-  "createdAt": "2026-04-01T00:00:00Z"
+  "createdAt": "2022-07-29T00:00:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:worldseeder01/world.ptah.world/hamlet-world`
+**AT URI:** `at://did:plc:renaissance01/world.ptah.world/renaissance`
+
+`sourceType: originalIP` — this is an original commercial work. `governanceMode: governed` because one person controls the world, even with a hundred contributors. Beyoncé is the architect. Everyone else is credited, but the world is hers.
 
 ---
 
-### Record 2 — Template: Hamlet, Prince of Denmark
+### Record 2 — Template: The Featured Artist
 
-The template. The shared identity. Not a specific performance — the Template itself.
+The archetype. RENAISSANCE has featured artists on multiple tracks — Big Freedia, Grace Jones, Tems. This template defines what a featured artist is within the world: a voice invited into a track, credited and compensated, but not the world's originator.
 
 ```json
 {
   "$type": "world.ptah.template",
-  "name": "Hamlet, Prince of Denmark",
-  "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
-  "creatorDID": "did:plc:worldseeder01",
-  "description": "The Prince. Son of the murdered King. The most performed role in the English language.",
-  "originType": "publicDomain",
-  "canonicalCharacterReference": "at://did:plc:worldseeder01/world.ptah.character/hamlet-canonical",
+  "name": "The Featured Artist",
+  "worldReference": "at://did:plc:renaissance01/world.ptah.world/renaissance",
+  "creatorDID": "did:plc:renaissance01",
+  "description": "A guest voice on the record. Featured artists bring their own identity into the world but operate within the album's architecture. They are invited, not self-appointed. Their contributions are credited, cleared, and compensated.",
+  "originType": "originalIP",
+  "canonicalReferencePolicy": "fixed",
+  "instancePolicy": "restricted",
+  "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
+  "createdAt": "2022-07-29T00:01:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:renaissance01/world.ptah.template/featured-artist`
+
+`instancePolicy: restricted` — not anyone can be a featured artist on RENAISSANCE. You get invited. This is a governed world with curated access.
+
+---
+
+### Record 3 — Character: Beyoncé
+
+The world's originator. Not an instance of the Featured Artist template — she is the architect, not a guest.
+
+```json
+{
+  "$type": "world.ptah.character",
+  "name": "Beyoncé",
+  "creatorDID": "did:plc:renaissance01",
+  "worldReference": "at://did:plc:renaissance01/world.ptah.world/renaissance",
+  "description": "Singer, writer, producer, world-builder. RENAISSANCE is her seventh studio album and her most collaborative — but the vision is singular. She controls the world. Every featured artist, every sample, every four-on-the-floor kick exists because she put it there.",
+  "controlType": "exclusive",
+  "originType": "originalIP",
+  "characterProperties": {
+    "role": "world originator, lead artist, executive producer",
+    "affiliation": "Parkwood Entertainment"
+  },
+  "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
+  "createdAt": "2022-07-29T00:02:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:renaissance01/world.ptah.character/beyonce`
+
+No `templateReference`. Beyoncé is not a featured artist on her own album. She is the world itself.
+
+---
+
+### Record 4 — Character: Big Freedia
+
+Featured on BREAK MY SOUL. The bounce queen from New Orleans. Her vocal is the track's call to action.
+
+```json
+{
+  "$type": "world.ptah.character",
+  "name": "Big Freedia",
+  "creatorDID": "did:plc:bigfreedia01",
+  "worldReference": "at://did:plc:renaissance01/world.ptah.world/renaissance",
+  "templateReference": "at://did:plc:renaissance01/world.ptah.template/featured-artist",
+  "description": "New Orleans bounce artist. Featured on BREAK MY SOUL. Her vocal commands the dancefloor — part sermon, part directive. She brought the bounce tradition into the house framework and made them shake hands.",
+  "controlType": "exclusive",
+  "originType": "originalIP",
+  "characterProperties": {
+    "role": "featured artist, vocalist",
+    "affiliation": "New Orleans bounce"
+  },
+  "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
+  "createdAt": "2022-07-29T00:03:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:bigfreedia01/world.ptah.character/big-freedia`
+
+`templateReference` points to the Featured Artist template. Big Freedia is an instance of that archetype — an invited voice with full attribution.
+
+---
+
+### Record 5 — Character: Donna Summer (Sampled)
+
+Not a living participant. A presence carried forward through a sample. Her voice on "I Feel Love" appears in SUMMER RENAISSANCE — the album's closing track and direct tribute.
+
+```json
+{
+  "$type": "world.ptah.character",
+  "name": "Donna Summer (Sampled)",
+  "creatorDID": "did:plc:renaissance01",
+  "worldReference": "at://did:plc:renaissance01/world.ptah.world/renaissance",
+  "description": "The Queen of Disco. Her 1977 track 'I Feel Love,' produced by Giorgio Moroder, is sampled on SUMMER RENAISSANCE. She is not a living collaborator but a credited ancestor — her voice is the foundation the closing track is built on. The sample is the citation. The protocol makes it permanent.",
+  "controlType": "open",
+  "originType": "originalIP",
+  "characterProperties": {
+    "role": "sampled artist",
+    "affiliation": "Disco, electronic dance music origins"
+  },
+  "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
+  "createdAt": "2022-07-29T00:04:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:renaissance01/world.ptah.character/donna-summer`
+
+`controlType: open` — Donna Summer died in 2012. Her legacy is performed by the sample, not controlled by a living person. The protocol still credits her.
+
+---
+
+### Record 6 — Location: The Studio
+
+```json
+{
+  "$type": "world.ptah.location",
+  "name": "The Studio",
+  "creatorDID": "did:plc:renaissance01",
+  "worldReference": "at://did:plc:renaissance01/world.ptah.world/renaissance",
+  "description": "Where RENAISSANCE was built. Sessions in Los Angeles, New York, London — wherever the collaborators gathered. The studio is singular in the world even though the physical rooms were many. One creative space, distributed across cities.",
+  "locationType": "building",
+  "depthIndex": 1,
+  "locationProperties": {
+    "climate": "controlled, isolated, nocturnal",
+    "notableHistory": "Three years of sessions across multiple cities, 2019–2022"
+  },
+  "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
+  "createdAt": "2022-07-29T00:05:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:renaissance01/world.ptah.location/the-studio`
+
+---
+
+### Record 7 — Location: The Stage
+
+```json
+{
+  "$type": "world.ptah.location",
+  "name": "The Stage",
+  "creatorDID": "did:plc:renaissance01",
+  "worldReference": "at://did:plc:renaissance01/world.ptah.world/renaissance",
+  "description": "The live performance space. The Renaissance World Tour, the Grammy stage, every venue where the album became a physical experience. The studio made the record. The stage made it a world.",
+  "locationType": "building",
+  "depthIndex": 1,
+  "locationProperties": {
+    "climate": "heat, volume, crowd energy",
+    "notableHistory": "Renaissance World Tour, 2023. 56 shows. Grammy performance, February 2023."
+  },
+  "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
+  "createdAt": "2022-07-29T00:06:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:renaissance01/world.ptah.location/the-stage`
+
+No `parentLocation` — The Studio and The Stage are parallel spaces, not nested. The album is made in one and realized in the other.
+
+---
+
+### Record 8 — Action: BREAK MY SOUL Drops
+
+```json
+{
+  "$type": "world.ptah.action",
+  "actorDID": "did:plc:renaissance01",
+  "characterReference": "at://did:plc:renaissance01/world.ptah.character/beyonce",
+  "worldReference": "at://did:plc:renaissance01/world.ptah.world/renaissance",
+  "actionType": "narrative",
+  "content": "The lead single arrives. June 20, 2022 — five weeks before the album. A four-on-the-floor house beat, a Robin S. vocal sample, a Big Freedia bounce call. The thesis statement: the dancefloor as liberation. The world announces itself.",
+  "locationReference": "at://did:plc:renaissance01/world.ptah.location/the-studio",
+  "visibility": "canon",
+  "createdAt": "2022-06-20T00:00:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:renaissance01/world.ptah.action/break-my-soul-drops`
+
+---
+
+### Record 9 — Action: Big Freedia's Call
+
+```json
+{
+  "$type": "world.ptah.action",
+  "actorDID": "did:plc:bigfreedia01",
+  "characterReference": "at://did:plc:bigfreedia01/world.ptah.character/big-freedia",
+  "worldReference": "at://did:plc:renaissance01/world.ptah.world/renaissance",
+  "actionType": "dialogue",
+  "content": "Big Freedia's vocal on BREAK MY SOUL — the bounce call that drives the track. A New Orleans tradition dropped into a Chicago house framework. The collaboration is the point: two Black music lineages meeting on the same four-count.",
+  "locationReference": "at://did:plc:renaissance01/world.ptah.location/the-studio",
+  "visibility": "canon",
+  "createdAt": "2022-06-20T00:01:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:bigfreedia01/world.ptah.action/freedia-call`
+
+`actorDID` is Big Freedia's DID — the action belongs to the person who performed it, not the world creator. This is how the protocol distinguishes the architect from the collaborator.
+
+---
+
+### Record 10 — Event: Album Release
+
+```json
+{
+  "$type": "world.ptah.event",
+  "name": "RENAISSANCE Album Release",
+  "creatorDID": "did:plc:renaissance01",
+  "worldReference": "at://did:plc:renaissance01/world.ptah.world/renaissance",
+  "description": "The album drops. July 29, 2022. Sixteen tracks. Act I of a planned trilogy. The world goes live.",
+  "eventType": "milestone",
+  "status": "completed",
+  "startTime": "2022-07-29T00:00:00Z",
+  "endTime": "2022-07-29T23:59:00Z",
+  "stakes": "The return. Beyoncé's first solo album in six years. A bet on house music in the streaming era.",
+  "result": "Debuted at number one. Grammy for Best Dance/Electronic Album. The house revival it triggered is still ongoing.",
+  "participants": [
+    "at://did:plc:renaissance01/world.ptah.character/beyonce"
+  ],
+  "locationReference": "at://did:plc:renaissance01/world.ptah.location/the-studio",
+  "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
+  "createdAt": "2022-07-29T00:07:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:renaissance01/world.ptah.event/album-release`
+
+---
+
+### Record 11 — Event: Grammy Performance
+
+```json
+{
+  "$type": "world.ptah.event",
+  "name": "Grammy Performance — RENAISSANCE",
+  "creatorDID": "did:plc:renaissance01",
+  "worldReference": "at://did:plc:renaissance01/world.ptah.world/renaissance",
+  "description": "The 65th Grammy Awards. Beyoncé opens the show. The stage becomes the world — chrome, light, movement. The studio record becomes a live experience. She wins four awards that night, becoming the most awarded artist in Grammy history.",
+  "eventType": "ceremony",
+  "status": "completed",
+  "startTime": "2023-02-05T20:00:00Z",
+  "endTime": "2023-02-05T23:30:00Z",
+  "stakes": "Legacy. The record book. Whether RENAISSANCE translates from headphones to the room.",
+  "result": "Four wins including Best Dance/Electronic Album. Most awarded artist in Grammy history with 32 total.",
+  "participants": [
+    "at://did:plc:renaissance01/world.ptah.character/beyonce"
+  ],
+  "locationReference": "at://did:plc:renaissance01/world.ptah.location/the-stage",
+  "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
+  "createdAt": "2023-02-05T20:00:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:renaissance01/world.ptah.event/grammy-performance`
+
+---
+
+### Record 12 — Log: How House Music Shaped RENAISSANCE
+
+```json
+{
+  "$type": "world.ptah.log",
+  "title": "How House Music Shaped RENAISSANCE",
+  "creatorDID": "did:plc:renaissance01",
+  "worldReference": "at://did:plc:renaissance01/world.ptah.world/renaissance",
+  "logType": "essay",
+  "summary": "The album's debt to house music, Black queer dance culture, and the Chicago/Detroit/New York lineage that made it possible.",
+  "content": "RENAISSANCE did not come from nowhere. It came from the Warehouse in Chicago where Frankie Knuckles played. From the Paradise Garage in New York where Larry Levan mixed. From Detroit where Juan Atkins and Derrick May built techno from Kraftwerk and funk. From the ballroom scene where vogueing and house music fused into a culture of survival and style. The album samples Robin S., Donna Summer, Giorgio Moroder. It features Big Freedia from the New Orleans bounce tradition. Every track is a citation — a line drawn from the present back to the source. The protocol makes those lines permanent. The Origin record names every contributor. The Trace records map every sample. The dancefloor has a bibliography now.",
+  "sourceReferences": [
+    "at://did:plc:renaissance01/world.ptah.action/break-my-soul-drops",
+    "at://did:plc:bigfreedia01/world.ptah.action/freedia-call",
+    "at://did:plc:renaissance01/world.ptah.event/album-release",
+    "at://did:plc:renaissance01/world.ptah.event/grammy-performance"
+  ],
+  "characters": [
+    "at://did:plc:renaissance01/world.ptah.character/beyonce",
+    "at://did:plc:bigfreedia01/world.ptah.character/big-freedia",
+    "at://did:plc:renaissance01/world.ptah.character/donna-summer"
+  ],
+  "humanAuthored": true,
+  "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
+  "createdAt": "2022-08-01T00:00:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:renaissance01/world.ptah.log/house-music-shaped-renaissance`
+
+The `sourceReferences` array traces this essay back to the actions and events that generated it. The `characters` array names every person discussed. The history is verifiable — follow the AT URIs to the source.
+
+---
+
+### Record 13 — Origin: Attribution Chain
+
+This is the record that justifies the Origin type's existence. RENAISSANCE has over a hundred contributors. This Origin record shows a representative slice — the attribution chain for BREAK MY SOUL, with featured artists, sampled artists, roles, and split percentages.
+
+```json
+{
+  "$type": "world.ptah.origin",
+  "contributorDID": "did:plc:renaissance01",
+  "worldReference": "at://did:plc:renaissance01/world.ptah.world/renaissance",
+  "targetReference": "at://did:plc:renaissance01/world.ptah.action/break-my-soul-drops",
+  "contributionType": "coauthor",
+  "description": "Attribution chain for BREAK MY SOUL. Multiple contributors across performance, writing, sampling, and production. Each entry represents a credited role with a split percentage in basis points.",
+  "originatorApproval": "approved",
+  "publicDomainCompliance": "notApplicable",
+  "attributionChain": [
+    {
+      "contributorDID": "did:plc:renaissance01",
+      "role": "lead artist, writer, producer",
+      "timestamp": "2022-06-20T00:00:00Z",
+      "splitPercentage": 3000
+    },
+    {
+      "contributorDID": "did:plc:bigfreedia01",
+      "role": "featured artist, vocalist",
+      "timestamp": "2022-06-20T00:00:00Z",
+      "splitPercentage": 1500
+    },
+    {
+      "contributorDID": "did:plc:robins01",
+      "role": "sampled artist — Show Me Love vocal",
+      "timestamp": "2022-06-20T00:00:00Z",
+      "splitPercentage": 2000
+    },
+    {
+      "contributorDID": "did:plc:donnasummer01",
+      "role": "sampled artist — I Feel Love",
+      "timestamp": "2022-06-20T00:00:00Z",
+      "splitPercentage": 1500
+    },
+    {
+      "contributorDID": "did:plc:tricky01",
+      "role": "producer",
+      "timestamp": "2022-06-20T00:00:00Z",
+      "splitPercentage": 2000
+    }
+  ],
+  "splitPercentage": 3000,
+  "createdAt": "2022-07-29T00:08:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:renaissance01/world.ptah.origin/break-my-soul-attribution`
+
+Five entries in the `attributionChain`. Split percentages in basis points (100 = 1%, so 3000 = 30%). The chain is representative, not exhaustive — the real BREAK MY SOUL has even more credited writers and producers. But the structure scales. Add entries to the array. The protocol holds them all.
+
+---
+
+### Record 14 — Collection: RENAISSANCE (The Album)
+
+The album itself, structured as a collection of tracks. Each item references an action record representing a key track.
+
+```json
+{
+  "$type": "world.ptah.collection",
+  "name": "RENAISSANCE",
+  "creatorDID": "did:plc:renaissance01",
+  "worldReference": "at://did:plc:renaissance01/world.ptah.world/renaissance",
+  "description": "The album as a sequenced collection. Sixteen tracks, each a discrete creative work, ordered as released. The collection is the world's spine — everything else references into it.",
+  "items": [
+    "at://did:plc:renaissance01/world.ptah.action/break-my-soul-drops",
+    "at://did:plc:bigfreedia01/world.ptah.action/freedia-call"
+  ],
+  "ordering": "sequential",
+  "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
+  "createdAt": "2022-07-29T00:09:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:renaissance01/world.ptah.collection/renaissance-album`
+
+The `items` array here shows two representative tracks. A full implementation would list all sixteen. `ordering: sequential` — track order matters. This is an album, not a playlist.
+
+---
+
+### Record 15 — Trace: "Show Me Love" Sample
+
+```json
+{
+  "$type": "world.ptah.trace",
+  "creatorDID": "did:plc:renaissance01",
+  "worldReference": "at://did:plc:renaissance01/world.ptah.world/renaissance",
+  "sourceWork": "at://did:plc:robins01/world.ptah.action/show-me-love-original",
+  "derivedWork": "at://did:plc:renaissance01/world.ptah.action/break-my-soul-drops",
+  "relationship": "sample",
+  "description": "BREAK MY SOUL samples the vocal hook from Robin S.'s 'Show Me Love' (1993). The sample is the emotional core of the track — a 1990s house vocal threaded into a 2022 production. Cleared and credited.",
+  "clearanceStatus": "cleared",
+  "createdAt": "2022-07-29T00:10:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:renaissance01/world.ptah.trace/show-me-love-sample`
+
+`sourceWork` points to the original. `derivedWork` points to the new track. `relationship: sample`. `clearanceStatus: cleared`. The paper trail is complete.
+
+---
+
+### Record 16 — Trace: "I Feel Love" Sample
+
+```json
+{
+  "$type": "world.ptah.trace",
+  "creatorDID": "did:plc:renaissance01",
+  "worldReference": "at://did:plc:renaissance01/world.ptah.world/renaissance",
+  "sourceWork": "at://did:plc:donnasummer01/world.ptah.action/i-feel-love-original",
+  "derivedWork": "at://did:plc:renaissance01/world.ptah.action/summer-renaissance",
+  "relationship": "sample",
+  "description": "SUMMER RENAISSANCE samples Donna Summer and Giorgio Moroder's 'I Feel Love' (1977). The closing track of the album built on the opening statement of electronic dance music. The lineage is the point.",
+  "clearanceStatus": "cleared",
+  "createdAt": "2022-07-29T00:11:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:renaissance01/world.ptah.trace/i-feel-love-sample`
+
+Two Trace records, two samples, two lineages. Each one links a source work to a derived work with a named relationship and clearance status. This is what Trace was built for.
+
+---
+
+### Record 17 — Usage: Album Licensing Terms
+
+```json
+{
+  "$type": "world.ptah.usage",
+  "creatorDID": "did:plc:renaissance01",
+  "worldReference": "at://did:plc:renaissance01/world.ptah.world/renaissance",
+  "workReference": "at://did:plc:renaissance01/world.ptah.collection/renaissance-album",
+  "licenseType": "allRightsReserved",
+  "allowCommercial": true,
+  "allowDerivatives": false,
+  "allowPerformance": true,
+  "requireAttribution": true,
+  "territories": [],
+  "terms": "All rights reserved. Commercial release via Columbia Records and Parkwood Entertainment. Performance rights administered through ASCAP/BMI. Sampling requires clearance — see individual Trace records for sample-level permissions. Attribution is non-negotiable.",
+  "createdAt": "2022-07-29T00:12:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:renaissance01/world.ptah.usage/album-licensing`
+
+`licenseType: allRightsReserved` — this is a commercial release, not a Creative Commons project. `allowDerivatives: false` — you cannot remix the album without clearance. `requireAttribution: true` — you must credit the artists. `territories` is empty, meaning worldwide.
+
+---
+
+### Record 18 — Version: Album Release Version
+
+```json
+{
+  "$type": "world.ptah.version",
+  "creatorDID": "did:plc:renaissance01",
+  "worldReference": "at://did:plc:renaissance01/world.ptah.world/renaissance",
+  "workReference": "at://did:plc:renaissance01/world.ptah.collection/renaissance-album",
+  "versionLabel": "published",
+  "changeDescription": "Initial commercial release. Sixteen tracks. Act I of a planned trilogy.",
+  "isCurrent": true,
+  "status": "active",
+  "createdAt": "2022-07-29T00:13:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:renaissance01/world.ptah.version/album-v1`
+
+`versionLabel: published`, `status: active`, `isCurrent: true`. No `previousVersion` — this is the first and current release. When Act II drops, a new Version record supersedes this one, and `isCurrent` flips to `false`. The edit history is permanent.
+
+---
+
+## What This World Demonstrates
+
+**Complex attribution.** The Origin record's `attributionChain` holds five contributors with roles and split percentages. The real album has over a hundred. The array scales — add entries, the structure holds.
+
+**Sampling lineage.** Two Trace records map two samples from source to derived work. Every sample has a named relationship (`sample`), a clearance status (`cleared`), and a description. The paper trail is machine-readable and permanent.
+
+**All 14 record types.** RENAISSANCE uses every record type in the protocol: World, Template, Character, Location, Action, Event, Log, Origin, Collection, Trace, Usage, Version — plus Flax and Defs referenced throughout via `canonicalStatus` values. No other example world exercises the full schema.
+
+**The difference between originator and collaborator.** Beyoncé has no `templateReference` — she is the world, not an instance of it. Big Freedia has a `templateReference` pointing to the Featured Artist template. Donna Summer has `controlType: open` because she is a sampled presence, not a living participant. Three characters, three different relationships to the world.
+
+**Commercial licensing.** The Usage record makes rights explicit: all rights reserved, attribution required, derivatives require clearance. This is not a public domain world. The protocol handles both.
+
+**Version tracking.** The Version record establishes the album's release as the current active version of the collection, with a structure ready to track future revisions or new acts in the trilogy.
+
+---
+
+# World 2: The Marvel Cinematic Universe — Franchise as World
+
+## Why This World
+
+The MCU is the Template/Character showcase. Iron Man is not Tony Stark. Iron Man is the mantle — the identity that exists independent of who wears it. Tony Stark is one Character instance of that Template. Rhodey as War Machine is another. The MCU tests what happens when intellectual property operates at franchise scale — hundreds of characters, dozens of films, a shared continuity, and a corporate originator whose attribution chain runs through decades of comics creators.
+
+This world demonstrates all fourteen record types, with particular emphasis on Template, Collection, Trace, and Version.
+
+## What This Chain Contains
+
+- 1 World record
+- 1 Template record (Iron Man)
+- 2 Character records (Tony Stark, Pepper Potts)
+- 2 Location records (Avengers Tower, Stark Industries R&D Lab)
+- 1 Action record ("I Am Iron Man")
+- 1 Event record (The Battle of New York)
+- 1 Log record (The Avengers Chronicle)
+- 1 Origin record (Stan Lee → Iron Man)
+- 1 Collection record (MCU Phase One)
+- 1 Trace record (Comics to Film)
+- 1 Usage record (MCU Franchise Terms)
+- 1 Version record (Phase One Release)
+
+Total: 14 records across all 14 record types.
+
+---
+
+### Record 1 — World: The Marvel Cinematic Universe
+
+```json
+{
+  "$type": "world.ptah.world",
+  "name": "The Marvel Cinematic Universe",
+  "creatorDID": "did:plc:mcu01",
+  "description": "A shared cinematic universe built from sixty years of comics. One continuity. Dozens of films. Hundreds of characters. A single corporate originator controlling canon across every medium. The MCU is what happens when world-building becomes an industrial process — and the industry is worth billions.",
+  "sourceType": "originalIP",
+  "governanceMode": "governed",
+  "renderingHints": {
+    "tone": "heroic, quippy, high-stakes",
+    "era": "contemporary Earth with advanced technology",
+    "genre": "superhero, science fiction, action",
+    "aesthetic": "repulsor glow, vibranium sheen, New York skylines, third-act beam in the sky"
+  },
+  "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
+  "createdAt": "2026-04-01T00:00:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:mcu01/world.ptah.world/mcu`
+
+`governanceMode: governed` — Marvel Studios controls what is and isn't canon. This is not a sandbox. You don't get to add an Avenger without approval.
+
+---
+
+### Record 2 — Template: Iron Man
+
+The mantle. The identity. Not Tony Stark — the concept of Iron Man. The suit, the name, the role in the Avengers. Tony Stark is one person who wore it. He won't be the last.
+
+```json
+{
+  "$type": "world.ptah.template",
+  "name": "Iron Man",
+  "creatorDID": "did:plc:mcu01",
+  "worldReference": "at://did:plc:mcu01/world.ptah.world/mcu",
+  "description": "The armored Avenger. A mantle defined by the suit, not the wearer. The identity has outlived its first bearer in the comics and will outlive him in the films. Iron Man is a role — genius, billionaire, or otherwise — that someone steps into.",
+  "originType": "originalIP",
+  "canonicalCharacterReference": "at://did:plc:mcu01/world.ptah.character/tony-stark",
   "canonicalReferencePolicy": "updatable",
-  "instancePolicy": "open",
+  "instancePolicy": "restricted",
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
   "createdAt": "2026-04-01T00:01:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:worldseeder01/world.ptah.template/hamlet-role`
+**AT URI:** `at://did:plc:mcu01/world.ptah.template/iron-man`
 
-The Template exists. `instancePolicy: open` means anyone can create a Character instance of Hamlet. This is a public domain world — Hamlet belongs to everyone.
+`instancePolicy: restricted` — Marvel decides who wears the suit. `canonicalReferencePolicy: updatable` because the canonical Iron Man can change — and in the comics, it already has.
 
 ---
 
-### Record 3 — Character: Canonical Hamlet
+### Record 3 — Character: Tony Stark
 
-The specific character the world originator designated as the authoritative expression of the Hamlet template.
+The first and canonical instance of the Iron Man template. The man who built the suit in a cave.
 
 ```json
 {
   "$type": "world.ptah.character",
-  "name": "Hamlet (Canonical)",
-  "creatorDID": "did:plc:worldseeder01",
-  "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
-  "templateReference": "at://did:plc:worldseeder01/world.ptah.template/hamlet-role",
-  "description": "The canonical Hamlet. The originator's definitive expression of the prince.",
+  "name": "Tony Stark",
+  "creatorDID": "did:plc:mcu01",
+  "worldReference": "at://did:plc:mcu01/world.ptah.world/mcu",
+  "templateReference": "at://did:plc:mcu01/world.ptah.template/iron-man",
+  "description": "Genius. Billionaire. The man who built the first suit in a cave in Afghanistan with a box of scraps, then spent a decade upgrading it. Founding Avenger. Died closing a portal. The MCU started with him and ended its first saga with him.",
   "controlType": "exclusive",
-  "originType": "publicDomain",
+  "originType": "originalIP",
+  "characterProperties": {
+    "species": "human",
+    "affiliation": "Avengers, Stark Industries",
+    "abilities": "genius-level intellect, powered armor, arc reactor technology",
+    "role": "founding Avenger, Iron Man (primary)"
+  },
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
   "createdAt": "2026-04-01T00:02:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:worldseeder01/world.ptah.character/hamlet-canonical`
+**AT URI:** `at://did:plc:mcu01/world.ptah.character/tony-stark`
 
-This is the character that `canonicalCharacterReference` on the Template record points to.
+This is the character that `canonicalCharacterReference` on the Iron Man Template points to. Tony Stark is Iron Man — for now. The `updatable` policy on the Template means this pointer can change.
 
 ---
 
-### Record 4 — Character: Claudius
+### Record 4 — Character: Pepper Potts
 
-An open character — anyone can act as Claudius within the world's rules.
+No `templateReference` — Pepper Potts is not an instance of a shared mantle. She is her own character. Not every character needs the Template/Instance split.
 
 ```json
 {
   "$type": "world.ptah.character",
-  "name": "Claudius, King of Denmark",
-  "creatorDID": "did:plc:worldseeder01",
-  "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
-  "description": "The usurper. Brother of the dead king. Took the crown and married the queen.",
-  "controlType": "open",
-  "originType": "publicDomain",
+  "name": "Pepper Potts",
+  "creatorDID": "did:plc:mcu01",
+  "worldReference": "at://did:plc:mcu01/world.ptah.world/mcu",
+  "description": "CEO of Stark Industries. The person who kept the company running while Tony was in the suit. Wore the Rescue armor once. Didn't need it to be the most important person in the room.",
+  "controlType": "exclusive",
+  "originType": "originalIP",
+  "characterProperties": {
+    "species": "human",
+    "affiliation": "Stark Industries",
+    "abilities": "corporate leadership, Extremis exposure (temporary), Rescue armor (temporary)",
+    "role": "CEO, Tony Stark's partner"
+  },
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
   "createdAt": "2026-04-01T00:03:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:worldseeder01/world.ptah.character/claudius`
+**AT URI:** `at://did:plc:mcu01/world.ptah.character/pepper-potts`
 
-No `templateReference` — Claudius doesn't need the Template/Instance split because there's only one Claudius. The template pattern is used when multiple people need to embody the same identity.
+Pepper briefly wore armor, but she's not an instance of the Iron Man Template. Wearing a suit once doesn't make you the mantle. The Template pattern is for persistent shared identities, not borrowed equipment.
 
 ---
 
-### Record 5 — Location: The Battlements of Elsinore
+### Record 5 — Location: Avengers Tower, Manhattan
 
 ```json
 {
   "$type": "world.ptah.location",
-  "name": "The Battlements of Elsinore",
-  "creatorDID": "did:plc:worldseeder01",
-  "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
-  "description": "The high walls of the castle. Where the ghost walks. Where the watch keeps vigil. Cold stone and colder wind.",
-  "locationType": "landmark",
+  "name": "Avengers Tower",
+  "creatorDID": "did:plc:mcu01",
+  "worldReference": "at://did:plc:mcu01/world.ptah.world/mcu",
+  "description": "Originally Stark Tower. Rebuilt after the Battle of New York with a giant A on the side. The operational headquarters of the Avengers during Phase One and Two. Midtown Manhattan. Ninety-three floors of glass, steel, and arc reactor power.",
+  "locationType": "building",
   "depthIndex": 2,
-  "properties": {
-    "climate": "North Sea wind, perpetual damp, winter fog",
-    "controllingFaction": "The Crown — currently Claudius"
+  "locationProperties": {
+    "climate": "Manhattan — four seasons, rooftop wind, helicopter noise",
+    "population": "Avengers roster plus Stark Industries staff",
+    "controllingFaction": "Stark Industries / The Avengers",
+    "notableHistory": "Formerly Stark Tower. Damaged during the Chitauri invasion. Rebuilt as Avengers HQ."
   },
-  "authorshipRecord": "did:plc:worldseeder01",
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
   "createdAt": "2026-04-01T00:04:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:worldseeder01/world.ptah.location/battlements`
+**AT URI:** `at://did:plc:mcu01/world.ptah.location/avengers-tower`
 
 ---
 
-### Record 6 — Action: The Ghost Speaks
+### Record 6 — Location: Stark Industries R&D Lab
+
+Nested inside Avengers Tower via `parentLocation`. This is where the suits get built.
 
 ```json
 {
-  "$type": "world.ptah.action",
-  "actorDID": "did:plc:worldseeder01",
-  "characterReference": "at://did:plc:worldseeder01/world.ptah.character/hamlet-canonical",
-  "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
-  "actionType": "dialogue",
-  "content": "The ghost of King Hamlet appears on the battlements and speaks to his son. He names his murderer. He demands revenge. The prince listens. The prince does not act.",
-  "locationReference": "at://did:plc:worldseeder01/world.ptah.location/battlements",
-  "visibility": "canon",
+  "$type": "world.ptah.location",
+  "name": "Stark Industries R&D Lab",
+  "creatorDID": "did:plc:mcu01",
+  "worldReference": "at://did:plc:mcu01/world.ptah.world/mcu",
+  "description": "Sub-level workshop inside Avengers Tower. Holographic displays, robotic assembly arms, a fleet of Iron Man suits on the walls. JARVIS runs the room. Tony talks to the machines and the machines talk back.",
+  "locationType": "room",
+  "parentLocation": "at://did:plc:mcu01/world.ptah.location/avengers-tower",
+  "depthIndex": 3,
+  "locationProperties": {
+    "controllingFaction": "Tony Stark, personal access only",
+    "notableHistory": "Where the Mark suits were designed and built. Where Ultron was born."
+  },
+  "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
   "createdAt": "2026-04-01T00:05:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:worldseeder01/world.ptah.action/ghost-speaks`
+**AT URI:** `at://did:plc:mcu01/world.ptah.location/stark-rd-lab`
+
+`parentLocation` creates the nesting. The R&D Lab is inside Avengers Tower. `depthIndex: 3` reflects the hierarchy: world (0) → city (1) → building (2) → room (3).
 
 ---
 
-### Record 7 — Origin: A Contributor Enters the World
+### Record 7 — Action: "I Am Iron Man"
 
-A second person wants to add to the World of Hamlet.
-
-```json
-{
-  "$type": "world.ptah.origin",
-  "contributorDID": "did:plc:contributor01",
-  "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
-  "contributionType": "contributor",
-  "targetReference": "at://did:plc:contributor01/world.ptah.character/hamlet-instance-01",
-  "originatorApproval": "notRequired",
-  "canonicalStatus": "world.ptah.defs#canonicalStatusCommunity",
-  "attributionChain": [
-    {
-      "contributorDID": "did:plc:worldseeder01",
-      "role": "originator"
-    }
-  ],
-  "publicDomainCompliance": "compliant",
-  "createdAt": "2026-04-02T00:00:00Z"
-}
-```
-
-**AT URI:** `at://did:plc:contributor01/world.ptah.origin/hamlet-contrib-01`
-
-`originatorApproval: notRequired` because the world is public domain with `instancePolicy: open`. The contributor doesn't need individual permission — the world's design already grants it.
-
----
-
-### Record 8 — Character: A Contributor's Hamlet Instance
-
-```json
-{
-  "$type": "world.ptah.character",
-  "name": "Hamlet (The Burning Court)",
-  "creatorDID": "did:plc:contributor01",
-  "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
-  "templateReference": "at://did:plc:worldseeder01/world.ptah.template/hamlet-role",
-  "description": "A Hamlet who chose fire over hesitation. This is the prince who acts immediately — and burns the court down around him.",
-  "controlType": "exclusive",
-  "originType": "publicDomain",
-  "canonicalStatus": "world.ptah.defs#canonicalStatusCommunity",
-  "createdAt": "2026-04-02T00:01:00Z"
-}
-```
-
-**AT URI:** `at://did:plc:contributor01/world.ptah.character/hamlet-instance-01`
-
-This character references the same Template as the canonical Hamlet but is a different instance — a different performance. `canonicalStatus: communityCanon` distinguishes it from the originator's version.
-
----
-
-### Record 9 — Action: The Burning Court Hamlet Acts
+The press conference at the end of Iron Man (2008). The moment Tony Stark threw out the prepared cover story and told the world who he was. Every other superhero kept the secret. Stark held a press conference.
 
 ```json
 {
   "$type": "world.ptah.action",
-  "actorDID": "did:plc:contributor01",
-  "characterReference": "at://did:plc:contributor01/world.ptah.character/hamlet-instance-01",
-  "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
-  "actionType": "competitive",
-  "content": "This Hamlet does not wait. He draws his sword in the throne room and names Claudius murderer before the entire court. The court fractures. The kingdom splinters. The ghost watches from the battlements and says nothing.",
-  "locationReference": "at://did:plc:worldseeder01/world.ptah.location/battlements",
-  "visibility": "community",
-  "createdAt": "2026-04-02T00:02:00Z"
-}
-```
-
-**AT URI:** `at://did:plc:contributor01/world.ptah.action/burning-court-acts`
-
----
-
-### Record 10 — Action: A Witness
-
-A third person witnesses the event. This action record becomes evidence in the Event's witnesses array.
-
-```json
-{
-  "$type": "world.ptah.action",
-  "actorDID": "did:plc:witness01",
-  "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
-  "actionType": "witness",
-  "content": "I was present when the court confrontation occurred. The prince acted. The king fell.",
+  "actorDID": "did:plc:mcu01",
+  "worldReference": "at://did:plc:mcu01/world.ptah.world/mcu",
+  "characterReference": "at://did:plc:mcu01/world.ptah.character/tony-stark",
+  "actionType": "dialogue",
+  "content": "Tony Stark stands at the podium. Agent Coulson's cover story is on the cards in front of him. He looks at the press corps, sets the cards down, and says it: 'I am Iron Man.' No secret identity. No mask. The MCU starts here — with a man who refuses to hide.",
   "visibility": "canon",
-  "createdAt": "2026-04-02T00:03:00Z"
+  "narrativeWeight": 10,
+  "createdAt": "2026-04-01T00:06:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:witness01/world.ptah.action/witness-throne-room`
+**AT URI:** `at://did:plc:mcu01/world.ptah.action/i-am-iron-man`
+
+`narrativeWeight: 10` — this is the defining action of the entire franchise. It set the tone for twenty-three films.
 
 ---
 
-### Record 11 — Event: The Throne Room Confrontation
+### Record 8 — Event: The Battle of New York
+
+The Avengers assemble for the first time. The Chitauri pour through a portal over Manhattan. Six people hold the line.
 
 ```json
 {
   "$type": "world.ptah.event",
-  "name": "The Throne Room Confrontation",
-  "creatorDID": "did:plc:worldseeder01",
-  "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
+  "name": "The Battle of New York",
+  "creatorDID": "did:plc:mcu01",
+  "worldReference": "at://did:plc:mcu01/world.ptah.world/mcu",
+  "description": "The Chitauri invasion of Manhattan. Loki opens a portal above Stark Tower using the Tesseract. The Avengers — assembled for the first time — hold the city block by block. Stark flies a nuclear missile through the portal and closes it from the other side.",
   "eventType": "conflict",
+  "locationReference": "at://did:plc:mcu01/world.ptah.location/avengers-tower",
   "participants": [
-    "at://did:plc:worldseeder01/world.ptah.character/hamlet-canonical",
-    "at://did:plc:worldseeder01/world.ptah.character/claudius"
+    "at://did:plc:mcu01/world.ptah.character/tony-stark"
   ],
-  "stakes": "The crown. The truth. The future of Denmark.",
   "status": "completed",
-  "result": "The prince spoke. The court heard. The kingdom will never be the same.",
+  "stakes": "Manhattan. Earth. The first public confirmation that humanity is not alone in the universe.",
+  "result": "Portal closed. Chitauri defeated. Stark survived the fall. The Avengers became a symbol. The world changed permanently.",
   "witnesses": [
-    "at://did:plc:witness01/world.ptah.action/witness-throne-room"
+    "at://did:plc:viewer01/world.ptah.action/witness-new-york"
   ],
-  "locationReference": "at://did:plc:worldseeder01/world.ptah.location/battlements",
-  "startTime": "2026-04-02T00:04:00Z",
-  "endTime": "2026-04-02T00:05:00Z",
-  "createdAt": "2026-04-02T00:04:00Z"
+  "startTime": "2026-04-01T12:00:00Z",
+  "endTime": "2026-04-01T15:00:00Z",
+  "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
+  "createdAt": "2026-04-01T00:07:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:worldseeder01/world.ptah.event/throne-room`
+**AT URI:** `at://did:plc:mcu01/world.ptah.event/battle-of-new-york`
+
+The `participants` array here shows only Tony Stark for brevity — a full implementation would include all six original Avengers as Character records.
 
 ---
 
-### Record 12 — Log: The Day the Court Heard the Truth
+### Record 9 — Log: The Avengers Chronicle
 
 ```json
 {
   "$type": "world.ptah.log",
-  "title": "The Day the Court Heard the Truth",
-  "worldReference": "at://did:plc:worldseeder01/world.ptah.world/hamlet-world",
-  "creatorDID": "did:plc:worldseeder01",
+  "title": "The Avengers Chronicle — How Six People Held New York",
+  "creatorDID": "did:plc:mcu01",
+  "worldReference": "at://did:plc:mcu01/world.ptah.world/mcu",
   "logType": "chronicle",
-  "summary": "The court confrontation and its two competing accounts — the deliberating prince and the burning prince.",
-  "content": "On the day the prince finally spoke, the court learned what the battlements had known since the ghost first walked. The king was a murderer. The crown was stolen. And the prince — whether he hesitated for weeks or acted in an instant — changed Denmark forever. Two versions of this moment exist in the record. In one, the prince deliberated. In the other, he burned. Both are true. Both are attributed. The world holds both.",
+  "summary": "The narrative account of the first Avengers team-up: from Loki's arrival to the Battle of New York to the shawarma.",
+  "content": "They were never supposed to work together. A billionaire in a suit. A soldier out of time. A god. A spy. Another spy. A rage monster. Fury's gamble was that the crisis would be bigger than the egos. He was barely right. Loki opened a portal over Manhattan and the Chitauri came through. The team held the perimeter. Stark flew the nuke through the portal. The portal closed. Stark fell. The Hulk caught him. Then they ate shawarma. The Avengers Initiative was no longer theoretical.",
   "sourceReferences": [
-    "at://did:plc:worldseeder01/world.ptah.action/ghost-speaks",
-    "at://did:plc:contributor01/world.ptah.action/burning-court-acts",
-    "at://did:plc:worldseeder01/world.ptah.event/throne-room"
+    "at://did:plc:mcu01/world.ptah.action/i-am-iron-man",
+    "at://did:plc:mcu01/world.ptah.event/battle-of-new-york"
   ],
   "characters": [
-    "at://did:plc:worldseeder01/world.ptah.character/hamlet-canonical",
-    "at://did:plc:worldseeder01/world.ptah.character/claudius"
+    "at://did:plc:mcu01/world.ptah.character/tony-stark"
   ],
+  "locationReference": "at://did:plc:mcu01/world.ptah.location/avengers-tower",
+  "humanAuthored": true,
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
-  "createdAt": "2026-04-02T00:06:00Z"
+  "createdAt": "2026-04-01T00:08:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:worldseeder01/world.ptah.log/court-heard-truth`
+**AT URI:** `at://did:plc:mcu01/world.ptah.log/avengers-chronicle`
 
-The `sourceReferences` array traces this log back to the action records and event record that generated it. The history is verifiable — follow the AT URIs to the source.
-
----
-
-# World 2: The World of Gatsby
-
-## Why This World
-
-Gatsby tests what Hamlet doesn't. Where Hamlet is a world of political violence and succession, Gatsby is a world of social performance — wealth as identity, parties as power, narration as an unreliable act. The characters' public selves diverge from their private selves. The events are social gatherings, not battles. The log is gossip elevated to history.
-
-This world entered the U.S. public domain in 2021 and has already spawned a wave of creative reworkings. It's one of the most recognized stories in the English language.
-
-## What This Chain Contains
-
-- 1 World record
-- 1 Template record (Gatsby)
-- 2 Character records (Canonical Gatsby, a contributor's Gatsby reinterpretation)
-- 1 Location record (The Mansion at West Egg)
-- 2 Action records (The Party Begins, A Witness Observes)
-- 1 Event record (The Last Party)
-- 1 Log record (What the Green Light Meant)
-- 1 Origin record
-
-Total: 10 records across all 8 record types.
+`humanAuthored: true` — this chronicle was written by a person, not generated. The `sourceReferences` trace every claim back to specific action and event records.
 
 ---
 
-### Record 1 — World: The World of Gatsby
+### Record 10 — Origin: Stan Lee → Iron Man
 
-```json
-{
-  "$type": "world.ptah.world",
-  "name": "The World of Gatsby",
-  "creatorDID": "did:plc:worldseeder02",
-  "description": "Long Island, 1922. New money and old money separated by a bay. A man built an empire to win back a woman. The empire was a performance. The woman was a memory. The narrator watched it all and told you a story — but narrators choose what to tell.",
-  "sourceType": "publicDomain",
-  "sourceReference": "F. Scott Fitzgerald, The Great Gatsby, 1925. Public domain (U.S.) as of January 1, 2021.",
-  "governanceMode": "governed",
-  "renderingHints": {
-    "tone": "elegiac, seductive, doomed",
-    "era": "Jazz Age, 1920s America",
-    "genre": "literary fiction, social tragedy",
-    "aesthetic": "gold light, green water, white linen, broken glass"
-  },
-  "createdAt": "2026-04-01T00:00:00Z"
-}
-```
-
-**AT URI:** `at://did:plc:worldseeder02/world.ptah.world/gatsby-world`
-
----
-
-### Record 2 — Template: Jay Gatsby
-
-```json
-{
-  "$type": "world.ptah.template",
-  "name": "Jay Gatsby",
-  "worldReference": "at://did:plc:worldseeder02/world.ptah.world/gatsby-world",
-  "creatorDID": "did:plc:worldseeder02",
-  "description": "The self-made man. Born James Gatz. Invented himself out of nothing and longing. Throws parties for a woman across the bay. The performance is the person — or the person is the performance. The template invites that question.",
-  "originType": "publicDomain",
-  "canonicalCharacterReference": "at://did:plc:worldseeder02/world.ptah.character/gatsby-canonical",
-  "canonicalReferencePolicy": "updatable",
-  "instancePolicy": "open",
-  "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
-  "createdAt": "2026-04-01T00:01:00Z"
-}
-```
-
-**AT URI:** `at://did:plc:worldseeder02/world.ptah.template/gatsby-role`
-
----
-
-### Record 3 — Character: Canonical Gatsby
-
-```json
-{
-  "$type": "world.ptah.character",
-  "name": "Jay Gatsby (Canonical)",
-  "creatorDID": "did:plc:worldseeder02",
-  "worldReference": "at://did:plc:worldseeder02/world.ptah.world/gatsby-world",
-  "templateReference": "at://did:plc:worldseeder02/world.ptah.template/gatsby-role",
-  "description": "The originator's Gatsby. Faithful to Fitzgerald's portrait — the romantic who built a cathedral of lights to reach one person.",
-  "controlType": "exclusive",
-  "originType": "publicDomain",
-  "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
-  "createdAt": "2026-04-01T00:02:00Z"
-}
-```
-
-**AT URI:** `at://did:plc:worldseeder02/world.ptah.character/gatsby-canonical`
-
----
-
-### Record 4 — Location: The Mansion at West Egg
-
-```json
-{
-  "$type": "world.ptah.location",
-  "name": "The Mansion at West Egg",
-  "creatorDID": "did:plc:worldseeder02",
-  "worldReference": "at://did:plc:worldseeder02/world.ptah.world/gatsby-world",
-  "description": "Gatsby's house. An imitation of a French Hôtel de Ville. Forty acres of lawn. A marble swimming pool. A tower on one side. The whole thing is a stage set for an audience of one — Daisy, across the bay.",
-  "locationType": "building",
-  "depthIndex": 2,
-  "properties": {
-    "climate": "Long Island summers — humid, golden, lit by lanterns",
-    "controllingFaction": "Jay Gatsby, sole owner"
-  },
-  "authorshipRecord": "did:plc:worldseeder02",
-  "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
-  "createdAt": "2026-04-01T00:03:00Z"
-}
-```
-
-**AT URI:** `at://did:plc:worldseeder02/world.ptah.location/west-egg-mansion`
-
----
-
-### Record 5 — Action: The Party Begins
-
-```json
-{
-  "$type": "world.ptah.action",
-  "actorDID": "did:plc:worldseeder02",
-  "characterReference": "at://did:plc:worldseeder02/world.ptah.character/gatsby-canonical",
-  "worldReference": "at://did:plc:worldseeder02/world.ptah.world/gatsby-world",
-  "actionType": "narrative",
-  "content": "The lights go on across the lawn. The orchestra arrives. The caterers lay tables for hundreds. Gatsby stands at the window and watches the green light across the bay. The party is not for the guests. It has never been for the guests.",
-  "locationReference": "at://did:plc:worldseeder02/world.ptah.location/west-egg-mansion",
-  "visibility": "canon",
-  "createdAt": "2026-04-01T00:04:00Z"
-}
-```
-
-**AT URI:** `at://did:plc:worldseeder02/world.ptah.action/party-begins`
-
----
-
-### Record 6 — Origin: A Contributor Reimagines Gatsby
+The attribution record. Iron Man didn't appear out of nowhere — he was created in 1963 by four people. The protocol tracks all of them.
 
 ```json
 {
   "$type": "world.ptah.origin",
-  "contributorDID": "did:plc:contributor02",
-  "worldReference": "at://did:plc:worldseeder02/world.ptah.world/gatsby-world",
-  "contributionType": "contributor",
-  "targetReference": "at://did:plc:contributor02/world.ptah.character/gatsby-instance-01",
-  "originatorApproval": "notRequired",
-  "canonicalStatus": "world.ptah.defs#canonicalStatusCommunity",
+  "contributorDID": "did:plc:stanlee01",
+  "worldReference": "at://did:plc:mcu01/world.ptah.world/mcu",
+  "targetReference": "at://did:plc:mcu01/world.ptah.template/iron-man",
+  "contributionType": "originator",
+  "description": "Iron Man was created for Tales of Suspense #39 (March 1963). Stan Lee conceived the character, Larry Lieber wrote the script, Don Heck designed the initial artwork, and Jack Kirby designed the original gray armor. The attribution chain preserves all four contributions.",
+  "originatorApproval": "approved",
+  "publicDomainCompliance": "notApplicable",
   "attributionChain": [
     {
-      "contributorDID": "did:plc:worldseeder02",
-      "role": "originator"
+      "contributorDID": "did:plc:stanlee01",
+      "role": "creator",
+      "timestamp": "1963-03-01T00:00:00Z",
+      "splitPercentage": 4000
+    },
+    {
+      "contributorDID": "did:plc:larrylieber01",
+      "role": "scripter",
+      "timestamp": "1963-03-01T00:00:00Z",
+      "splitPercentage": 2000
+    },
+    {
+      "contributorDID": "did:plc:donheck01",
+      "role": "artist",
+      "timestamp": "1963-03-01T00:00:00Z",
+      "splitPercentage": 2000
+    },
+    {
+      "contributorDID": "did:plc:jackkirby01",
+      "role": "designer",
+      "timestamp": "1963-03-01T00:00:00Z",
+      "splitPercentage": 2000
     }
   ],
-  "publicDomainCompliance": "compliant",
-  "createdAt": "2026-04-02T00:00:00Z"
+  "createdAt": "2026-04-01T00:09:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:contributor02/world.ptah.origin/gatsby-contrib-01`
+**AT URI:** `at://did:plc:stanlee01/world.ptah.origin/iron-man-creation`
+
+Four creators, each with a role and a split percentage (in basis points — 4000 = 40%). The protocol doesn't just say "Stan Lee created Iron Man." It says who did what.
 
 ---
 
-### Record 7 — Character: A Contributor's Gatsby
+### Record 11 — Collection: MCU Phase One
+
+The six films that launched the franchise, bundled as a collection.
 
 ```json
 {
-  "$type": "world.ptah.character",
-  "name": "Jay Gatsby (The Hollow Empire)",
-  "creatorDID": "did:plc:contributor02",
-  "worldReference": "at://did:plc:worldseeder02/world.ptah.world/gatsby-world",
-  "templateReference": "at://did:plc:worldseeder02/world.ptah.template/gatsby-role",
-  "description": "A Gatsby who knows the performance is empty and keeps performing anyway. Not a romantic — a nihilist wearing a romantic's suit. The parties get louder because the silence underneath gets worse.",
-  "controlType": "exclusive",
-  "originType": "publicDomain",
-  "canonicalStatus": "world.ptah.defs#canonicalStatusCommunity",
-  "createdAt": "2026-04-02T00:01:00Z"
-}
-```
-
-**AT URI:** `at://did:plc:contributor02/world.ptah.character/gatsby-instance-01`
-
-Same Template, different instance. Fitzgerald's Gatsby is a romantic. This contributor's Gatsby is a nihilist. Both reference the same Template record. Both are valid. Both are attributed to different creators.
-
----
-
-### Record 8 — Action: A Witness Observes
-
-```json
-{
-  "$type": "world.ptah.action",
-  "actorDID": "did:plc:witness02",
-  "worldReference": "at://did:plc:worldseeder02/world.ptah.world/gatsby-world",
-  "actionType": "witness",
-  "content": "I attended the last party. I saw Gatsby standing alone on the dock after everyone left. The green light was still on across the bay.",
-  "locationReference": "at://did:plc:worldseeder02/world.ptah.location/west-egg-mansion",
-  "visibility": "canon",
-  "createdAt": "2026-04-02T00:02:00Z"
-}
-```
-
-**AT URI:** `at://did:plc:witness02/world.ptah.action/witness-last-party`
-
----
-
-### Record 9 — Event: The Last Party
-
-```json
-{
-  "$type": "world.ptah.event",
-  "name": "The Last Party at West Egg",
-  "creatorDID": "did:plc:worldseeder02",
-  "worldReference": "at://did:plc:worldseeder02/world.ptah.world/gatsby-world",
-  "eventType": "gathering",
-  "participants": [
-    "at://did:plc:worldseeder02/world.ptah.character/gatsby-canonical"
+  "$type": "world.ptah.collection",
+  "name": "MCU Phase One",
+  "creatorDID": "did:plc:mcu01",
+  "worldReference": "at://did:plc:mcu01/world.ptah.world/mcu",
+  "description": "The six films of Phase One: Iron Man through The Avengers. The origin story of the shared universe itself — six solo introductions converging into one team.",
+  "items": [
+    "at://did:plc:mcu01/world.ptah.action/i-am-iron-man",
+    "at://did:plc:mcu01/world.ptah.event/battle-of-new-york",
+    "at://did:plc:mcu01/world.ptah.log/avengers-chronicle"
   ],
-  "stakes": "Everything Gatsby built. Every light he turned on. The question of whether any of it was real.",
-  "status": "completed",
-  "result": "The guests left. The lights went dark. Gatsby stood on the dock alone. The green light was still there. It was always going to be there.",
-  "witnesses": [
-    "at://did:plc:witness02/world.ptah.action/witness-last-party"
-  ],
-  "locationReference": "at://did:plc:worldseeder02/world.ptah.location/west-egg-mansion",
-  "startTime": "2026-04-02T00:03:00Z",
-  "endTime": "2026-04-02T00:04:00Z",
-  "createdAt": "2026-04-02T00:03:00Z"
-}
-```
-
-**AT URI:** `at://did:plc:worldseeder02/world.ptah.event/last-party`
-
----
-
-### Record 10 — Log: What the Green Light Meant
-
-```json
-{
-  "$type": "world.ptah.log",
-  "title": "What the Green Light Meant",
-  "worldReference": "at://did:plc:worldseeder02/world.ptah.world/gatsby-world",
-  "creatorDID": "did:plc:worldseeder02",
-  "logType": "essay",
-  "summary": "Two interpretations of the green light — the romantic reading and the nihilist reading — both sourced to the same event.",
-  "content": "After the last party ended and the mansion went dark, the question remained: what was the green light? To the canonical Gatsby, it was Daisy — the real person, the recoverable past. To the Hollow Empire Gatsby, it was the performance itself — the light you stare at because looking away means admitting there's nothing behind you. Both readings trace back to the same event. Both are sourced. Both are permanent. The world holds both, and the green light stays on.",
-  "sourceReferences": [
-    "at://did:plc:worldseeder02/world.ptah.action/party-begins",
-    "at://did:plc:worldseeder02/world.ptah.event/last-party"
-  ],
-  "characters": [
-    "at://did:plc:worldseeder02/world.ptah.character/gatsby-canonical",
-    "at://did:plc:contributor02/world.ptah.character/gatsby-instance-01"
-  ],
+  "ordering": "chronological",
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
-  "createdAt": "2026-04-02T00:05:00Z"
+  "createdAt": "2026-04-01T00:10:00Z"
 }
 ```
 
-**AT URI:** `at://did:plc:worldseeder02/world.ptah.log/green-light`
+**AT URI:** `at://did:plc:mcu01/world.ptah.collection/phase-one`
+
+`ordering: chronological` — the films have a release order that matters.
 
 ---
 
-## What These Two Literary Worlds Demonstrate
+### Record 12 — Trace: Comics to Film
 
-**Hamlet** tests the protocol's hardest public domain problem: a universally known work with contested interpretations, where multiple people need to embody the same character simultaneously. The Template/Instance split, `controlType`, and `canonicalCharacterReference` are all exercised.
+The lineage record. Iron Man didn't start in the MCU — he started in a comic book in 1963. The Trace tracks the adaptation.
 
-**Gatsby** tests a different kind of world: social performance rather than political violence, gatherings rather than conflicts, log entries built from unreliable narration rather than witnessed combat. The same fourteen record types express both worlds without modification.
+```json
+{
+  "$type": "world.ptah.trace",
+  "creatorDID": "did:plc:mcu01",
+  "worldReference": "at://did:plc:mcu01/world.ptah.world/mcu",
+  "sourceWork": "at://did:plc:stanlee01/world.ptah.origin/iron-man-creation",
+  "derivedWork": "at://did:plc:mcu01/world.ptah.template/iron-man",
+  "relationship": "adaptation",
+  "description": "The MCU Iron Man is adapted from the Marvel Comics character who first appeared in Tales of Suspense #39 (March 1963). The film version retains the core identity — genius inventor builds powered armor — while updating the origin from Vietnam-era to Afghanistan. The adaptation is substantial but the lineage is direct.",
+  "clearanceStatus": "cleared",
+  "createdAt": "2026-04-01T00:11:00Z"
+}
+```
 
-Both worlds show:
-- A world originator seeding the foundation
-- A contributor adding their own interpretation
-- Multiple Character instances of the same Template, attributed to different creators
-- Actions generating history that becomes verifiable Log entries
-- Events with witnesses — real action records, not just a count
-- The `attributionChain` tracing provenance through every origin record
+**AT URI:** `at://did:plc:mcu01/world.ptah.trace/comics-to-film`
+
+`relationship: adaptation` — not a remake, not a sequel, not a fork. An adaptation: same character, different medium, updated context. `clearanceStatus: cleared` because Marvel owns both the source and the derived work.
+
+---
+
+### Record 13 — Usage: MCU Franchise Terms
+
+```json
+{
+  "$type": "world.ptah.usage",
+  "creatorDID": "did:plc:mcu01",
+  "worldReference": "at://did:plc:mcu01/world.ptah.world/mcu",
+  "workReference": "at://did:plc:mcu01/world.ptah.world/mcu",
+  "allowCommercial": true,
+  "allowDerivatives": false,
+  "allowPerformance": false,
+  "requireAttribution": true,
+  "territories": ["worldwide"],
+  "terms": "All Marvel Cinematic Universe characters, names, likenesses, and related indicia are trademarks of and copyrighted by Marvel Entertainment, LLC and The Walt Disney Company. No derivative works, fan films, or public performances without explicit written license.",
+  "licenseType": "allRightsReserved",
+  "createdAt": "2026-04-01T00:12:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:mcu01/world.ptah.usage/mcu-franchise-terms`
+
+`allowDerivatives: false` and `allowPerformance: false` — nobody else gets to without a license. This is the opposite of an open public domain world — corporate IP locked down at every level.
+
+---
+
+### Record 14 — Version: Phase One Release
+
+```json
+{
+  "$type": "world.ptah.version",
+  "creatorDID": "did:plc:mcu01",
+  "worldReference": "at://did:plc:mcu01/world.ptah.world/mcu",
+  "workReference": "at://did:plc:mcu01/world.ptah.collection/phase-one",
+  "versionLabel": "published",
+  "changeDescription": "Phase One complete. Six films released: Iron Man (2008), The Incredible Hulk (2008), Iron Man 2 (2010), Thor (2011), Captain America: The First Avenger (2011), The Avengers (2012). Shared continuity established.",
+  "isCurrent": false,
+  "status": "active",
+  "createdAt": "2026-04-01T00:13:00Z"
+}
+```
+
+**AT URI:** `at://did:plc:mcu01/world.ptah.version/phase-one-release`
+
+`isCurrent: false` because Phase One has been superseded by later phases. `status: active` because the content is still canonical — it hasn't been retracted or archived.
+
+---
+
+## What This World Demonstrates
+
+**Template/Instance split at franchise scale.** Iron Man is a Template. Tony Stark is a Character instance of that Template. Pepper Potts is her own character — no template needed. `instancePolicy: restricted` shows how corporate IP differs from public domain: Marvel controls who gets to be Iron Man.
+
+**Corporate attribution chains.** The Origin record traces Iron Man back to four creators with explicit roles and split percentages. The protocol preserves the full chain — creator, scripter, artist, designer — because attribution at this scale is never simple.
+
+**Adaptation lineage from comics to film.** The Trace record draws a direct line from Tales of Suspense #39 to the MCU Iron Man Template. The relationship type (`adaptation`) and clearance status (`cleared`) make the lineage explicit and verifiable.
+
+**Phase-based versioning.** The Version record tracks Phase One as a published version of the franchise. The Collection bundles the phase's key records. Together, they model how a franchise evolves in discrete, labeled stages.
 
 ---
 
@@ -626,7 +1010,7 @@ Both worlds show:
 
 ## Why This World
 
-Hamlet and Gatsby demonstrate literary world-building. Spades demonstrates the other half of what the protocol was built for — structured competitive events with brackets, rounds, winners, and results that become permanent history.
+RENAISSANCE and the MCU demonstrate world-building with complex attribution and franchise-scale IP. Spades demonstrates the other half of what the protocol was built for — structured competitive events with brackets, rounds, winners, and results that become permanent history.
 
 This world tests: the full `status` lifecycle (`scheduled` → `active` → `completed`), multiple Events chaining into a tournament arc, witnesses as real attestation records during competitive play, and Log entries that read like a season record rather than a narrative.
 
@@ -682,7 +1066,7 @@ Total: 11 records. No Template record — Spades players are themselves, not ins
   "description": "Team North. Bids conservative. Plays aggressive. Never goes nil unless it's match point.",
   "controlType": "exclusive",
   "originType": "originalIP",
-  "properties": {
+  "characterProperties": {
     "affiliation": "Team North"
   },
   "createdAt": "2026-04-01T00:01:00Z"
@@ -704,7 +1088,7 @@ Total: 11 records. No Template record — Spades players are themselves, not ins
   "description": "Team North. The nil specialist. Reads the table like a book.",
   "controlType": "exclusive",
   "originType": "originalIP",
-  "properties": {
+  "characterProperties": {
     "affiliation": "Team North"
   },
   "createdAt": "2026-04-01T00:02:00Z"
@@ -726,7 +1110,7 @@ Total: 11 records. No Template record — Spades players are themselves, not ins
   "description": "Team South. Overbids every round. Somehow makes it work.",
   "controlType": "exclusive",
   "originType": "originalIP",
-  "properties": {
+  "characterProperties": {
     "affiliation": "Team South"
   },
   "createdAt": "2026-04-01T00:03:00Z"
@@ -748,7 +1132,7 @@ Total: 11 records. No Template record — Spades players are themselves, not ins
   "description": "Team South. Counts every card. Doesn't talk until the hand is over. Then talks too much.",
   "controlType": "exclusive",
   "originType": "originalIP",
-  "properties": {
+  "characterProperties": {
     "affiliation": "Team South"
   },
   "createdAt": "2026-04-01T00:04:00Z"
@@ -768,9 +1152,8 @@ Total: 11 records. No Template record — Spades players are themselves, not ins
   "creatorDID": "did:plc:spadeshost01",
   "worldReference": "at://did:plc:spadeshost01/world.ptah.world/blacksky-spades",
   "description": "Four seats. One deck. House rules: no blind nil before round 5, jokers are high, talk all the trash you want.",
-  "locationType": "abstractSpace",
+  "locationType": "virtual",
   "depthIndex": 1,
-  "authorshipRecord": "did:plc:spadeshost01",
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
   "createdAt": "2026-04-01T00:05:00Z"
 }
@@ -778,7 +1161,7 @@ Total: 11 records. No Template record — Spades players are themselves, not ins
 
 **AT URI:** `at://did:plc:spadeshost01/world.ptah.location/the-table`
 
-`locationType: abstractSpace` — the table isn't a physical place. It's wherever the game happens.
+`locationType: virtual` — the table isn't a physical place. It's wherever the game happens.
 
 ---
 
@@ -870,7 +1253,7 @@ Total: 11 records. No Template record — Spades players are themselves, not ins
 
 **AT URI:** `at://did:plc:spadeshost01/world.ptah.event/championship-spring-2026`
 
-`eventType: competition` — the same record type that holds literary confrontations also holds tournament matches. The `stakes` and `result` fields do the heavy lifting.
+`eventType: competition` — the same record type that holds franchise conflicts also holds tournament matches. The `stakes` and `result` fields do the heavy lifting.
 
 ---
 
@@ -968,7 +1351,7 @@ Total: 10 records.
   "description": "Half-elf ranger. Survived the crossing from the mainland. Doesn't talk about what happened on the boat. Tracks everything. Trusts nothing.",
   "controlType": "exclusive",
   "originType": "originalIP",
-  "properties": {
+  "characterProperties": {
     "species": "Half-elf",
     "role": "Ranger",
     "abilities": "Favored terrain: coastal. Fighting style: archery. Carries a longbow named Tide.",
@@ -981,7 +1364,7 @@ Total: 10 records.
 
 **AT URI:** `at://did:plc:player05/world.ptah.character/kael`
 
-The `properties` object gets real use here — species, class, abilities, and affiliation all matter for gameplay.
+The `characterProperties` object gets real use here — species, class, abilities, and affiliation all matter for gameplay.
 
 ---
 
@@ -996,7 +1379,7 @@ The `properties` object gets real use here — species, class, abilities, and af
   "description": "Tiefling warlock. Made a pact she won't explain. The magic works. The cost is unclear. She smiles too much for someone carrying that kind of debt.",
   "controlType": "exclusive",
   "originType": "originalIP",
-  "properties": {
+  "characterProperties": {
     "species": "Tiefling",
     "role": "Warlock",
     "abilities": "Eldritch blast. Pact of the Tome. Patron: unknown (GM secret).",
@@ -1022,7 +1405,7 @@ The `properties` object gets real use here — species, class, abilities, and af
   "description": "Nobody knows her real name. She controls the last stable bridge between the outer islands and the mainland fragment. Charges a toll — not in gold. In favors. The favors always come due at the worst possible time.",
   "controlType": "exclusive",
   "originType": "originalIP",
-  "properties": {
+  "characterProperties": {
     "species": "Human (probably)",
     "role": "NPC — quest giver, gatekeeper",
     "abilities": "Unknown. The bridge obeys her. That's enough.",
@@ -1048,15 +1431,14 @@ Created by the GM's DID, not a player. The `controlType: exclusive` means only t
   "creatorDID": "did:plc:gm01",
   "worldReference": "at://did:plc:gm01/world.ptah.world/shattered-reach",
   "description": "What used to be a continuous northern coastline is now an archipelago of jagged islands connected by bridges of frozen arcane energy. The bridges hum. Some of them flicker. The locals say the flickering ones are dying.",
-  "locationType": "region",
+  "locationType": "territory",
   "depthIndex": 0,
-  "properties": {
+  "locationProperties": {
     "climate": "Cold coastal. Permanent fog at sea level. Clear and biting wind above the bridge line.",
     "population": "Scattered settlements on the larger islands. Maybe 3,000 total.",
     "controllingFaction": "Contested — three factions, none dominant",
     "notableHistory": "The Shattering occurred roughly 100 years ago. No one agrees on the cause."
   },
-  "authorshipRecord": "did:plc:gm01",
   "canonicalStatus": "world.ptah.defs#canonicalStatusOfficial",
   "createdAt": "2026-04-01T00:04:00Z"
 }
@@ -1138,7 +1520,7 @@ A third player joins the campaign in session 2.
 
 **AT URI:** `at://did:plc:player07/world.ptah.origin/join-campaign`
 
-`originatorApproval: approved` — unlike the public domain worlds where approval is not required, a tabletop campaign requires the GM to approve new players. The GM governs the world.
+`originatorApproval: approved` — unlike RENAISSANCE where the originator curates featured artists, a tabletop campaign requires the GM to approve new players. The GM governs the world.
 
 ---
 
@@ -1209,11 +1591,11 @@ The campaign journal is a Log entry — traceable back to the specific actions a
 
 | World | Type | Tests |
 |---|---|---|
-| **Hamlet** | Literary, public domain | Template/Instance split, contested canon, multiple embodiments of shared characters |
-| **Gatsby** | Literary, public domain | Social performance, unreliable narration, gatherings as events |
+| **RENAISSANCE** | Music, original IP | Complex attribution chains, sampling lineage, all 14 record types, commercial licensing |
+| **MCU** | Franchise, original IP | Template/Instance split at scale, corporate attribution, adaptation lineage, phase-based versioning |
 | **Blacksky Spades** | Structured competition | Competition events, scoring, competitive witnesses, season records |
 | **The Shattered Reach** | Collaborative RPG campaign | GM/player dynamics, character progression, sessions as events, campaign journals as log entries |
 
-The same fourteen record types express all four worlds without modification. Literary world-building. Social narrative. Competitive card games. Tabletop RPG campaigns. The protocol doesn't care what kind of world you're building. It cares that authorship travels, history is verifiable, and every contribution traces back to the person who made it.
+The same fourteen record types express all four worlds without modification. Music production. Franchise IP. Competitive card games. Tabletop RPG campaigns. The protocol doesn't care what kind of world you're building. It cares that authorship travels, history is verifiable, and every contribution traces back to the person who made it.
 
 The schema holds all four worlds. It will hold yours.

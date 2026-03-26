@@ -18,7 +18,7 @@ The namespace is `world.ptah.*`. Production schemas are published and live on th
 
 - **[Getting Started](GETTING_STARTED.md)** — build your first world in five minutes
 - **[Specification](SPECIFICATION.md)** — field-level reference for every record type
-- **[Examples](EXAMPLES.md)** — four complete world record chains (Hamlet, Gatsby, Spades, tabletop RPG)
+- **[Examples](EXAMPLES.md)** — four complete world record chains (RENAISSANCE, MCU, Spades, tabletop RPG)
 - **[Glossary](GLOSSARY.md)** — terms from protocol infrastructure, world-building, and competitive play
 - **[Roadmap](ROADMAP.md)** — where the protocol is and where it's going
 
@@ -35,7 +35,7 @@ The foundational record. Everything else references it. A world must exist befor
 A person, creature, or entity that exists inside a specific world. The character is not the user — the character is the world's inhabitant. Can be an original creation or an instance of a shared Template.
 
 ### Template · `world.ptah.template`
-A shared identity template that multiple characters can embody. The type, not the instance. Hamlet is a Template — each performance of Hamlet is a Character instance. Governs instance policy and canonical reference.
+A shared identity template that multiple characters can embody. The type, not the instance. Iron Man is a Template — Tony Stark is a Character instance of that Template. Governs instance policy and canonical reference.
 
 ### Action · `world.ptah.action`
 The heartbeat of the protocol. Every time someone acts inside a world, they create one of these. Captures who acted, as which character, in which world, at which location, and what happened. Supports threading via parent action references.

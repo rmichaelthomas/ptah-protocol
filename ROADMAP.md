@@ -9,7 +9,7 @@ The Ptah Protocol is in active development. Here's where things stand and where 
 **Done:**
 - Fourteen record types defined and formalized as Lexicon JSON
 - Shared definitions file (world.ptah.defs)
-- Two complete example world chains (Hamlet + Freedmen Universe) pressure-tested against seven failure modes
+- Four example world chains (RENAISSANCE, MCU, Spades, tabletop RPG) demonstrating all 14 record types
 - Production schemas published to the ATProto network under `world.ptah.*`
 - Schemas promoted from `world.ptah.temp.*` to production `world.ptah.*` namespace
 - Domain, DNS, Blacksky account, and website live
