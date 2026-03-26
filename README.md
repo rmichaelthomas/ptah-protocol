@@ -1,8 +1,8 @@
 # The Ptah Protocol
 
-**Open world infrastructure for the AT Protocol.**
+**Creative provenance infrastructure for the AT Protocol.**
 
-The Ptah Protocol is a set of [Lexicon](https://atproto.com/specs/lexicon) schemas that bring collaborative world-building, narrative provenance, and creative attribution to the [AT Protocol](https://atproto.com) network. It defines fourteen record types that let anyone create a world, inhabit it with characters, act inside it, accumulate history, track lineage and permissions, and trace every contribution back to the person who made it.
+The Ptah Protocol is a set of [Lexicon](https://atproto.com/specs/lexicon) schemas that bring creative attribution, lineage tracking, and collaborative world-building to the [AT Protocol](https://atproto.com) network. It defines fourteen record types that let anyone create a world, populate it with characters and works, track every contribution and sample back to its source, manage permissions and licensing, and accumulate verifiable history.
 
 The namespace is `world.ptah.*`. Production schemas are published and live on the ATProto network.
 
@@ -41,7 +41,7 @@ A shared identity template that multiple characters can embody. The type, not th
 The heartbeat of the protocol. Every time someone acts inside a world, they create one of these. Captures who acted, as which character, in which world, at which location, and what happened. Supports threading via parent action references.
 
 ### Event · `world.ptah.event`
-Where competition becomes history. A competition, gathering, milestone, ceremony, or conflict where characters compete or convene. Tracks participants, stakes, status, result, and witnesses. Witnesses are verifiable action records, not just a count.
+A structured occurrence — competition, gathering, milestone, ceremony, or conflict. Tracks participants, stakes, status, result, and witnesses. An album release is an event. A tournament match is an event. A battle is an event. Witnesses are verifiable action records, not just a count.
 
 ### Log · `world.ptah.log`
 The world's history book. What separates the protocol from a game or a social feed. Logs trace back through source references to the actions and events that generated them. The history is attributable, permanent, and verifiable. Supports a human-authored declaration flag.
@@ -75,7 +75,7 @@ Signaling record indicating an account participates in the Ptah Protocol. One pe
 
 ## Design Principles
 
-**Attribution is infrastructure, not metadata.** Every record carries a permanent, immutable link to its creator. The `authorshipRecord` field never changes, even if the record is contributed to, built on, or rendered a thousand different ways.
+**Attribution is infrastructure, not metadata.** Every record carries a permanent link to its creator. The creator's DID is immutable — it doesn't change even if the record is contributed to, built on, or rendered a thousand different ways.
 
 **The protocol records; clients render.** The schemas define the data. How that data is displayed — which canon tier to show, how to weight narrative significance, what visual style to use — belongs to the rendering layer. Multiple clients can read the same records and produce meaningfully different world experiences.
 
@@ -88,7 +88,7 @@ Signaling record indicating an account participates in the Ptah Protocol. One pe
 ## Schema Design Decisions
 
 - **`knownValues` over `enum` everywhere.** Fields use open-ended known value sets rather than closed enumerations, allowing extensibility without breaking changes.
-- **Consistent required fields.** Every record requires who created it, what world it belongs to, when it was created, and what it's called. Everything else is optional.
+- **Consistent required fields.** Core records require a creator DID, a world reference, and a creation timestamp. Most also require a name or title. Everything else is optional.
 - **Typed flexible properties.** Freeform metadata (rendering hints, character properties, location properties) uses named object definitions with explicit optional fields rather than untyped key-value pairs.
 - **String length limits.** Names: 640 bytes / 64 graphemes. Descriptions: 10,240 bytes / 1,024 graphemes. Log content: 102,400 bytes / 10,000 graphemes. Byte-to-grapheme ratio approximately 10:1.
 - **AT URI references throughout.** All cross-record references use the `at-uri` format, making every relationship in the record chain resolvable on the network.
