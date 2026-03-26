@@ -18,7 +18,7 @@ The namespace is `world.ptah.*`. Production schemas are published and live on th
 
 - **[Getting Started](GETTING_STARTED.md)** — build your first world in five minutes
 - **[Specification](SPECIFICATION.md)** — field-level reference for every record type
-- **[Examples](EXAMPLES.md)** — four complete world record chains (RENAISSANCE, MCU, Spades, tabletop RPG)
+- **[Examples](examples/)** — four complete world record chains (RENAISSANCE, MCU, Spades, tabletop RPG)
 - **[Glossary](GLOSSARY.md)** — terms from protocol infrastructure, world-building, and competitive play
 - **[Roadmap](ROADMAP.md)** — where the protocol is and where it's going
 
@@ -126,7 +126,12 @@ ptah-protocol/
 ├── README.md
 ├── SPECIFICATION.md
 ├── GETTING_STARTED.md
-├── EXAMPLES.md
+├── examples/
+│   ├── README.md
+│   ├── renaissance.md
+│   ├── mcu.md
+│   ├── blacksky-spades.md
+│   └── shattered-reach.md
 ├── GLOSSARY.md
 ├── ROADMAP.md
 ├── LICENSE
