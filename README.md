@@ -1,8 +1,8 @@
 # The Ptah Protocol
 
-**Creative provenance infrastructure for the AT Protocol.**
+**Open infrastructure for creative authorship on the AT Protocol.**
 
-The Ptah Protocol is a set of [Lexicon](https://atproto.com/specs/lexicon) schemas that bring creative attribution, lineage tracking, and collaborative world-building to the [AT Protocol](https://atproto.com) network. It defines fourteen record types that let anyone create a world, populate it with characters and works, track every contribution and sample back to its source, manage permissions and licensing, and accumulate verifiable history.
+The Ptah Protocol is a set of [Lexicon](https://atproto.com/specs/lexicon) schemas for the [AT Protocol](https://atproto.com) network. It defines fourteen record types that handle attribution, lineage, permissions, and history for creative work — from albums and franchise universes to competitive tournaments and collaborative campaigns. Create a world. Track who contributed what. Trace every sample, adaptation, and remix back to its source. Accumulate history that's permanent and verifiable.
 
 The namespace is `world.ptah.*`. Production schemas are published and live on the ATProto network.
 
