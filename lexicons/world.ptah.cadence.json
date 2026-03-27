@@ -1,0 +1,106 @@
+{
+  "lexicon": 1,
+  "id": "world.ptah.cadence",
+  "defs": {
+    "main": {
+      "type": "record",
+      "description": "Temporal orchestration for content delivery. Controls when and how works surface — release schedules, gated access, sequential unlocks, ritualized drops. The world's clock.",
+      "key": "tid",
+      "record": {
+        "type": "object",
+        "required": ["name", "creatorDID", "worldReference", "createdAt", "targetReferences"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 640,
+            "maxGraphemes": 64,
+            "description": "The name of this cadence"
+          },
+          "creatorDID": {
+            "type": "string",
+            "format": "did",
+            "description": "The permanent identity of the cadence record's creator"
+          },
+          "worldReference": {
+            "type": "string",
+            "format": "at-uri",
+            "description": "Reference to the world this cadence belongs to"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime",
+            "description": "Timestamp when this cadence record was created"
+          },
+          "targetReferences": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "at-uri"
+            },
+            "description": "References to the works this cadence orchestrates"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 10240,
+            "maxGraphemes": 1024,
+            "description": "What this cadence is about"
+          },
+          "cadenceType": {
+            "type": "string",
+            "knownValues": ["scheduled", "sequential", "gated", "ritualized"],
+            "description": "The temporal orchestration mode. scheduled = fixed dates/times. sequential = ordered progression, next unlocks after previous. gated = conditional access based on criteria. ritualized = irregular, unpredictable drops designed to break habituation."
+          },
+          "cadenceRule": {
+            "type": "string",
+            "maxLength": 2560,
+            "maxGraphemes": 256,
+            "description": "RRULE string (RFC 5545) or human-readable schedule description defining the temporal pattern"
+          },
+          "startsAt": {
+            "type": "string",
+            "format": "datetime",
+            "description": "When this cadence begins"
+          },
+          "endsAt": {
+            "type": "string",
+            "format": "datetime",
+            "description": "When this cadence ends (absent = ongoing)"
+          },
+          "audienceTier": {
+            "type": "string",
+            "knownValues": ["public", "supporters", "early", "private"],
+            "description": "Who gets access under this cadence. public = everyone. supporters = paid/supporting audience. early = early access window before public. private = specific audience only."
+          },
+          "unlockCondition": {
+            "type": "string",
+            "maxLength": 2560,
+            "maxGraphemes": 256,
+            "description": "Human-readable description of what triggers the next release or access change"
+          },
+          "channelHints": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "knownValues": ["calendar", "wallet", "notification", "feed"],
+            "description": "Preferred delivery surfaces for this cadence. Presence in array = preferred. Extensible — new surfaces can be added without schema changes."
+          },
+          "status": {
+            "type": "string",
+            "knownValues": ["draft", "active", "paused", "completed", "cancelled"],
+            "description": "Current state of this cadence"
+          },
+          "canonicalStatus": {
+            "type": "string",
+            "knownValues": [
+              "world.ptah.defs#canonicalStatusOfficial",
+              "world.ptah.defs#canonicalStatusCommunity",
+              "world.ptah.defs#canonicalStatusApocryphal"
+            ],
+            "description": "The canonical standing of this cadence"
+          }
+        }
+      }
+    }
+  }
+}

@@ -10,9 +10,17 @@ Terms used across the Ptah Protocol documentation, covering protocol infrastruct
 
 **AT URI** — The address of a specific record on the ATProto network. Format: `at://{DID}/{NSID}/{rkey}`. Every cross-reference in the protocol — a character pointing to its world, log pointing to its source events — uses an AT URI. It's how the record graph stays connected and traversable.
 
+**audienceTier** — Who gets access under a Cadence record's temporal rules. Four known values: `public` (everyone), `supporters` (paid/supporting audience), `early` (early access window before public release), and `private` (specific audience only). Determines who sees what, when.
+
 **Attribution Chain** — An array of structured `attributionEntry` objects on the Origin record. Each entry records a contributor's DID, role, timestamp, and optional split percentage. If person A created a world, person B added a character, and person C built on that character, the chain records all three. Provenance travels with the work.
 
+**Cadence** — A record that controls when and how works surface inside a world. The temporal orchestration primitive — release schedules, gated access, sequential unlocks, ritualized drops. Each cadence targets one or more works and defines the rules for when they become available.
+
+**cadenceType** — The temporal orchestration mode on a Cadence record. Four known values: `scheduled` (fixed dates/times), `sequential` (ordered progression where the next unlocks after the previous), `gated` (conditional access based on criteria), and `ritualized` (irregular, unpredictable drops designed to break habituation).
+
 **Canonical Status** — Where a record stands in its world's accepted history. Three tiers: Official (originator-designated), Community (community-accepted but not originator-designated), and Apocryphal (exists but outside accepted canon). Clients can filter or display differently based on tier.
+
+**channelHints** — An array on the Cadence record indicating preferred delivery surfaces for content releases. Known values include `calendar`, `wallet`, `notification`, and `feed`. Presence in the array signals preference. The field is extensible — new surfaces can be added without schema changes.
 
 **Collection** — A record that bundles multiple works together. An album, anthology, season, or any curated set of related works. Items can be ordered sequentially, chronologically, or left unordered.
 
@@ -24,7 +32,7 @@ Terms used across the Ptah Protocol documentation, covering protocol infrastruct
 
 **knownValues** — ATProto's open-ended value sets. Unlike enums (closed lists), knownValues can be extended without breaking the schema. Every categorical field in the protocol uses knownValues so new types can be added over time.
 
-**Lexicon** — ATProto's schema language. It defines the shape of records — what fields exist, what types they are, which are required. The Ptah Protocol's fourteen record types are expressed as Lexicon schemas. Think of a Lexicon as a blank form. Each record is a filled-out version of that form.
+**Lexicon** — ATProto's schema language. It defines the shape of records — what fields exist, what types they are, which are required. The Ptah Protocol's fifteen record types are expressed as Lexicon schemas. Think of a Lexicon as a blank form. Each record is a filled-out version of that form.
 
 **NSID (Namespaced Identifier)** — The unique address of a Lexicon schema across the entire ATProto network. Read right to left: `world.ptah.character` means the Character record type, from the Ptah protocol, at the domain ptah.world.
 
@@ -33,6 +41,8 @@ Terms used across the Ptah Protocol documentation, covering protocol infrastruct
 **Record** — A single piece of structured data in an ATProto repository. A Bluesky post is a record. A Ptah World is a record. A Ptah Character is a record. Records are signed, timestamped, and attributed to the DID that created them.
 
 **Trace** — A record tracking lineage between works. The paper trail from one work to another — cover, remix, adaptation, translation, sample, interpolation, response, sequel, spinoff, excerpt, remake, or fork. Includes clearance status for rights management.
+
+**unlockCondition** — A human-readable description on a Cadence record of what triggers the next release or access change. Used with `gated` and `sequential` cadence types to describe conditions like "complete chapter 3 to unlock chapter 4" or "reach 1,000 supporters to release the bonus track."
 
 **Usage** — A record governing terms and permissions for a work. Covers what's allowed (commercial use, derivatives, performance), where (territories), for how long (expiration), and under what license type (all rights reserved, Creative Commons, public domain, custom).
 
@@ -53,6 +63,8 @@ Terms used across the Ptah Protocol documentation, covering protocol infrastruct
 **Control Type** — How a character is governed. Exclusive (one DID controls it), Open (anyone can act as it), or Contested (multiple claimants). Solves the problem of shared characters in public domain or collaborative worlds.
 
 **Log** — A world's accumulated history. What separates the protocol from a game or a social feed. Log records trace back through source references to the actions and events that generated them. Supports typed entries (history, chronicle, essay, chapter, article, entry) and a human-authored declaration flag.
+
+**Ritualized** — A cadence mode (`cadenceType: ritualized`) for irregular, unpredictable content drops designed to break habituation. Unlike scheduled or sequential cadences, ritualized drops have no fixed pattern — the irregularity is the point. Useful for surprise releases, limited-time events, or content strategies that reward attention over routine.
 
 **Rendering Hints** — Metadata on a World record that tells visual rendering layers what kind of world it is — tone, era, genre, aesthetic. The world has to feel like something before anything has happened in it yet.
 

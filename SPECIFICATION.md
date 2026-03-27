@@ -290,6 +290,30 @@ Bundles multiple works together. An album, anthology, season, or any curated set
 
 ---
 
+## Cadence · `world.ptah.cadence`
+
+Temporal orchestration for content delivery. Controls when and how works surface — release schedules, gated access, sequential unlocks, ritualized drops. The world's clock.
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `name` | string | ✦ | What this cadence is called. Max 640 bytes / 64 graphemes. |
+| `creatorDID` | string (did) | ✦ | Who created this cadence. |
+| `worldReference` | string (at-uri) | ✦ | Which world this cadence belongs to. |
+| `createdAt` | string (datetime) | ✦ | Timestamp. |
+| `targetReferences` | array of string (at-uri) | ✦ | References to the works this cadence orchestrates. |
+| `description` | string | | What this cadence is about. Max 10,240 bytes / 1,024 graphemes. |
+| `cadenceType` | string | | `knownValues`: `scheduled` (fixed dates/times), `sequential` (ordered progression, next unlocks after previous), `gated` (conditional access based on criteria), `ritualized` (irregular, unpredictable drops designed to break habituation). |
+| `cadenceRule` | string | | RRULE string (RFC 5545) or human-readable schedule description defining the temporal pattern. Max 2,560 bytes / 256 graphemes. |
+| `startsAt` | string (datetime) | | When this cadence begins. |
+| `endsAt` | string (datetime) | | When this cadence ends. Absent = ongoing. |
+| `audienceTier` | string | | `knownValues`: `public` (everyone), `supporters` (paid/supporting audience), `early` (early access window before public), `private` (specific audience only). |
+| `unlockCondition` | string | | Human-readable description of what triggers the next release or access change. Max 2,560 bytes / 256 graphemes. |
+| `channelHints` | array of string | | Preferred delivery surfaces. `knownValues`: `calendar`, `wallet`, `notification`, `feed`. Presence in array = preferred. Extensible. |
+| `status` | string | | `knownValues`: `draft`, `active`, `paused`, `completed`, `cancelled`. |
+| `canonicalStatus` | string | | References `world.ptah.defs#canonicalStatus*` tokens. |
+
+---
+
 ## Trace · `world.ptah.trace`
 
 Tracks lineage between works. The paper trail from one work to another.
@@ -377,6 +401,7 @@ World
 ├── Log (references World, Actions + Events + Logs as sources, Characters, Location)
 ├── Origin (references World + any record being contributed to)
 ├── Collection (references World + array of work items)
+├── Cadence (references World + array of target works)
 ├── Trace (references World + source work + derived work)
 ├── Usage (references World + work)
 └── Version (references World + work + previous version)

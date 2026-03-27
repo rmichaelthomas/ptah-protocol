@@ -2,7 +2,7 @@
 
 **Open infrastructure for creative authorship on the AT Protocol.**
 
-The Ptah Protocol is a set of [Lexicon](https://atproto.com/specs/lexicon) schemas for the [AT Protocol](https://atproto.com) network. It defines fourteen record types that handle attribution, lineage, permissions, and history for creative work — from albums and franchise universes to competitive tournaments and collaborative campaigns. Create a world. Track who contributed what. Trace every sample, adaptation, and remix back to its source. Accumulate history that's permanent and verifiable.
+The Ptah Protocol is a set of [Lexicon](https://atproto.com/specs/lexicon) schemas for the [AT Protocol](https://atproto.com) network. It defines fifteen record types that handle attribution, lineage, permissions, and history for creative work — from albums and franchise universes to competitive tournaments and collaborative campaigns. Create a world. Track who contributed what. Trace every sample, adaptation, and remix back to its source. Accumulate history that's permanent and verifiable.
 
 The namespace is `world.ptah.*`. Production schemas are published and live on the ATProto network.
 
@@ -26,7 +26,7 @@ The namespace is `world.ptah.*`. Production schemas are published and live on th
 
 ## Record Types
 
-The protocol defines fourteen record types plus a shared definitions file.
+The protocol defines fifteen record types plus a shared definitions file.
 
 ### World · `world.ptah.world`
 The foundational record. Everything else references it. A world must exist before characters, events, or logs can exist inside it. Declares the world's name, creator, intellectual property origin, governance mode, and rendering hints.
@@ -54,6 +54,9 @@ A place inside a world. Gives events and actions an address. Locations nest infi
 
 ### Collection · `world.ptah.collection`
 Bundles multiple works together. An album, anthology, season, or any curated set of related works. Items are ordered sequentially, chronologically, or unordered.
+
+### Cadence · `world.ptah.cadence`
+Temporal orchestration for content delivery. Controls when and how works surface — release schedules, gated access, sequential unlocks, ritualized drops. Supports RRULE scheduling, audience tiering, unlock conditions, and multi-surface channel hints. The world's clock.
 
 ### Trace · `world.ptah.trace`
 Tracks lineage between works. The paper trail from one work to another — cover, remix, adaptation, translation, sample, interpolation, response, sequel, spinoff, excerpt, remake, or fork. Includes clearance status.
@@ -97,7 +100,7 @@ Signaling record indicating an account participates in the Ptah Protocol. One pe
 
 ## Network Publication
 
-Production schemas are published as `com.atproto.lexicon.schema` records in the [@ptah.world](https://blacksky.community/profile/ptah.world) repository under the `world.ptah.*` namespace. All fourteen schemas are live and resolvable on the ATProto network.
+Production schemas are published as `com.atproto.lexicon.schema` records in the [@ptah.world](https://blacksky.community/profile/ptah.world) repository under the `world.ptah.*` namespace. All fifteen schemas are live and resolvable on the ATProto network.
 
 Lexicon resolution is wired via DNS TXT record:
 - `_lexicon.ptah.world` → `did=did:plc:l45z35sxxjuobp5q65a5vu22`
@@ -137,6 +140,7 @@ ptah-protocol/
 ├── LICENSE
 └── lexicons/
     ├── world.ptah.action.json
+    ├── world.ptah.cadence.json
     ├── world.ptah.character.json
     ├── world.ptah.collection.json
     ├── world.ptah.defs.json

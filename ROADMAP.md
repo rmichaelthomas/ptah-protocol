@@ -7,9 +7,10 @@ The Ptah Protocol is in active development. Here's where things stand and where 
 ## Now — Schema Complete
 
 **Done:**
-- Fourteen record types defined and formalized as Lexicon JSON
+- Fifteen record types defined and formalized as Lexicon JSON
+- Cadence record type (world.ptah.cadence) — temporal orchestration primitive
 - Shared definitions file (world.ptah.defs)
-- Four example world chains (RENAISSANCE, MCU, Spades, tabletop RPG) demonstrating all 14 record types
+- Four example world chains (RENAISSANCE, MCU, Spades, tabletop RPG) demonstrating all record types
 - Production schemas published to the ATProto network under `world.ptah.*`
 - Schemas promoted from `world.ptah.temp.*` to production `world.ptah.*` namespace
 - Domain, DNS, Blacksky account, and website live
@@ -53,7 +54,7 @@ Identified during pressure testing as real needs that don't belong in v1:
 
 The roadmap follows a few commitments:
 
-**Schemas shipped. Now build the view.** The record types are defined and published to the ATProto network under the production `world.ptah.*` namespace. The priority has shifted to building the AppView and rendering layer that makes this data queryable and navigable.
+**Schemas shipped. Now build the view.** All fifteen record types are defined and published to the ATProto network under the production `world.ptah.*` namespace. The priority has shifted to building the AppView and rendering layer that makes this data queryable and navigable.
 
 **Open by default.** The protocol is MIT/Apache-2.0 dual-licensed. Anyone can build on it. The roadmap is public. Feedback shapes direction.
 
