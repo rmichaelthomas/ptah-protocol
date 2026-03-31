@@ -1,16 +1,53 @@
+<div align="center">
+  <img src="og_image.png" alt="The Ptah Protocol" width="640">
+</div>
+
 # The Ptah Protocol
+
+[![License: MIT / Apache-2.0](https://img.shields.io/badge/license-MIT%20%7C%20Apache--2.0-c9a84c?style=flat-square&labelColor=1a251d)](LICENSE)
+[![Schemas](https://img.shields.io/badge/schemas-15%20live-5a9a6a?style=flat-square&labelColor=1a251d)](lexicons/)
+[![Network](https://img.shields.io/badge/network-AT%20Protocol-4a9fd4?style=flat-square&labelColor=1a251d)](https://atproto.com)
+[![Status](https://img.shields.io/badge/status-schema%20complete-5a9a6a?style=flat-square&labelColor=1a251d)](ROADMAP.md)
+[![Website](https://img.shields.io/badge/website-ptah.world-c9a84c?style=flat-square&labelColor=1a251d)](https://ptah.world)
 
 **Open infrastructure for creative authorship on the AT Protocol.**
 
-The Ptah Protocol is a set of [Lexicon](https://atproto.com/specs/lexicon) schemas for the [AT Protocol](https://atproto.com) network. It defines fifteen record types that handle attribution, lineage, permissions, and history for creative work — from albums and franchise universes to competitive tournaments and collaborative campaigns. Create a world. Track who contributed what. Trace every sample, adaptation, and remix back to its source. Accumulate history that's permanent and verifiable.
+The Ptah Protocol is a set of [Lexicon](https://atproto.com/specs/lexicon) schemas for the [AT Protocol](https://atproto.com) network. Fifteen record types that handle attribution, lineage, permissions, and history for creative work — from albums and franchise universes to competitive tournaments and collaborative campaigns. Create a world. Track who contributed what. Trace every sample, adaptation, and remix back to its source. Accumulate history that's permanent and verifiable.
 
-The namespace is `world.ptah.*`. Production schemas are published and live on the ATProto network.
+The namespace is `world.ptah.*`. Production schemas are live on the ATProto network.
 
-**Status:** Active Development — Schema Complete
+**Website:** [ptah.world](https://ptah.world) · **Account:** [@ptah.world](https://blacksky.community/profile/ptah.world) · **Contact:** protocol@ptah.world
 
-**Website:** [ptah.world](https://ptah.world)
-**Account:** [@ptah.world](https://blacksky.community/profile/ptah.world)
-**Contact:** protocol@ptah.world
+---
+
+## Quick Start
+
+You need an ATProto account. Find your DID:
+
+```
+https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=YOUR_HANDLE
+```
+
+Declare participation (one record per account, fixed key `self`):
+
+```bash
+curl -X POST "https://YOUR_PDS/xrpc/com.atproto.repo.putRecord" \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "repo": "YOUR_DID",
+    "collection": "world.ptah.flax",
+    "rkey": "self",
+    "record": {
+      "$type": "world.ptah.flax",
+      "displayName": "Your Builder Name",
+      "bio": "World-builder.",
+      "createdAt": "2026-01-01T00:00:00Z"
+    }
+  }'
+```
+
+Then create a world, a character, a location, and an action. Full walkthrough in **[GETTING_STARTED.md](GETTING_STARTED.md)**.
 
 ---
 
@@ -28,51 +65,23 @@ The namespace is `world.ptah.*`. Production schemas are published and live on th
 
 The protocol defines fifteen record types plus a shared definitions file.
 
-### World · `world.ptah.world`
-The foundational record. Everything else references it. A world must exist before characters, events, or logs can exist inside it. Declares the world's name, creator, intellectual property origin, governance mode, and rendering hints.
-
-### Character · `world.ptah.character`
-A person, creature, or entity that exists inside a specific world. The character is not the user — the character is the world's inhabitant. Can be an original creation or an instance of a shared Template.
-
-### Template · `world.ptah.template`
-A shared identity template that multiple characters can embody. The type, not the instance. Iron Man is a Template — Tony Stark is a Character instance of that Template. Governs instance policy and canonical reference.
-
-### Action · `world.ptah.action`
-The heartbeat of the protocol. Every time someone acts inside a world, they create one of these. Captures who acted, as which character, in which world, at which location, and what happened. Supports threading via parent action references.
-
-### Event · `world.ptah.event`
-A structured occurrence — competition, gathering, milestone, ceremony, or conflict. Tracks participants, stakes, status, result, and witnesses. An album release is an event. A tournament match is an event. A battle is an event. Witnesses are verifiable action records, not just a count.
-
-### Log · `world.ptah.log`
-The world's history book. What separates the protocol from a game or a social feed. Logs trace back through source references to the actions and events that generated them. The history is attributable, permanent, and verifiable. Supports a human-authored declaration flag.
-
-### Origin · `world.ptah.origin`
-The attribution and permission layer. Tracks who contributed what, under what terms, and with what role. Carries a structured attribution chain where each entry records the contributor's DID, role, and optional split percentage. Provenance travels with the work.
-
-### Location · `world.ptah.location`
-A place inside a world. Gives events and actions an address. Locations nest infinitely via parent references and carry a depth index for efficient rendering without traversing the full hierarchy.
-
-### Collection · `world.ptah.collection`
-Bundles multiple works together. An album, anthology, season, or any curated set of related works. Items are ordered sequentially, chronologically, or unordered.
-
-### Cadence · `world.ptah.cadence`
-Temporal orchestration for content delivery. Controls when and how works surface — release schedules, gated access, sequential unlocks, ritualized drops. Supports RRULE scheduling, audience tiering, unlock conditions, and multi-surface channel hints. The world's clock.
-
-### Trace · `world.ptah.trace`
-Tracks lineage between works. The paper trail from one work to another — cover, remix, adaptation, translation, sample, interpolation, response, sequel, spinoff, excerpt, remake, or fork. Includes clearance status.
-
-### Usage · `world.ptah.usage`
-Terms and permissions for a work. What's allowed, where, for how long, and under what conditions. Covers commercial use, derivatives, performance rights, attribution requirements, territories, and license type.
-
-### Version · `world.ptah.version`
-Edit history within a work. Tracks the evolution from draft to published to revised to final — every version, every change. Versions link to their predecessors and carry status (active, superseded, retracted, archived).
-
-### Flax · `world.ptah.flax`
-Signaling record indicating an account participates in the Ptah Protocol. One per account, fixed key `self`. Named for the twisted flax glyph (𓉔), the H in Ptah — the attribution chain thread. Used by AppViews for participant discovery.
-
-### Supporting schemas
-
-- **Defs** · `world.ptah.defs` — Shared token definitions (source types, canonical status tiers) referenced across all record types.
+| Record | Namespace | Purpose |
+|--------|-----------|---------|
+| World | `world.ptah.world` | The foundational record. Everything else references it. Declares name, creator, IP origin, governance, and rendering hints. |
+| Character | `world.ptah.character` | A person, creature, or entity inside a world. The character is not the user — it's the world's inhabitant. |
+| Template | `world.ptah.template` | A shared identity template. Iron Man is a Template; Tony Stark is a Character instance of it. |
+| Action | `world.ptah.action` | The heartbeat of the protocol. Captures who acted, as which character, where, and what happened. |
+| Event | `world.ptah.event` | A structured occurrence — competition, gathering, milestone, conflict. Witnesses are verifiable action records. |
+| Log | `world.ptah.log` | The world's history book. Traces back to the actions and events that generated it. Attributable and permanent. |
+| Origin | `world.ptah.origin` | The attribution and permission layer. Who contributed what, under what terms, with what role. |
+| Location | `world.ptah.location` | A place inside a world. Nests infinitely via parent references with a depth index. |
+| Collection | `world.ptah.collection` | Bundles multiple works together — album, anthology, season, curated set. |
+| Cadence | `world.ptah.cadence` | Temporal orchestration. Controls when and how works surface: schedules, gated access, sequential unlocks. |
+| Trace | `world.ptah.trace` | Lineage between works — cover, remix, adaptation, sample, sequel, fork. Includes clearance status. |
+| Usage | `world.ptah.usage` | Terms and permissions. What's allowed, where, for how long, and under what conditions. |
+| Version | `world.ptah.version` | Edit history within a work. Every version, every change, linked to its predecessor. |
+| Flax | `world.ptah.flax` | Participation signal. One per account, fixed key `self`. Used by AppViews for discovery. |
+| Defs | `world.ptah.defs` | Shared token definitions referenced across all record types. |
 
 ---
 
@@ -92,8 +101,8 @@ Signaling record indicating an account participates in the Ptah Protocol. One pe
 
 - **`knownValues` over `enum` everywhere.** Fields use open-ended known value sets rather than closed enumerations, allowing extensibility without breaking changes.
 - **Consistent required fields.** Core records require a creator DID, a world reference, and a creation timestamp. Most also require a name or title. Everything else is optional.
-- **Typed flexible properties.** Freeform metadata (rendering hints, character properties, location properties) uses named object definitions with explicit optional fields rather than untyped key-value pairs.
-- **String length limits.** Names: 640 bytes / 64 graphemes. Descriptions: 10,240 bytes / 1,024 graphemes. Log content: 102,400 bytes / 10,000 graphemes. Byte-to-grapheme ratio approximately 10:1.
+- **Typed flexible properties.** Freeform metadata uses named object definitions with explicit optional fields rather than untyped key-value pairs.
+- **String length limits.** Names: 640 bytes / 64 graphemes. Descriptions: 10,240 bytes / 1,024 graphemes. Log content: 102,400 bytes / 10,000 graphemes.
 - **AT URI references throughout.** All cross-record references use the `at-uri` format, making every relationship in the record chain resolvable on the network.
 
 ---
@@ -129,6 +138,8 @@ ptah-protocol/
 ├── README.md
 ├── SPECIFICATION.md
 ├── GETTING_STARTED.md
+├── CHANGELOG.md
+├── CONTRIBUTING.md
 ├── examples/
 │   ├── README.md
 │   ├── renaissance.md
@@ -155,6 +166,12 @@ ptah-protocol/
     ├── world.ptah.version.json
     └── world.ptah.world.json
 ```
+
+---
+
+## Contributing
+
+Contributions are welcome — schema feedback, documentation fixes, example worlds, and tooling. See [CONTRIBUTING.md](CONTRIBUTING.md) for how to get started and what we accept.
 
 ---
 
